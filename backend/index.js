@@ -10,8 +10,10 @@ app.use(cors());
 // import Router 
 const userRouter = require("./routes/users")
 const roleRouter = require("./routes/role")
+const categoryRouter = require("./routes/category")
 app.use("/users",userRouter)
 app.use("/roles",roleRouter)
+app.use("/category",categoryRouter)
 
 
 
