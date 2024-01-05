@@ -33,19 +33,58 @@ const createProduct = (req, res) => {
 };
 
 const getAllProduct = (req, res) => {
-  productModule.find({}).populate("reviews").then((result)=>{
-        res.status(200).json(result)
-  }).catch((err)=>{
-      res.status(404).json(err)
-  })
+  productModule
+    .find({})
+    .populate("reviews")
+    .then((result) => {
+      res.status(200).json(result);
+    })
+    .catch((err) => {
+      res.status(404).json(err);
+    });
 };
 
-const getProductById = (req, res) => {};
-const deleteProductById = (req, res) => {};
+const getProductById = (req, res) => {
+  const { id } = req.params;
 
+  productModule
+    .findById({ _id: id })
+    .populate("reviews")
+    .then((result) => {
+      res.status(200).json(result);
+    })
+    .catch((err) => {
+      res.status(404).json(err.massage);
+    });
+};
+const deleteProductById = (req, res) => {
+  const { id } = req.params;
+
+  productModule
+    .findByIdAndDelete({ _id: id })
+    .then((result) => {
+      res.status(201).json("deleted product");
+    })
+    .catch((err) => {
+      res.status(404).json(err.massage);
+    });
+};
+const updateProduct = (req, res) => {
+  const { id } = req.params;
+
+  productModule
+    .findByIdAndUpdate({ _id: id }, req.body, { new: true })
+    .then((result) => {
+      res.json(result);
+    })
+    .catch((err) => {
+      res.json(err);
+    });
+};
 module.exports = {
   createProduct,
   getAllProduct,
   getProductById,
   deleteProductById,
+  updateProduct,
 };
