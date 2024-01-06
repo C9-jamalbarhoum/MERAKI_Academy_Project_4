@@ -1,5 +1,5 @@
 const userModule = require("../models/users");
-
+const cartSchema = require("../models/cart");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const role = require("../models/role");
@@ -18,7 +18,19 @@ const register = (req, res) => {
   newUser
     .save()
     .then((result) => {
-      res.status(202).json(result);
+      //   add new cart for this user  => =>
+      const newCart = new cartSchema({
+        products: [],
+        user: result._id,
+      });
+      newCart
+        .save()
+        .then((result) => {
+          res.status(202).json("successful Created");
+        })
+        .catch((err) => {
+          res.status(500).json(err);
+        });
     })
     .catch((err) => {
       res.status(500).json(err);
@@ -57,10 +69,10 @@ const login = (req, res) => {
           location: result.location,
         };
         const options = {
-          expiresIn: "70m",
+          expiresIn: "120m",
         };
 
-        const token = jwt.sign(payload, process.env.SECRET || "xqx", options);
+        const token = jwt.sign(payload, process.env.SECRET , options);
 
         res.status(200).json({
           success: true,

@@ -2,6 +2,9 @@ const reviewsModule = require("../models/reviews");
 const productModule = require("../models/product");
 const reviews = require("../models/reviews");
 
+
+
+// ! for create Reviews => => => http://localhost:5000/product/:id    ==> {id : productID}
 const CreateReviews = (req, res) => {
   const id = req.params.id;
   // Comment: [{ type: String }],
@@ -36,6 +39,9 @@ const CreateReviews = (req, res) => {
       });
   });
 };
+
+
+//! API for delete reviews => => http://localhost:5000/?reviewsId=1&productId=2
 const deleteReviews = (req, res) => {
   const { reviewsId, productId } = req.query;
 

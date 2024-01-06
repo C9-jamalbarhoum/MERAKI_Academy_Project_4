@@ -1,9 +1,10 @@
 const express = require("express");
+require("dotenv").config()
 const cors = require("cors");
 require("./models/db")
-require("dotenv").config()
+
 const app = express();
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT ;
 
 app.use(express.json());
 app.use(cors());
@@ -13,6 +14,9 @@ const roleRouter = require("./routes/role")
 const categoryRouter = require("./routes/category")
 const productRouter = require("./routes/product")
 const reviewsRouter = require("./routes/reviews")
+const cartRouter =require("./routes/cart")
+const orderRouter = require("./routes/order")
+const SearchRouter = require("./routes/search")
 
 
 app.use("/users",userRouter)
@@ -20,6 +24,9 @@ app.use("/roles",roleRouter)
 app.use("/category",categoryRouter)
 app.use("/product",productRouter)
 app.use("/",reviewsRouter)
+app.use("/cart",cartRouter)
+app.use("/order",orderRouter)
+app.use("/search",SearchRouter)
 
 
 

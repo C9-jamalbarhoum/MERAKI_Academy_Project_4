@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
-
+// "mongodb://localhost:27017/E-Commerce" 
 mongoose
-  .connect(process.env.DB_URI||"mongodb://localhost:27017/E-Commerce" )
+  .connect(process.env.DB_URI)
   .then((result) => {
     console.log("Linked with DB");
   })
