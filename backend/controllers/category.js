@@ -55,10 +55,23 @@ const deleteCategoryById = (req, res) => {
     });
   });
 };
+const updateCategoryById = (req, res) => {
+  const { id } = req.params;
+
+  CategoryModule
+    .findByIdAndUpdate({ _id: id }, req.body, { new: true })
+    .then((result) => {
+      res.json(result);
+    })
+    .catch((err) => {
+      res.json(err.massage);
+    });
+};
 
 module.exports = {
   createCategory,
   getAllCategory,
   gitCategoryById,
   deleteCategoryById,
+  updateCategoryById
 };
