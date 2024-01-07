@@ -1,3 +1,12 @@
 .App {
   text-align: center;
+
+}
+.boxLogo{
+  height: 35px;
+  border-radius: 5px;
+
+}
+.boxLogo img{
+  border-radius: 15px;
 }
