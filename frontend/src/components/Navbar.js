@@ -1,14 +1,15 @@
 import React, { useContext } from "react";
 import { USEContext } from "../App";
+import { useNavigate } from "react-router-dom";
 function Navbar() {
-  const { category } = useContext(USEContext);
-
+  const { category,setIDCategory } = useContext(USEContext);
+const Navigate = useNavigate()
   return (
     <div>
       {" "}
       <nav
         style={{
-          borderRadius: "20px",
+          borderRadius: "5px",
           color: "",
           position: "fixed",
           width: "100%",
@@ -16,6 +17,7 @@ function Navbar() {
         }}
         class="navbar navbar-expand-lg navbar-dark bg-dark"
       >
+        {/* {navbar navbar-dark bg-dark} */}
         <a
           style={{ color: "#fff", fontWeight: "bold" }}
           className="navbar-brand"
@@ -45,7 +47,7 @@ function Navbar() {
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav mr-auto">
             <li className="nav-item active">
-              <a className="nav-link" href="#">
+              <a className="nav-link" href="/">
                 Home <span className="sr-only">(current)</span>
               </a>
             </li>
@@ -70,14 +72,32 @@ function Navbar() {
                 {category.map((category, index) => {
                   return (
                     <>
-                      <a onClick={()=>{
-                          // <AllproductFor this category />
-                      }} className="dropdown-item" href="">
+                      <a style={{cursor:"pointer"}}
+                        onClick={() => {
+                          setIDCategory(category._id)
+                          Navigate("/products")
+                   
+                        }}
+                        className="dropdown-item"
+                       
+                      >
                         {category.title}
                       </a>
+                      
                     </>
                   );
                 })}
+                      <a style={{cursor:"pointer"}}
+                        onClick={() => {
+                          setIDCategory(category._id)
+                          Navigate("/Allproducts")
+                   
+                        }}
+                        className="dropdown-item"
+                       
+                      >
+                        All items
+                      </a>
               </div>
             </li>
             <li className="nav-item">
@@ -106,8 +126,14 @@ function Navbar() {
               <button type="button" class="btn btn-warning">
                 Sign Up
               </button> */}
-              <img  style={{width:"20px",cursor:"pointer"}} src="./person.svg"></img>
-              <img style={{width:"20px",cursor:"pointer"}} src="./cart.svg"></img>
+              <img
+                style={{ width: "20px", cursor: "pointer" }}
+                src="./person.svg"
+              ></img>
+              <img
+                style={{ width: "20px", cursor: "pointer" }}
+                src="./cart.svg"
+              ></img>
             </div>
           </form>
         </div>

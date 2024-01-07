@@ -84,10 +84,22 @@ const updateProduct = (req, res) => {
       res.json(err);
     });
 };
+//!  http://localhost:5000/product/idCate/:id
+const getAllProductByIdCategory =(req,res)=>{
+
+     const {id} = req.params 
+     console.log(id);
+  productModule.find({category:id}).then((result)=>{
+    res.json(result)
+  }).catch((Err)=>{
+    console.log(Err);
+  })
+}
 module.exports = {
   createProduct,
   getAllProduct,
   getProductById,
   deleteProductById,
   updateProduct,
+  getAllProductByIdCategory
 };

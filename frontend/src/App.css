@@ -10,3 +10,12 @@
 .boxLogo img{
   border-radius: 15px;
 }
+.card{
+  width: "18rem";
+  height:"40vh";
+  border-Radius: "30px";
+  cursor: "pointer";
+}
+.card:hover{
+  background-color: aliceblue;
+}

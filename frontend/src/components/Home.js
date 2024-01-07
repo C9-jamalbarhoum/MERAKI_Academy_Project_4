@@ -1,32 +1,34 @@
-import React from "react";
+
 import { useEffect, useState, useContext } from "react";
 
 import { USEContext } from "../App";
+import { useNavigate } from "react-router-dom";
 function Home() {
-  const {category} = useContext(USEContext)
+  const Navigate  =useNavigate()
+  const {category,setIDCategory,IDCategory} = useContext(USEContext)
   //{category[1].image}
   return (
     <>
       <div style={{ backgroundColor: "#fff" }}>
    
         <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-  <div style={{height:"100vh"}}  class="carousel-inner">
+  <div style={{height:"100vh" }}  class="carousel-inner">
     <div  class="carousel-item active">
       <img  class="d-block w-100" src= "https://m.media-amazon.com/images/I/81TcQ2E2EML._SL1500_.jpg"  alt="First slide"/>
     </div>
     <div class="carousel-item">
-      <img class="d-block w-100" src= "https://m.media-amazon.com/images/I/71c4F1CPMEL._SL1500_.jpg" alt="Second slide"/>
+      <img class="d-block w-100" src= "https://w0.peakpx.com/wallpaper/975/852/HD-wallpaper-books-reading-books-background-with-books-bookshelf.jpg" alt="Second slide"/>
     </div>
     <div class="carousel-item">
-      <img class="d-block w-100" src= "https://m.media-amazon.com/images/I/71cw2PWB6LL._AC_SX522_.jpg"alt="Third slide"/>
+      <img class="d-block w-100" src= "https://images.unsplash.com/3/www.madebyvadim.com.jpg?q=80&w=1782&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"alt="Third slide"/>
     </div>
   </div>
-  <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+  <a style={{margin : "300px 0"}} class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+    <span style={{padding:"20px"}} class="carousel-control-prev-icon" aria-hidden="true"></span>
     <span class="sr-only">Previous</span>
   </a>
-  <a style={{color:"#000"}} class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+  <a style={{margin : "300px 0"}}   class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+    <span style={{padding:"20px"}}   class="carousel-control-next-icon" aria-hidden="true"></span>
     <span class="sr-only">Next</span>
   </a>
 </div>
@@ -42,7 +44,10 @@ function Home() {
             {category.map((category, index) => {
               return (
                 <>
-                  <div className="col-sm">
+                  <div onClick={()=>{
+                    setIDCategory(category._id)
+                    Navigate("/products")
+                  }} className="col-sm">
                     <div
                       className="card"
                       style={{
