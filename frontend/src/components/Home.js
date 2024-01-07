@@ -1,63 +1,76 @@
 import React from "react";
-import { useEffect, useState } from "react";
-import axios from "axios";
+import { useEffect, useState, useContext } from "react";
+
+import { USEContext } from "../App";
 function Home() {
-  const [category, setCategory] = useState([]);
-  useEffect(() => {
-    axios
-      .get("http://localhost:5000/category/")
-      .then((result) => {
-        setCategory(result.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
-  //background-color: rgb(212, 197, 200);
+  const {category} = useContext(USEContext)
+  //{category[1].image}
   return (
-    <div style={{ backgroundColor: "#fff" }}>
-      <div>
-        <img
-          style={{ width: "100%", height: "100vh" }}
-          src="https://img.freepik.com/free-photo/set-plant-twigs-near-ornament-hearts-threads_23-2148042175.jpg?w=1380&t=st=1704638241~exp=1704638841~hmac=c95c097c68905716da2b3c31defa3274daa57c41552256363e8655aaf0154f83"
-        ></img>
-      </div>
-      <div style={{color: "#000", fontWeight:"bold" }} class="p-3 mb-2 bg-transparent text-#fff">
-        Shop By Department
-      </div>
-      <div style={{ padding: "10px  0" }} className="container">
-        <div style={{ gap: "10px" }} class="row">
-          {category.map((category, index) => {
-            return (
-              <>
-                <div className="col-sm">
-                  <div
-                    className="card"
-                    style={{
-                      width: "18rem",
-                      borderRadius: "30px",
-                      cursor: "pointer",
-                    }}
-                  >
-                    <img
-                      style={{ height: "30vh", borderRadius: "30px" }}
-                      className="card-img-top"
-                      src={category.image}
-                      alt="Card image cap"
-                    />
-                    <div className="card-body">
-                      <p style={{ fontWeight: "bold" }} className="card-text">
-                        {category.title}
-                      </p>
+    <>
+      <div style={{ backgroundColor: "#fff" }}>
+   
+        <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+  <div style={{height:"100vh"}}  class="carousel-inner">
+    <div  class="carousel-item active">
+      <img  class="d-block w-100" src= "https://m.media-amazon.com/images/I/81TcQ2E2EML._SL1500_.jpg"  alt="First slide"/>
+    </div>
+    <div class="carousel-item">
+      <img class="d-block w-100" src= "https://m.media-amazon.com/images/I/71c4F1CPMEL._SL1500_.jpg" alt="Second slide"/>
+    </div>
+    <div class="carousel-item">
+      <img class="d-block w-100" src= "https://m.media-amazon.com/images/I/71cw2PWB6LL._AC_SX522_.jpg"alt="Third slide"/>
+    </div>
+  </div>
+  <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a style={{color:"#000"}} class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
+</div>
+      
+        <div
+          style={{ color: "#000", fontWeight: "bold" }}
+          class="p-3 mb-2 bg-transparent text-#fff"
+        >
+          Shop By Department
+        </div>
+        <div style={{ padding: "10px  0" }} className="container">
+          <div style={{ gap: "10px" }} class="row">
+            {category.map((category, index) => {
+              return (
+                <>
+                  <div className="col-sm">
+                    <div
+                      className="card"
+                      style={{
+                        width: "18rem",
+                        borderRadius: "30px",
+                        cursor: "pointer",
+                      }}
+                    >
+                      <img
+                        style={{ height: "30vh", borderRadius: "30px" }}
+                        className="card-img-top"
+                        src={category.image}
+                        alt="Card image cap"
+                      />
+                      <div className="card-body">
+                        <p style={{ fontWeight: "bold" }} className="card-text">
+                          {category.title}
+                        </p>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </>
-            );
-          })}
+                </>
+              );
+            })}
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }
 

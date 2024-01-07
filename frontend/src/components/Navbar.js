@@ -1,10 +1,21 @@
-import React from "react";
-
+import React, { useContext } from "react";
+import { USEContext } from "../App";
 function Navbar() {
+  const { category } = useContext(USEContext);
+
   return (
     <div>
       {" "}
-      <nav  style={{borderRadius : "20px", color:"",position:"fixed" , width:"100%", zIndex:"1px" } } class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <nav
+        style={{
+          borderRadius: "20px",
+          color: "",
+          position: "fixed",
+          width: "100%",
+          zIndex: "1",
+        }}
+        class="navbar navbar-expand-lg navbar-dark bg-dark"
+      >
         <a
           style={{ color: "#fff", fontWeight: "bold" }}
           className="navbar-brand"
@@ -40,7 +51,7 @@ function Navbar() {
             </li>
             <li className="nav-item">
               <a className="nav-link" href="#">
-              about ass
+                about ass
               </a>
             </li>
             <li className="nav-item dropdown">
@@ -56,16 +67,17 @@ function Navbar() {
                 Shop By Department
               </a>
               <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a className="dropdown-item" href="#">
-                  Action
-                </a>
-                <a className="dropdown-item" href="#">
-                  Another action
-                </a>
-                <div className="dropdown-divider"></div>
-                <a className="dropdown-item" href="#">
-                  Something else here
-                </a>
+                {category.map((category, index) => {
+                  return (
+                    <>
+                      <a onClick={()=>{
+                          // <AllproductFor this category />
+                      }} className="dropdown-item" href="">
+                        {category.title}
+                      </a>
+                    </>
+                  );
+                })}
               </div>
             </li>
             <li className="nav-item">
@@ -81,18 +93,24 @@ function Navbar() {
               placeholder="Search"
               aria-label="Search"
             />
-            <button className="btn btn-outline-success my-2 my-sm-0" type="submit">
+            <button
+              className="btn btn-outline-success my-2 my-sm-0"
+              type="submit"
+            >
               Search
             </button>
-            <div style={{paddingLeft:"10px" ,display:"flex",gap:"10px"}}>
-            <button type="button" class="btn btn-light">Sign in</button>
-            <button type="button" class="btn btn-warning">Sign Up</button>
-            <img></img>
+            <div style={{ paddingLeft: "10px", display: "flex", gap: "10px" }}>
+              {/* <button type="button" class="btn btn-light">
+                Sign in
+              </button>
+              <button type="button" class="btn btn-warning">
+                Sign Up
+              </button> */}
+              <img  style={{width:"20px",cursor:"pointer"}} src="./person.svg"></img>
+              <img style={{width:"20px",cursor:"pointer"}} src="./cart.svg"></img>
             </div>
           </form>
-      
         </div>
-    
       </nav>
     </div>
   );

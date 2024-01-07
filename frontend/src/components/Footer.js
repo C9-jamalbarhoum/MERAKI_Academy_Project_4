@@ -120,7 +120,7 @@ function footer() {
         >
           © 2021 Copyright:
           <a class="text-reset fw-bold" href="https://mdbootstrap.com/">
-            MDBootstrap.com
+            jamalbarhoum@gmail.com
           </a>
         </div>
       </footer>
