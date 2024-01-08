@@ -2,8 +2,8 @@ import React, { useContext } from "react";
 import { USEContext } from "../App";
 import { useNavigate } from "react-router-dom";
 function Navbar() {
-  const { category,setIDCategory } = useContext(USEContext);
-const Navigate = useNavigate()
+  const { category, setIDCategory,setInLogin,InLogin } = useContext(USEContext);
+  const Navigate = useNavigate();
   return (
     <div>
       {" "}
@@ -13,7 +13,7 @@ const Navigate = useNavigate()
           color: "",
           position: "fixed",
           width: "100%",
-          zIndex: "1",
+          zIndex: "2",
         }}
         class="navbar navbar-expand-lg navbar-dark bg-dark"
       >
@@ -72,32 +72,33 @@ const Navigate = useNavigate()
                 {category.map((category, index) => {
                   return (
                     <>
-                      <a style={{cursor:"pointer"}}
+                      <a
+                        style={{ cursor: "pointer" }}
                         onClick={() => {
-                          setIDCategory(category._id)
-                          Navigate("/products")
-                   
+                          Navigate({
+                            pathname: "/products",
+                            search: `?catId=${category._id}`,
+                          });
                         }}
                         className="dropdown-item"
-                       
                       >
                         {category.title}
                       </a>
-                      
                     </>
                   );
                 })}
-                      <a style={{cursor:"pointer"}}
-                        onClick={() => {
-                          setIDCategory(category._id)
-                          Navigate("/Allproducts")
-                   
-                        }}
-                        className="dropdown-item"
-                       
-                      >
-                        All items
-                      </a>
+                <a
+                  style={{ cursor: "pointer" }}
+                  onClick={() => {
+                    Navigate({
+                      pathname: "/Allproducts",
+                      search: `?catId=${category._id}`,
+                    })
+                  }}
+                  className="dropdown-item"
+                >
+                  All items
+                </a>
               </div>
             </li>
             <li className="nav-item">
@@ -120,18 +121,22 @@ const Navigate = useNavigate()
               Search
             </button>
             <div style={{ paddingLeft: "10px", display: "flex", gap: "10px" }}>
-              {/* <button type="button" class="btn btn-light">
-                Sign in
-              </button>
-              <button type="button" class="btn btn-warning">
-                Sign Up
-              </button> */}
-              <img
+              {InLogin?<button onClick={()=>{
+                localStorage.clear()
+                setInLogin(false)
+
+              }} type="button" class="btn btn-danger">Logout</button> :<img
+                onClick={() => {
+                  Navigate("/Login");
+                }}
                 style={{ width: "20px", cursor: "pointer" }}
                 src="./person.svg"
-              ></img>
-              <img
-                style={{ width: "20px", cursor: "pointer" }}
+              ></img>}
+              <img 
+                onClick={() => {
+                  // Navigate("/Cart"); //!!!!!
+                }}
+                style={{ width: "20px", cursor: "pointer" ,position:"relative"}}
                 src="./cart.svg"
               ></img>
             </div>

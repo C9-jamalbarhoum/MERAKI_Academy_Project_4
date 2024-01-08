@@ -12,23 +12,24 @@ function Home() {
       <div style={{ backgroundColor: "#fff" }}>
    
         <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-  <div style={{height:"100vh" }}  class="carousel-inner">
+  <div style={{height:"100vh" , width:"80vw" , margin: "0 130px" }}  class="carousel-inner">
     <div  class="carousel-item active">
       <img  class="d-block w-100" src= "https://m.media-amazon.com/images/I/81TcQ2E2EML._SL1500_.jpg"  alt="First slide"/>
     </div>
     <div class="carousel-item">
-      <img class="d-block w-100" src= "https://w0.peakpx.com/wallpaper/975/852/HD-wallpaper-books-reading-books-background-with-books-bookshelf.jpg" alt="Second slide"/>
+      <img class="d-block w-100" src= "https://images.unsplash.com/3/www.madebyvadim.com.jpg?q=80&w=1782&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Second slide"/>
+      {/* {} */}
     </div>
     <div class="carousel-item">
-      <img class="d-block w-100" src= "https://images.unsplash.com/3/www.madebyvadim.com.jpg?q=80&w=1782&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"alt="Third slide"/>
+      <img class="d-block w-100" src= "https://w0.peakpx.com/wallpaper/975/852/HD-wallpaper-books-reading-books-background-with-books-bookshelf.jpg"alt="Third slide"/>
     </div>
   </div>
-  <a style={{margin : "300px 0"}} class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-    <span style={{padding:"20px"}} class="carousel-control-prev-icon" aria-hidden="true"></span>
+  <a style={{margin : "300px"}} class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+    <span  style={{padding:"20px",margin:"0 500px 0 0 "}} class="carousel-control-prev-icon" aria-hidden="true"></span>
     <span class="sr-only">Previous</span>
   </a>
-  <a style={{margin : "300px 0"}}   class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-    <span style={{padding:"20px"}}   class="carousel-control-next-icon" aria-hidden="true"></span>
+  <a style={{margin : "300px  0"}}   class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+    <span style={{padding:"20px", margin:"0 200px 0  0"}}   class="carousel-control-next-icon" aria-hidden="true"></span>
     <span class="sr-only">Next</span>
   </a>
 </div>
@@ -45,8 +46,11 @@ function Home() {
               return (
                 <>
                   <div onClick={()=>{
-                    setIDCategory(category._id)
-                    Navigate("/products")
+                    Navigate({
+                      pathname: "/products",
+                      search: `?catId=${category._id}`,
+                    })
+
                   }} className="col-sm">
                     <div
                       className="card"

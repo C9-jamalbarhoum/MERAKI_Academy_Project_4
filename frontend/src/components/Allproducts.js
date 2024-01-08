@@ -23,8 +23,8 @@ function Allproducts() {
               <div
                 className="card"
                 style={{
-                  width: "12rem",
-                  height: "50vh",
+                  width: "19rem",
+                  height: "47vh",
                   borderRadius: "30px",
                   cursor: "pointer",
                 }}
