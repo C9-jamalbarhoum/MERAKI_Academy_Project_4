@@ -183,9 +183,8 @@ function Navbar() {
                 ></img>
               )}
               <img
-                data-toggle="modal"
-                data-target="#exampleModalCenter"
-                id="cart-img"
+                id="cart-img" 
+           //!! =>    type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"
                 onClick={() => {
                   if (InLogin) {
                     setToggleCart(!toggleCart);
@@ -203,28 +202,20 @@ function Navbar() {
               ></img>
               {toggleCart && (
                 <>
-                  {/* <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">login first</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
+                   {/* //! for cart offcanvas ==> ==>{" "} */}
+
+{/* <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+  <div class="offcanvas-header">
+    <h5 id="offcanvasRightLabel">Offcanvas right</h5>
+    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body">
+    ...
   </div>
 </div> */}
-
                   <div className="Cart-box">
                     Shopping Cart
+                     {/* //! lop => for cart product =>{" "} */}
                     {/* {cartProduct.map((pro, i) => {
                       setTotal(total + pro.price)
                     return (

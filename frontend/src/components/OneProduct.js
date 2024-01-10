@@ -9,10 +9,11 @@ const ratingChanged = (newRating) => {
 };
 
 function OneProduct() {
-  const { user_id, setUser_id} = useContext(USEContext);
+  const { user_id, setUser_id } = useContext(USEContext);
   const Navigate = useNavigate();
 
   const [proData, setProData] = useState({});
+  const [ImgSrc, setImgSrc] = useState("");
 
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
@@ -29,17 +30,65 @@ function OneProduct() {
       });
   }, []);
 
-
   return (
     <div style={{ paddingTop: "140px" }} className="containerProduct">
       <div className="containerBox">
         {typeof proData.image === typeof [] ? (
           <div className="image-4">
             <div className="sm-3-img">
+              {/* { for img on Click show img  => } */}
+              <div
+                class="modal fade"
+                id="exampleModalLong"
+                tabindex="-1"
+                role="dialog"
+                aria-labelledby="exampleModalLongTitle"
+                aria-hidden="true"
+              >
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLongTitle">
+                        welcome Joy joy
+                      </h5>
+                      <button
+                        type="button"
+                        class="close"
+                        data-dismiss="modal"
+                        aria-label="Close"
+                      >
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <img style={{ width: "100%" ,height:"100%" }} src={ImgSrc}></img>
+                    </div>
+                    <div class="modal-footer">
+                      <button
+                        type="button"
+                        class="btn btn-secondary"
+                        data-dismiss="modal"
+                      >
+                        Close
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
               {proData.image.map((img, i) => {
                 return (
                   <>
-                    <div style={{ width: "100%" }} className="imgs-pro">
+                    <div
+                      class="btn btn-primary"
+                      data-toggle="modal"
+                      data-target="#exampleModalLong"
+                      onClick={(e) => {
+                        setImgSrc(e.target.src);
+                      }}
+                      style={{ width: "100%", cursor: "pointer" }}
+                      className="imgs-pro"
+                    >
                       <img
                         style={{ width: "100%", height: "100px" }}
                         src={img}
@@ -83,14 +132,15 @@ function OneProduct() {
           >
             <button
               onClick={() => {
-                if (user_id||localStorage.getItem("token")) {
-               
+                if (user_id || localStorage.getItem("token")) {
                   //!!!!!!!!!!!!!!!!!!!!!!
-             
+
                   axios
                     .put(`http://localhost:5000/cart/${user_id}`, {
                       headers: {
-                        Authorization: `Bearer ${localStorage.getItem("token")}`,
+                        Authorization: `Bearer ${localStorage.getItem(
+                          "token"
+                        )}`,
                       },
                     })
                     .then((result) => {

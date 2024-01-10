@@ -22,7 +22,7 @@ function App() {
   const [InLogin, setInLogin] = useState(
     localStorage.getItem("InLogin") || false
   );
-  const [SearchVal, setSearchVal] = useState();
+  const [SearchVal, setSearchVal] = useState("");
   useEffect(() => {
     axios
       .get("http://localhost:5000/category/")

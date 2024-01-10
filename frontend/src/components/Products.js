@@ -30,8 +30,8 @@ function Products() {
 
   return (
     <div>
-      <div style={{ padding: "150px  0" }} className="container">
-        <div style={{ gap: "10px" }} class="row">
+      <div style={{ paddingTop:"150px" }} className="container">
+        <div style={{ gap: "20px" }} class="row">
           {Products.map((products, index) => {
             return (
               <>

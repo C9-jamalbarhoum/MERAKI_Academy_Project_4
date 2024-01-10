@@ -1,43 +1,80 @@
 import axios from "axios";
 import React, { useEffect, useContext, useState } from "react";
 import { USEContext } from "../App";
+import { useNavigate } from "react-router-dom";
 function Search() {
+  const  Navigate = useNavigate()
   const { SearchVal, setSearchVal } = useContext(USEContext);
   const [SearchData, setSearchData] = useState([]);
-  console.log(SearchVal);
-  console.log(SearchData);
-
+//! http://localhost:5000/search?q=name
+console.log(SearchData);
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/search?q= ${SearchVal}`)
+      .get(`http://localhost:5000/search?q=${SearchVal}`)
       .then((result) => {
         setSearchData(result.data.result);
       })
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+  }, [SearchVal]);
   return (
     <>
-      {/* <p>Lorem</p>
-      <p>Lorem</p>
-      <p>Lorem</p>
-      <p>Lorem</p>
-      <p>Lorem</p>
-      <p>Lorem</p>
-      <p>Lorem</p>
-      <p>Lorem</p>
-      <p>Lorem</p>
-      <p>Lorem</p>
-      <p>Lorem</p>
-      <p>Lorem</p>
-      <p>Lorem</p>
-      <p>Lorem</p>
-      <p>Lorem</p>
-      <p>Lorem</p>
-      <p>Lorem</p>
-      <p>Lorem</p>
-      <h2>{SearchData[0].title}</h2> */}
+   <div style={{ paddingTop: "150px" }} className="container">
+        <div style={{ gap: "100px" }} class="row">
+          {SearchData.map((products, index) => {
+            return (
+              <>
+                <div onClick={() => {
+                 Navigate({
+                  pathname:"/OneProduct",
+                  search:`?pro=${products._id}`
+                 })
+                }} className="col-sm-">
+                  <div
+                    className="card"
+                    style={{
+                      width: "18rem",
+                      height: "40vh",
+                      borderRadius: "30px",
+                      cursor: "pointer",
+                    }}
+                  >
+                    <img
+                      style={{ height: "30vh", borderRadius: "30px" }}
+                      className="card-img-top"
+                      src={products.image[0]}
+                      alt="Card image cap"
+                    />
+                    <div className="card-body">
+                      <p style={{ fontWeight: "bold" }} className="card-text">
+                        {products.title}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </>
+            );
+          })}
+          
+        </div>
+              <section  dclass="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
+     
+
+     <div>
+       <a class="me-4 text-reset">
+         <img onClick={()=>{
+      Navigate(-1)
+         }}  style={{padding:"10px" ,cursor:"pointer"}} src="arrow-left.svg"></img>
+       </a>
+       <a class="me-4 text-reset">
+         <img onClick={()=>{
+ 
+         }}  style={{padding:"10px",cursor:"pointer"}}  src="arrow-right.svg"></img>
+       </a>
+     </div>
+   </section>
+      </div>
     </>
   );
 }

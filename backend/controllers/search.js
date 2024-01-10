@@ -6,7 +6,7 @@ const SearchByNameProduct = (req, res) => {
   const { q } = req.query;
   productModule
     .find({ title: { $regex: q, $options: "i" } })
-    .limit(4)
+    .limit(20)
     .then((result) => {
       res.status(200).json({
         massage: "successful",
