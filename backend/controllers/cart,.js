@@ -1,32 +1,37 @@
 const cartModule = require("../models/cart");
 ///  get cart  by id for user => =>  { id => User Id}
 const getCartByUser = (req, res) => {
-  const { id } = req.params;
-  cartModule
+  const userId = req.token.userId;
 
-    .findOne({ user: id })
-    .populate("products")
+  cartModule
+    .findOne({ user: userId })
+    .populate("products.product")
     .then((result) => {
       res.status(200).json(result);
     })
     .catch((Err) => {
-      res.status(404).json(Err.massage);
+      console.log(Err);
+      res.status(500).json(Err);
     });
 };
 
 ///  user create new itm for cart => =>  { id => User Id}
 
 const UpdateCart = (req, res) => {
-  const { id } = req.params;
+  const userId = req.token.userId;
+  console.log(userId);
   cartModule
-    .findOneAndUpdate({ user: id }, req.body, { new: true })
+    .findOneAndUpdate(
+      { user: userId },
+      { $push: { products: req.body } },
+      { new: true }
+    )
     .populate("products")
     .then((result) => {
       res.status(200).json(result);
     })
     .catch((err) => {
-      res.status(500).json(err)
-
+      res.status(500).json(err);
     });
 };
 // delete cart  by id => =>   { id => cartID}
@@ -64,5 +69,5 @@ module.exports = {
   getCartByUser,
   deleteCartById,
   UpdateCart,
- deleteOneProductByIdOfCart,
+  deleteOneProductByIdOfCart,
 };

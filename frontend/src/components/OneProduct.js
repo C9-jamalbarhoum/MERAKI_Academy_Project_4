@@ -5,7 +5,18 @@ import { USEContext } from "../App";
 import ReactStars from "react-stars";
 
 function OneProduct() {
-  const { user_id, setUser_id } = useContext(USEContext);
+  const { user_id, setUser_id,token } = useContext(USEContext);
+
+  const [cartUser, setCartUser] = useState({
+    products: [],
+    user: user_id,
+  });
+  const [cartQuantity, setQuantity] = useState({
+    product: undefined,
+    quantity: 1,
+  });
+
+  console.log(cartUser);
   const Navigate = useNavigate();
   const [toggle, setToggle] = useState(false);
   const [proData, setProData] = useState({});
@@ -31,12 +42,17 @@ function OneProduct() {
     console.log(newRating);
     // setReviews({...Reviews,reviews:newRating})
   };
+
+  const [Reviews, setReviews] = useState({
+    comment: undefined,
+    reviews: 4,
+  });
   const createComment = () => {
     if (localStorage.getItem("token")) {
       axios
         .post(`http://localhost:5000/product/${proData._id}`, Reviews, {
           headers: {
-            Authorization: `Bearer :${localStorage.getItem("token")}`,
+            Authorization: `Bearer ${token}`,
           },
         })
         .then((result) => {
@@ -49,16 +65,43 @@ function OneProduct() {
     }
   };
 
-  const [Reviews, setReviews] = useState({
-    comment: undefined,
-    reviews: 4,
-    // commenter : user_id ,
-    // product : proData._id
-  });
   const filterProductForComment = () => {
     console.log("S");
 
     setProData({ ...proData, reviews: [...proData.reviews, Reviews] });
+  };
+
+  const addProductToCart = async (id) => {
+    const copy = { ...cartUser };
+    /* 
+      [{product:1,q:1}, {product:1,q:1}]
+      [{product:1,q:2}]
+    */
+
+    const pro = copy.products.find((product) => product.product === id);
+    if (!pro) {
+      copy.products.push({
+        product: id,
+        quantity: 1,
+      });
+    } else {
+      pro.quantity++;
+    }
+
+    console.log(id, pro);
+    console.log(copy);
+    if (localStorage.getItem("token")) {
+      try {
+        const res = await axios.put(`http://localhost:5000/cart/}`, copy.products, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        });
+        console.log(res);
+      } catch (error) {
+        console.log(error);
+      }
+    }
   };
 
   console.log("proData._id =>" + proData._id);
@@ -168,27 +211,7 @@ function OneProduct() {
             }}
           >
             <button
-              onClick={() => {
-                if (user_id || localStorage.getItem("token")) {
-                  //!!!!!!!!!!!!!!!!!!!!!!
-
-                  axios
-                    .put(`http://localhost:5000/cart/${user_id}`, {
-                      headers: {
-                        Authorization: `Bearer ${localStorage.getItem(
-                          "token"
-                        )}`,
-                      },
-                    })
-                    .then((result) => {
-                      console.log(result);
-                    })
-                    .catch((err) => {
-                      console.log(err);
-                    });
-                } else {
-                }
-              }}
+              onClick={() => addProductToCart(proData._id)}
               className="btn btn-primary"
             >
               add to cart
@@ -226,7 +249,7 @@ function OneProduct() {
         </div>
       </section>
       <hr style={{ border: "3px solid #f1f1f1" }} />
-      {/* {//!   =>  reviews  && Comments &&  Details } */}
+      {/* {//!   =>  reviews  && Comments &&  } */}
       <div style={{ padding: "50px" }} className="container">
         <div style={{ display: "flex", gap: "20px", justifyContent: "center" }}>
           <button
@@ -348,6 +371,7 @@ function OneProduct() {
                       );
                     })}
                   <textarea
+                    defaultValue={""}
                     onChange={(e) => {
                       setReviews({ ...Reviews, comment: e.target.value });
                       // console.log(e.target.value);

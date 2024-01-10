@@ -4,7 +4,7 @@ import { USEContext } from "../App";
 import { useNavigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
 function Login() {
-  const { InLogin, setInLogin ,setUser_id} = useContext(USEContext);
+  const { InLogin, setInLogin, setUser_id,   setToken } = useContext(USEContext);
 
   const [userLoginDATA, setUserLoginDATA] = useState({
     email: undefined,
@@ -94,18 +94,16 @@ function Login() {
                 axios
                   .post("http://localhost:5000/users/login", userLoginDATA)
                   .then((result) => {
+                    setToken( result.data.token)
                     localStorage.setItem("token", result.data.token);
                     localStorage.setItem("InLogin", true);
-                    setInLogin(true)
-                    console.log( result);
-                    Navigate("/");
-                 
-                      const token = jwtDecode(localStorage.getItem("token"));
-                      setUser_id(token.userId);
-            
-                   
+                    setInLogin(true);
+                    console.log(result);
+                    
+              
+
                     console.log(result.data.token);
-                 
+                    Navigate("/");
                   })
                   .catch((err) => {
                     console.log(err);
@@ -117,25 +115,30 @@ function Login() {
               Submit
             </button>
           </form>
-          
         </div>
-        <section  dclass="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
-     
-
-     <div>
-       <a class="me-4 text-reset">
-         <img onClick={()=>{
-      Navigate(-1)
-         }}  style={{padding:"10px" ,cursor:"pointer"}} src="arrow-left.svg"></img>
-       </a>
-       <a class="me-4 text-reset">
-         <img onClick={()=>{
-      Navigate("/Register")
-         }}  style={{padding:"10px",cursor:"pointer"}}  src="arrow-right.svg"></img>
-       </a>
-     </div>
-   </section>
-      <hr style={{ border: "3px solid #f1f1f1" }} />
+        <section dclass="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
+          <div>
+            <a class="me-4 text-reset">
+              <img
+                onClick={() => {
+                  Navigate(-1);
+                }}
+                style={{ padding: "10px", cursor: "pointer" }}
+                src="arrow-left.svg"
+              ></img>
+            </a>
+            <a class="me-4 text-reset">
+              <img
+                onClick={() => {
+                  Navigate("/Register");
+                }}
+                style={{ padding: "10px", cursor: "pointer" }}
+                src="arrow-right.svg"
+              ></img>
+            </a>
+          </div>
+        </section>
+        <hr style={{ border: "3px solid #f1f1f1" }} />
       </div>
     </>
   );

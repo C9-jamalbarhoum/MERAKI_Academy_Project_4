@@ -17,7 +17,7 @@ export const USEContext = createContext();
 
 function App() {
 
-  
+  const [token , setToken ] = useState(localStorage.getItem("token") || null)
 
 
 
@@ -58,7 +58,9 @@ function App() {
           setSearchVal,
           user_id,
           setUser_id,
-        
+          token,
+          setToken
+
         }}
       >
         <Navbar />

@@ -1,16 +1,17 @@
 import React, { useContext, useEffect, useState } from "react";
 import { USEContext } from "../App";
 import { useNavigate } from "react-router-dom";
-import { jwtDecode } from "jwt-decode";
-import axios from "axios";
 
+import axios from "axios";
+import Button from "react-bootstrap/Button";
+import Offcanvas from "react-bootstrap/Offcanvas";
 function Navbar() {
   const [total, setTotal] = useState(0);
   const Navigate = useNavigate();
   const [toggleCart, setToggleCart] = useState(false);
 
   const [toggleGoLogin, setToggleGoLogin] = useState(false);
-  const [cartProduct, setCategory] = useState([]);
+  const [cartProduct, setCartProduct] = useState([]);
 
   const {
     category,
@@ -21,19 +22,53 @@ function Navbar() {
     setSearchVal,
     user_id,
     setUser_id,
+    token,
+    setToken
   } = useContext(USEContext);
 
-  useEffect(() => {
+
+  const  getCartUser = ()=>{
     axios
-      .get(`http://localhost:5000/cart/${user_id}`)
-      .then((result) => {
-        console.log(result.data.products);
-        setCategory(result.data.products);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, [toggleCart]);
+    .get(`http://localhost:5000/cart/`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+    .then((result) => {
+      setCartProduct(result.data.products);
+      console.log("true for api get cart");
+    
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+  }
+
+
+  // function Example() {
+  //   const [show, setShow] = useState(false);
+
+  //   const handleClose = () => setShow(false);
+  //   const handleShow = () => setShow(true);
+
+  //   return (
+  //     <>
+  //       <Button variant="primary" onClick={handleShow}>
+  //         Launch
+  //       </Button>
+
+  //       <Offcanvas show={show} onHide={handleClose}>
+  //         <Offcanvas.Header closeButton>
+  //           <Offcanvas.Title>Offcanvas</Offcanvas.Title>
+  //         </Offcanvas.Header>
+  //         <Offcanvas.Body>
+  //           Some text as placeholder. In real life you can have the elements you
+  //           have chosen. Like, text, images, lists, etc.
+  //         </Offcanvas.Body>
+  //       </Offcanvas>
+  //     </>
+  //   );
+  // }
 
   return (
     <div>
@@ -183,13 +218,12 @@ function Navbar() {
                 ></img>
               )}
               <img
-                id="cart-img" 
-           //!! =>    type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"
+                id="cart-img"
+                //!! =>    type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"
                 onClick={() => {
                   if (InLogin) {
+                    getCartUser()
                     setToggleCart(!toggleCart);
-                    const token = jwtDecode(localStorage.getItem("token"));
-                    setUser_id(token.userId);
                   } else {
                   }
                 }}
@@ -202,9 +236,9 @@ function Navbar() {
               ></img>
               {toggleCart && (
                 <>
-                   {/* //! for cart offcanvas ==> ==>{" "} */}
+                  {/* //! for cart offcanvas ==> ==>{" "} */}
 
-{/* <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+                  {/* <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
   <div class="offcanvas-header">
     <h5 id="offcanvasRightLabel">Offcanvas right</h5>
     <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
@@ -213,31 +247,30 @@ function Navbar() {
     ...
   </div>
 </div> */}
+                  {console.log(cartProduct)}
                   <div className="Cart-box">
-                    Shopping Cart
-                     {/* //! lop => for cart product =>{" "} */}
-                    {/* {cartProduct.map((pro, i) => {
-                      setTotal(total + pro.price)
-                    return (
-                      <>
-                        <div>
-                          <div className="x"> x</div>
-                          <div className="productCart">
-                            <div>
-                              {" "}
-                              <img src={pro.image}></img>
-                            </div>
-                            <div>
-                              {" "}
-                              <p>{pro.title}</p>
-                              <span className="price">{pro.price} </span>
+                    Shopping Cart //! lop => for cart product => !// arror => !!
+                    {cartProduct.map((pro, i) => {
+                      // setTotal(total + pro.price);
+                      return (
+                        <>
+                          <div>
+                            <div className="x"> x</div>
+                            <div className="productCart">
+                              <div>
+                                {" "}
+                                <img src={pro.image}></img>
+                              </div>
+                              <div>
+                                {" "}
+                                <p>{pro.title}</p>
+                                <span className="price">{pro.price} </span>
+                              </div>
                             </div>
                           </div>
-                        </div>
-                        
-                      </>
-                    );
-                  })} */}
+                        </>
+                      );
+                    })}
                     <div className="totalCart">
                       <p>Total:{total}</p>
                     </div>

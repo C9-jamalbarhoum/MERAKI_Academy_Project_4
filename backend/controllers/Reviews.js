@@ -8,18 +8,18 @@ const CreateReviews = (req, res) => {
   // Comment: [{ type: String }],
   // reviews: { type: Number },
 
-  const { comment, reviews ,commenter,product } = req.body;
+  const { comment, reviews } = req.body;
 
+  const userId = req.token.userId;
   const NewReviews = new reviewsModule({
     comment,
     reviews,
-    commenter ,
-    product 
+    commenter: userId,
   });
   NewReviews.save().then((result) => {
     productModule
       .findByIdAndUpdate(
-        { _id: id },
+        { _id: userId },
         { $push: { reviews: result._id } },
         { new: true }
       )
@@ -33,8 +33,8 @@ const CreateReviews = (req, res) => {
       .catch((err) => {
         res.status(500).json({
           success: false,
-          message: `Server Error`,
-          err: err.message,
+          message:err.message,
+          err: err,
         });
       });
   });
@@ -65,10 +65,7 @@ const deleteReviews = (req, res) => {
     .catch((err) => {
       res.json(err.message);
     });
-
 };
-const getAllCommentByIdProduct = (req, res) => {
-    
-};
+const getAllCommentByIdProduct = (req, res) => {};
 
 module.exports = { CreateReviews, deleteReviews, getAllCommentByIdProduct };
