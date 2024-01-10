@@ -21,8 +21,7 @@ function Navbar() {
     setSearchVal,
     user_id,
     setUser_id,
-    product,
-     setProduct 
+
   } = useContext(USEContext);
 
   useEffect(() => {
@@ -102,7 +101,7 @@ function Navbar() {
                 Shop By Department
               </a>
               <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-                {product.map((category, index) => {
+                {category.map((category, index) => {
                   return (
                     <>
                       <a

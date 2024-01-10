@@ -9,7 +9,7 @@ const ratingChanged = (newRating) => {
 };
 
 function OneProduct() {
-  const { user_id, setUser_id, product, setProduct } = useContext(USEContext);
+  const { user_id, setUser_id} = useContext(USEContext);
   const Navigate = useNavigate();
 
   const [proData, setProData] = useState({});
@@ -28,17 +28,7 @@ function OneProduct() {
         console.log(err);
       });
   }, []);
-  useEffect(() => {
-    axios
-      .get(`http://localhost:5000/cart/${user_id}`)
-      .then((result) => {
-        setProduct(result.data.products);
-        console.log(product);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
+
 
   return (
     <div style={{ paddingTop: "140px" }} className="containerProduct">
@@ -94,12 +84,11 @@ function OneProduct() {
             <button
               onClick={() => {
                 if (user_id||localStorage.getItem("token")) {
-                  product.push(proData);
-                  console.log(product);
+               
                   //!!!!!!!!!!!!!!!!!!!!!!
              
                   axios
-                    .put(`http://localhost:5000/cart/${user_id}`, product, {
+                    .put(`http://localhost:5000/cart/${user_id}`, {
                       headers: {
                         Authorization: `Bearer ${localStorage.getItem("token")}`,
                       },

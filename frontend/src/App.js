@@ -17,11 +17,7 @@ export const USEContext = createContext();
 function App() {
   const [category, setCategory] = useState([]);
   const [Products, setProducts] = useState([]);
-  const [product, setProduct] = useState([{
-       product: undefined,
-       quantity: 1,
-       price: undefined
-  }]);
+
   const [user_id, setUser_id] = useState("");
   const [InLogin, setInLogin] = useState(
     localStorage.getItem("InLogin") || false
@@ -50,8 +46,7 @@ function App() {
           setSearchVal,
           user_id,
           setUser_id,
-          product,
-           setProduct
+        
         }}
       >
         <Navbar />
