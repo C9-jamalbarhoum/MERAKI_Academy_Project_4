@@ -2,19 +2,19 @@ const reviewsModule = require("../models/reviews");
 const productModule = require("../models/product");
 const reviews = require("../models/reviews");
 
-
-
 // ! for create Reviews => => => http://localhost:5000/product/:id    ==> {id : productID}
 const CreateReviews = (req, res) => {
   const id = req.params.id;
   // Comment: [{ type: String }],
   // reviews: { type: Number },
 
-  const { comment, reviews } = req.body;
+  const { comment, reviews ,commenter,product } = req.body;
 
   const NewReviews = new reviewsModule({
     comment,
     reviews,
+    commenter ,
+    product 
   });
   NewReviews.save().then((result) => {
     productModule
@@ -40,7 +40,6 @@ const CreateReviews = (req, res) => {
   });
 };
 
-
 //! API for delete reviews => => http://localhost:5000/?reviewsId=1&productId=2
 const deleteReviews = (req, res) => {
   const { reviewsId, productId } = req.query;
@@ -57,15 +56,19 @@ const deleteReviews = (req, res) => {
           { new: true }
         )
         .then((result) => {
-         res.status(203).json("deleted reviews")
+          res.status(203).json("deleted reviews");
         })
         .catch((err) => {
-          res.json(err.message)
+          res.json(err.message);
         });
     })
     .catch((err) => {
-      res.json(err.message)
+      res.json(err.message);
     });
+
+};
+const getAllCommentByIdProduct = (req, res) => {
+    
 };
 
-module.exports = { CreateReviews, deleteReviews };
+module.exports = { CreateReviews, deleteReviews, getAllCommentByIdProduct };

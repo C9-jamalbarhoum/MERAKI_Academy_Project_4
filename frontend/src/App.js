@@ -12,9 +12,17 @@ import Register from "./components/Register";
 import Cart from "./components/Cart";
 import Search from "./components/Search";
 import OneProduct from "./components/OneProduct";
+
 export const USEContext = createContext();
 
 function App() {
+
+  
+
+
+
+
+
   const [category, setCategory] = useState([]);
   const [Products, setProducts] = useState([]);
 
@@ -22,6 +30,10 @@ function App() {
   const [InLogin, setInLogin] = useState(
     localStorage.getItem("InLogin") || false
   );
+
+
+
+
   const [SearchVal, setSearchVal] = useState("");
   useEffect(() => {
     axios

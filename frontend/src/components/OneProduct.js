@@ -4,21 +4,19 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { USEContext } from "../App";
 import ReactStars from "react-stars";
 
-const ratingChanged = (newRating) => {
-  console.log(newRating);
-};
-
 function OneProduct() {
   const { user_id, setUser_id } = useContext(USEContext);
   const Navigate = useNavigate();
-
+  const [toggle, setToggle] = useState(false);
   const [proData, setProData] = useState({});
+
   const [ImgSrc, setImgSrc] = useState("");
+  const [ToggleReviews, setToggleReviews] = useState(false);
 
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const proID = queryParams.get("pro") || "";
-
+  console.log(proData);
   useEffect(() => {
     axios
       .get(`http://localhost:5000/product/${proID}`)
@@ -29,6 +27,42 @@ function OneProduct() {
         console.log(err);
       });
   }, []);
+  const ratingChanged = (newRating) => {
+    console.log(newRating);
+    // setReviews({...Reviews,reviews:newRating})
+  };
+  const createComment = () => {
+    if (localStorage.getItem("token")) {
+      axios
+        .post(`http://localhost:5000/product/${proData._id}`, Reviews, {
+          headers: {
+            Authorization: `Bearer :${localStorage.getItem("token")}`,
+          },
+        })
+        .then((result) => {
+          console.log(result);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    } else {
+    }
+  };
+
+  const [Reviews, setReviews] = useState({
+    comment: undefined,
+    reviews: 4,
+    // commenter : user_id ,
+    // product : proData._id
+  });
+  const filterProductForComment = () => {
+    console.log("S");
+
+    setProData({ ...proData, reviews: [...proData.reviews, Reviews] });
+  };
+
+  console.log("proData._id =>" + proData._id);
+  console.log("user_id =>" + user_id);
 
   return (
     <div style={{ paddingTop: "140px" }} className="containerProduct">
@@ -61,7 +95,10 @@ function OneProduct() {
                       </button>
                     </div>
                     <div class="modal-body">
-                      <img style={{ width: "100%" ,height:"100%" }} src={ImgSrc}></img>
+                      <img
+                        style={{ width: "100%", height: "100%" }}
+                        src={ImgSrc}
+                      ></img>
                     </div>
                     <div class="modal-footer">
                       <button
@@ -167,6 +204,7 @@ function OneProduct() {
           </div>
         </div>
       </div>
+
       <section dclass="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
         <div>
           <a class="me-4 text-reset">
@@ -188,62 +226,159 @@ function OneProduct() {
         </div>
       </section>
       <hr style={{ border: "3px solid #f1f1f1" }} />
+      {/* {//!   =>  reviews  && Comments &&  Details } */}
+      <div style={{ padding: "50px" }} className="container">
+        <div style={{ display: "flex", gap: "20px", justifyContent: "center" }}>
+          <button
+            onClick={() => {
+              setToggleReviews(!ToggleReviews);
+            }}
+            class="btn btn-light"
+          >
+            reviews
+          </button>
+          <button
+            onClick={() => {
+              setToggle(true);
+            }}
+            data-toggle="modal"
+            data-target="#exampleModal"
+            data-whatever="@mdo"
+            className="btn btn-light"
+          >
+            Comments
+          </button>
+        </div>
+      </div>
+      {ToggleReviews && (
+        <div class="row">
+          <div class="side">
+            <div>PRODUCTS</div>
+          </div>
+          <div class="middle">
+            <div class="bar-container">
+              <div class="bar-5"></div>
+            </div>
+          </div>
+          <div class="side right">
+            <div>150</div>
+          </div>
+          <div class="side">
+            <div>the service</div>
+          </div>
+          <div class="middle">
+            <div class="bar-container">
+              <div class="bar-5"></div>
+            </div>
+          </div>
+          <div class="side right">
+            <div>63</div>
+          </div>
+          <div class="side">
+            <div>Shipping</div>
+          </div>
+          <div class="middle">
+            <div class="bar-container">
+              <div class="bar-4"></div>
+            </div>
+          </div>
+          <div class="side right">
+            <div>15</div>
+          </div>
+          <div class="side">
+            <div>Instructions</div>
+          </div>
+          <div class="middle">
+            <div class="bar-container">
+              <div class="bar-2"></div>
+            </div>
+          </div>
+          <div class="side right">
+            <div>6</div>
+          </div>
+          <div class="side">
+            <div>the price</div>
+          </div>
+          <div class="middle">
+            <div class="bar-container">
+              <div class="bar-1"></div>
+            </div>
+          </div>
+          <div class="side right">
+            <div>20</div>
+          </div>
+        </div>
+      )}
+      <div
+        class="modal fade"
+        id="exampleModal"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">
+                New Comments
+              </h5>
 
-      <div class="row">
-        <div class="side">
-          <div>PRODUCTS</div>
-        </div>
-        <div class="middle">
-          <div class="bar-container">
-            <div class="bar-5"></div>
+              <button
+                type="button"
+                class="close"
+                data-dismiss="modal"
+                aria-label="Close"
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form>
+                <div class="form-group">
+                  <label for="message-text" class="col-form-label">
+                    Comments:
+                  </label>
+                  {toggle &&
+                    proData.reviews.map((reviews, i) => {
+                      return (
+                        <>
+                          <p>user : {reviews.comment}</p>{" "}
+                        </>
+                      );
+                    })}
+                  <textarea
+                    onChange={(e) => {
+                      setReviews({ ...Reviews, comment: e.target.value });
+                      // console.log(e.target.value);
+                    }}
+                    class="form-control"
+                    id="message-text"
+                  ></textarea>
+                </div>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-dismiss="modal"
+              >
+                Close
+              </button>
+              <button
+                onClick={() => {
+                  createComment();
+                  filterProductForComment();
+                }}
+                type="button"
+                class="btn btn-primary"
+                data-dismiss="modal"
+              >
+                Send message
+              </button>
+            </div>
           </div>
-        </div>
-        <div class="side right">
-          <div>150</div>
-        </div>
-        <div class="side">
-          <div>the service</div>
-        </div>
-        <div class="middle">
-          <div class="bar-container">
-            <div class="bar-5"></div>
-          </div>
-        </div>
-        <div class="side right">
-          <div>63</div>
-        </div>
-        <div class="side">
-          <div>Shipping</div>
-        </div>
-        <div class="middle">
-          <div class="bar-container">
-            <div class="bar-4"></div>
-          </div>
-        </div>
-        <div class="side right">
-          <div>15</div>
-        </div>
-        <div class="side">
-          <div>Instructions</div>
-        </div>
-        <div class="middle">
-          <div class="bar-container">
-            <div class="bar-2"></div>
-          </div>
-        </div>
-        <div class="side right">
-          <div>6</div>
-        </div>
-        <div class="side">
-          <div>the price</div>
-        </div>
-        <div class="middle">
-          <div class="bar-container">
-            <div class="bar-1"></div>
-          </div>
-        </div>
-        <div class="side right">
-          <div>20</div>
         </div>
       </div>
     </div>

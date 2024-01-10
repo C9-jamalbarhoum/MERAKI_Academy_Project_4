@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useState, useContext } from "react";
 import { USEContext } from "../App";
 import { useNavigate } from "react-router-dom";
+import { jwtDecode } from "jwt-decode";
 function Login() {
   const { InLogin, setInLogin ,setUser_id} = useContext(USEContext);
 
@@ -98,7 +99,11 @@ function Login() {
                     setInLogin(true)
                     console.log( result);
                     Navigate("/");
-                    setUser_id(result.data.userId);
+                 
+                      const token = jwtDecode(localStorage.getItem("token"));
+                      setUser_id(token.userId);
+            
+                   
                     console.log(result.data.token);
                  
                   })

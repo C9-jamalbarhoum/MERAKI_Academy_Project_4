@@ -1,15 +1,15 @@
-const express = require("express")
+const express = require("express");
 
-const {CreateReviews,deleteReviews} = require("../controllers/Reviews")
+const {
+  CreateReviews,
+  deleteReviews,
+  getAllCommentByIdProduct,
+} = require("../controllers/Reviews");
 
-const reviewsRouter = express() 
+const reviewsRouter = express();
 
+reviewsRouter.post("/product/:id", CreateReviews);
+reviewsRouter.delete("/", deleteReviews);
+reviewsRouter.get("/", getAllCommentByIdProduct);
 
-reviewsRouter.post("/product/:id",CreateReviews)
-reviewsRouter.delete("/",deleteReviews)
-
-
-
-
-
-module.exports = reviewsRouter
+module.exports = reviewsRouter;
