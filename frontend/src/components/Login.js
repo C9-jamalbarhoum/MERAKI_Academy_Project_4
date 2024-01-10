@@ -3,7 +3,7 @@ import React, { useState, useContext } from "react";
 import { USEContext } from "../App";
 import { useNavigate } from "react-router-dom";
 function Login() {
-  const { InLogin, setInLogin } = useContext(USEContext);
+  const { InLogin, setInLogin ,setUser_id} = useContext(USEContext);
 
   const [userLoginDATA, setUserLoginDATA] = useState({
     email: undefined,
@@ -96,8 +96,11 @@ function Login() {
                     localStorage.setItem("token", result.data.token);
                     localStorage.setItem("InLogin", true);
                     setInLogin(true)
-                    console.log(result.data.token);
+                    console.log( result);
                     Navigate("/");
+                    setUser_id(result.data.userId);
+                    console.log(result.data.token);
+                 
                   })
                   .catch((err) => {
                     console.log(err);
@@ -109,7 +112,25 @@ function Login() {
               Submit
             </button>
           </form>
+          
         </div>
+        <section  dclass="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
+     
+
+     <div>
+       <a class="me-4 text-reset">
+         <img onClick={()=>{
+      Navigate(-1)
+         }}  style={{padding:"10px" ,cursor:"pointer"}} src="arrow-left.svg"></img>
+       </a>
+       <a class="me-4 text-reset">
+         <img onClick={()=>{
+      Navigate("/Register")
+         }}  style={{padding:"10px",cursor:"pointer"}}  src="arrow-right.svg"></img>
+       </a>
+     </div>
+   </section>
+      <hr style={{ border: "3px solid #f1f1f1" }} />
       </div>
     </>
   );

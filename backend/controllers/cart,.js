@@ -25,7 +25,8 @@ const UpdateCart = (req, res) => {
       res.status(200).json(result);
     })
     .catch((err) => {
-      console.log(err.massage);
+      res.status(500).json(err)
+
     });
 };
 // delete cart  by id => =>   { id => cartID}
@@ -41,7 +42,7 @@ const deleteCartById = (req, res) => {
 };
 
 //  Update for cart  => =>  => delete One product of cart
-const deleteOneProductById = (req, res) => {
+const deleteOneProductByIdOfCart = (req, res) => {
   const { cartId, productId } = req.query;
   cartModule
     .findByIdAndUpdate(
@@ -63,5 +64,5 @@ module.exports = {
   getCartByUser,
   deleteCartById,
   UpdateCart,
-  deleteOneProductById,
+ deleteOneProductByIdOfCart,
 };

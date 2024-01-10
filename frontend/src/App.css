@@ -1,22 +1,20 @@
 .App {
   text-align: center;
-
 }
-.boxLogo{
+.boxLogo {
   height: 35px;
   border-radius: 5px;
-
 }
-.boxLogo img{
+.boxLogo img {
   border-radius: 15px;
 }
-.card{
+.card {
   width: "18rem";
-  height:"40vh";
-  border-Radius: "30px";
+  height: "40vh";
+  border-radius: "30px";
   cursor: "pointer";
 }
-.card:hover{
+.card:hover {
   background-color: aliceblue;
 }
 
@@ -28,3 +26,146 @@ style="transform: translate3d(-36.405%, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg)
   <img src="https://assets-global.website-files.com/617b1b1f42c1da41aeae3413/62ce0c95f7b515f953e3cbcc_audacy.png" loading="lazy"
    width="93" alt=""></div><div class="infinite-loop-card"><img src="https://assets-global.website-files.com/617b1b1f42c1da41aeae3413/62ce0c9ff7b515177ae3cbdb_bakkt.png" loading="lazy" width="93" alt=""></div><div class="infinite-loop-card"><img src="https://assets-global.website-files.com/617b1b1f42c1da41aeae3413/62ce0ca99981a44f28f13dce_clover.png" loading="lazy" width="93" alt=""></div><div class="infinite-loop-card"><img src="https://assets-global.website-files.com/617b1b1f42c1da41aeae3413/641d32e1f39774d10e39fc44_kaiser-x-labs.png" loading="lazy" width="133" alt=""></div><div class="infinite-loop-card"><img src="https://assets-global.website-files.com/617b1b1f42c1da41aeae3413/641d329ba61ee0e8fa192a6b_stihl.svg" loading="lazy" width="93" alt=""></div><div class="infinite-loop-card"><img src="https://assets-global.website-files.com/617b1b1f42c1da41aeae3413/62cc846372640f7c44a647e6_elfontheshelf.png" loading="lazy" width="93" alt=""></div><div class="infinite-loop-card"><img src="https://assets-global.website-files.com/617b1b1f42c1da41aeae3413/641d33394862792aa616cbeb_zenni.png" loading="lazy" width="93" alt=""></div><div class="infinite-loop-card"><img src="https://assets-global.website-files.com/617b1b1f42c1da41aeae3413/62ce0cd18327d08dbb5fc975_frontdoor.png" loading="lazy" width="93" alt=""></div><div class="infinite-loop-card"><img src="https://assets-global.website-files.com/617b1b1f42c1da41aeae3413/62ce0cdcb8332daa4ea050d4_hollywood.com.png" loading="lazy" width="103" alt=""></div><div class="infinite-loop-card"><img src="https://assets-global.website-files.com/617b1b1f42c1da41aeae3413/62ce0ce691000070869fdd08_mythical.png" loading="lazy" width="110" alt=""></div><div class="infinite-loop-card"><img src="https://assets-global.website-files.com/617b1b1f42c1da41aeae3413/62ce0c8b30d0225be1ee39de_edmodo.png" loading="lazy" alt="" width="106"></div><div class="infinite-loop-card"><img src="https://assets-global.website-files.com/617b1b1f42c1da41aeae3413/630952df0dc0119ed9b07ee1_obvio-health.png" loading="lazy" width="110" alt=""></div><div class="infinite-loop-card"><img src="https://assets-global.website-files.com/617b1b1f42c1da41aeae3413/62ce0cfd69ea38eed2190b4b_pwc.png" loading="lazy" width="93" alt=""></div><div class="infinite-loop-card"><img src="https://assets-global.website-files.com/617b1b1f42c1da41aeae3413/62ce0d089981a40c1ff1410d_take2-interactive.png" loading="lazy" width="93" alt=""></div><div class="infinite-loop-card"><img src="https://assets-global.website-files.com/617b1b1f42c1da41aeae3413/62ce0d11f870ab72315afe34_waterford.png" loading="lazy" width="110" alt=""></div><div class="infinite-loop-card"><img src="https://assets-global.website-files.com/617b1b1f42c1da41aeae3413/62ce0d2645ebff17af9aadd4_open-exchange.png" loading="lazy" alt="" width="120"></div><div class="infinite-loop-card"><img src="https://assets-global.website-files.com/617b1b1f42c1da41aeae3413/62ce0d31f7b5157068e3d6b5_purevpn.png" loading="lazy" alt="" width="110"></div><div class="infinite-loop-card"><img src="https://assets-global.website-files.com/617b1b1f42c1da41aeae3413/62cf2d6625b9f15a2b2ddada_underdog-fantasy.png" loading="lazy" alt="" width="110"></div><div class="infinite-loop-card"><img src="https://assets-global.website-files.com/617b1b1f42c1da41aeae3413/62ce0d53ddc9efd0f6c9943e_split.io.png" loading="lazy" alt="" width="110"></div><div class="infinite-loop-card"><img src="https://assets-global.website-files.com/617b1b1f42c1da41aeae3413/62ce0d64c31e42eebc794ae4_fnatic.png" loading="lazy" alt="" width="110"></div><div class="infinite-loop-card"><img src="https://assets-global.website-files.com/
 617b1b1f42c1da41aeae3413/62ce0c7df7b5151cebe3cb0c_fat%20shark.png" loading="lazy" alt="" width="96"></div></div> */
+
+
+
+.heading {
+  font-size: 25px;
+  margin-right: 25px;
+}
+
+.fa {
+  font-size: 25px;
+  cursor: pointer;
+}
+
+.checked {
+  color: orange;
+}
+
+/* Three column layout */
+.side {
+  float: left;
+  width: 15%;
+  margin-top: 10px;
+}
+
+.middle {
+  margin-top: 10px;
+  float: left;
+  width: 70%;
+}
+
+/* Place text to the right */
+.right {
+  text-align: right;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* The bar container */
+.bar-container {
+  width: 100%;
+  background-color: #f1f1f1;
+  text-align: center;
+  color: white;
+}
+
+/* Individual bars */
+.bar-5 {
+  width: 60%;
+  height: 18px;
+  background-color: #04aa6d;
+}
+.bar-4 {
+  width: 30%;
+  height: 18px;
+  background-color: #2196f3;
+}
+.bar-3 {
+  width: 10%;
+  height: 18px;
+  background-color: #00bcd4;
+}
+.bar-2 {
+  width: 4%;
+  height: 18px;
+  background-color: #ff9800;
+}
+.bar-1 {
+  width: 15%;
+  height: 18px;
+  background-color: #f44336;
+}
+
+/* Responsive layout - make the columns stack on top of each other instead of next to each other */
+@media (max-width: 400px) {
+  .side,
+  .middle {
+    width: 100%;
+  }
+  .right {
+    display: none;
+  }
+}
+.containerBox{
+  width: 100%;
+  display: flex;
+
+
+}
+.box2-data{
+width: 50%;
+display: flex;
+flex-direction: column;
+gap: 20px;
+
+
+}
+.image-4{
+  width: 50%;
+  height: 60vh;
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+}
+
+.box2-data *{
+  text-align: left;
+}
+.sm-3-img{
+  width: 20%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+}
+.firstImg{
+  width: 50%;
+
+}
+.Cart-box{
+  border-radius: 20px;
+  background-color: rgb(194, 193, 193);
+  width: 30vw;
+  height: 70vh;
+  z-index: 3;
+  position: absolute;
+right: 5px;
+top:70px;
+}
+.go-login{
+  border-radius: 20px;
+  background-color: rgb(194, 193, 193);
+  width: 20vw;
+  height: 30vh;
+  z-index: 3;
+  position: absolute;
+right: 5px;
+top:70px;
+}

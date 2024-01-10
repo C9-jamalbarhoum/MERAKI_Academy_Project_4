@@ -1,9 +1,42 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { USEContext } from "../App";
 import { useNavigate } from "react-router-dom";
+import { jwtDecode } from "jwt-decode";
+import axios from "axios";
+
 function Navbar() {
-  const { category, setIDCategory,setInLogin,InLogin } = useContext(USEContext);
+  const [total,setTotal] = useState(0)
   const Navigate = useNavigate();
+  const [toggleCart, setToggleCart] = useState(false);
+ 
+  const [toggleGoLogin, setToggleGoLogin] = useState(false);
+  const [cartProduct, setCategory] = useState([]);
+  
+  const {
+    category,
+    setIDCategory,
+    setInLogin,
+    InLogin,
+    SearchVal,
+    setSearchVal,
+    user_id,
+    setUser_id,
+    product,
+     setProduct 
+  } = useContext(USEContext);
+
+  useEffect(() => {
+    axios
+      .get(`http://localhost:5000/cart/${user_id}`)
+      .then((result) => {
+        console.log(result.data.products);
+        setCategory(result.data.products);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [toggleCart]);
+
   return (
     <div>
       {" "}
@@ -53,7 +86,7 @@ function Navbar() {
             </li>
             <li className="nav-item">
               <a className="nav-link" href="#">
-                about ass
+                about us
               </a>
             </li>
             <li className="nav-item dropdown">
@@ -69,7 +102,7 @@ function Navbar() {
                 Shop By Department
               </a>
               <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-                {category.map((category, index) => {
+                {product.map((category, index) => {
                   return (
                     <>
                       <a
@@ -93,7 +126,7 @@ function Navbar() {
                     Navigate({
                       pathname: "/Allproducts",
                       search: `?catId=${category._id}`,
-                    })
+                    });
                   }}
                   className="dropdown-item"
                 >
@@ -109,6 +142,10 @@ function Navbar() {
           </ul>
           <form className="form-inline my-2 my-lg-0">
             <input
+              onChange={(e) => {
+                setSearchVal(e.target.value);
+                Navigate("/Search");
+              }}
               className="form-control mr-sm-2"
               type="search"
               placeholder="Search"
@@ -121,24 +158,78 @@ function Navbar() {
               Search
             </button>
             <div style={{ paddingLeft: "10px", display: "flex", gap: "10px" }}>
-              {InLogin?<button onClick={()=>{
-                localStorage.clear()
-                setInLogin(false)
-
-              }} type="button" class="btn btn-danger">Logout</button> :<img
+              {InLogin ? (
+                <button
+                  onClick={() => {
+                    localStorage.clear();
+                    setInLogin(false);
+                  }}
+                  type="button"
+                  class="btn btn-danger"
+                >
+                  Logout
+                </button>
+              ) : (
+                <img
+                  onClick={() => {
+                    Navigate("/Login");
+                  }}
+                  style={{ width: "20px", cursor: "pointer" }}
+                  src="./person.svg"
+                ></img>
+              )}
+              <img
+                id="cart-img"
                 onClick={() => {
-                  Navigate("/Login");
+                  if (InLogin) {
+                    setToggleCart(!toggleCart);
+                    const token = jwtDecode(localStorage.getItem("token"));
+                    setUser_id(token.userId);
+                  } else {
+                    Navigate("/Login");
+                  }
                 }}
-                style={{ width: "20px", cursor: "pointer" }}
-                src="./person.svg"
-              ></img>}
-              <img 
-                onClick={() => {
-                  // Navigate("/Cart"); //!!!!!
+                style={{
+                  width: "20px",
+                  cursor: "pointer",
+                  position: "relative",
                 }}
-                style={{ width: "20px", cursor: "pointer" ,position:"relative"}}
                 src="./cart.svg"
               ></img>
+              {toggleCart && (
+                <>
+                  <div className="Cart-box">Shopping Cart
+                  {cartProduct.map((pro, i) => {
+                      setTotal(total + pro.price)
+                    return (
+                      <>
+                        <div>
+                          <div className="x"> x</div>
+                          <div className="productCart">
+                            <div>
+                              {" "}
+                              <img src={pro.image}></img>
+                            </div>
+                            <div>
+                              {" "}
+                              <p>{pro.title}</p>
+                              <span className="price">{pro.price} </span>
+                            </div>
+                          </div>
+                        </div>
+                        
+                      </>
+                    );
+                  })}
+                  <div className="totalCart">
+                    <p>Total:{total}</p>
+                   
+                  </div>
+                  <div className="checkOut"><button>checkOut</button></div>
+                  </div>
+                </>
+              )}
+              {toggleGoLogin && Navigate("/Login")}
             </div>
           </form>
         </div>

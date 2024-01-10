@@ -99,7 +99,7 @@ function Register() {
                 />
               </div>
             </div>
-            <div className="box2forUSer">
+            <div style={{padding:"40px"}} className="box2forUSer">
               <div class="form-group">
                 <label for="PhoneNumber1">Phone Number</label>
                 <input
@@ -160,7 +160,23 @@ function Register() {
             Submit
           </button>
         </form>
+        <section  dclass="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
      
+
+     <div>
+       <a class="me-4 text-reset">
+         <img onClick={()=>{
+      Navigate(-1)
+         }}  style={{padding:"10px" ,cursor:"pointer"}} src="arrow-left.svg"></img>
+       </a>
+       <a class="me-4 text-reset">
+         <img onClick={()=>{
+      Navigate("/Register")
+         }}  style={{padding:"10px",cursor:"pointer"}}  src="arrow-right.svg"></img>
+       </a>
+     </div>
+   </section>
+      <hr style={{ border: "3px solid #f1f1f1" }} />
       </div>
       {Successful&&<h2>Welcome to Joy joy </h2>}
     </>

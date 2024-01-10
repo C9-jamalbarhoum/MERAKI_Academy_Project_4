@@ -46,7 +46,7 @@ const getAllProduct = (req, res) => {
       res.status(404).json(err);
     });
 };
-
+//! http://localhost:5000/product/:id
 const getProductById = (req, res) => {
   const { id } = req.params;
 
@@ -84,7 +84,7 @@ const updateProduct = (req, res) => {
       res.json(err);
     });
 };
-//!  http://localhost:5000/product/idCate/:id
+//!  http://localhost:5000/product/IdCategory/:id
 const getAllProductByIdCategory =(req,res)=>{
 
      const {id} = req.params 

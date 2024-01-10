@@ -10,14 +10,23 @@ import axios from "axios";
 import Footer from "./components/Footer";
 import Register from "./components/Register";
 import Cart from "./components/Cart";
+import Search from "./components/Search";
+import OneProduct from "./components/OneProduct";
 export const USEContext = createContext();
 
 function App() {
-
   const [category, setCategory] = useState([]);
   const [Products, setProducts] = useState([]);
-  const [InLogin, setInLogin] = useState(localStorage.getItem("InLogin")|| false);
-  console.log(InLogin);
+  const [product, setProduct] = useState([{
+       product: undefined,
+       quantity: 1,
+       price: undefined
+  }]);
+  const [user_id, setUser_id] = useState("");
+  const [InLogin, setInLogin] = useState(
+    localStorage.getItem("InLogin") || false
+  );
+  const [SearchVal, setSearchVal] = useState();
   useEffect(() => {
     axios
       .get("http://localhost:5000/category/")
@@ -31,7 +40,19 @@ function App() {
   return (
     <div className="App">
       <USEContext.Provider
-        value={{ category, Products, setProducts,InLogin,setInLogin }}
+        value={{
+          category,
+          Products,
+          setProducts,
+          InLogin,
+          setInLogin,
+          SearchVal,
+          setSearchVal,
+          user_id,
+          setUser_id,
+          product,
+           setProduct
+        }}
       >
         <Navbar />
         <Routes>
@@ -41,6 +62,8 @@ function App() {
           <Route path="/Login" element={<Login />} />
           <Route path="/Register" element={<Register />} />
           <Route path="/Cart" element={<Cart />} />
+          <Route path="/Search" element={<Search />} />
+          <Route path="/OneProduct" element={<OneProduct />} />
         </Routes>
 
         <Footer />

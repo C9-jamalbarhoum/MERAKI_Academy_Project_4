@@ -2,9 +2,10 @@ import { useContext, useEffect } from "react";
 import { USEContext } from "../App";
 
 import axios from "axios";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 function Products() {
+  const Navigate = useNavigate()
   const { Products, setProducts, setIDCategory, IDCategory } =
     useContext(USEContext);
 
@@ -31,10 +32,15 @@ function Products() {
     <div>
       <div style={{ padding: "150px  0" }} className="container">
         <div style={{ gap: "10px" }} class="row">
-          {Products.map((category, index) => {
+          {Products.map((products, index) => {
             return (
               <>
-                <div onClick={() => {}} className="col-sm">
+                <div onClick={() => {
+                 Navigate({
+                  pathname:"/OneProduct",
+                  search:`?pro=${products._id}`
+                 })
+                }} className="col-sm">
                   <div
                     className="card"
                     style={{
@@ -47,12 +53,12 @@ function Products() {
                     <img
                       style={{ height: "30vh", borderRadius: "30px" }}
                       className="card-img-top"
-                      src={category.image[0]}
+                      src={products.image[0]}
                       alt="Card image cap"
                     />
                     <div className="card-body">
                       <p style={{ fontWeight: "bold" }} className="card-text">
-                        {category.title}
+                        {products.title}
                       </p>
                     </div>
                   </div>
@@ -60,8 +66,26 @@ function Products() {
               </>
             );
           })}
+          
         </div>
+              <section  dclass="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
+     
+
+     <div>
+       <a class="me-4 text-reset">
+         <img onClick={()=>{
+      Navigate(-1)
+         }}  style={{padding:"10px" ,cursor:"pointer"}} src="arrow-left.svg"></img>
+       </a>
+       <a class="me-4 text-reset">
+         <img onClick={()=>{
+ 
+         }}  style={{padding:"10px",cursor:"pointer"}}  src="arrow-right.svg"></img>
+       </a>
+     </div>
+   </section>
       </div>
+      
     </div>
   );
 }

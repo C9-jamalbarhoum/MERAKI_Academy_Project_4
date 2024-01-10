@@ -78,6 +78,7 @@ const login = (req, res) => {
           success: true,
           message: `Valid login credentials`,
           token: token,
+          userId : result._id
         });
       }
       console.log(result);
