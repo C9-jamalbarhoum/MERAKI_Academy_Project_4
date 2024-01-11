@@ -16,7 +16,7 @@ const getCartByUser = (req, res) => {
     });
 };
 
-///  user create new itm for cart => =>  { id => User Id}
+///  user create for push product of cart ==> new itm for cart => =>  { id => User Id}
 
 const UpdateCart = (req, res) => {
   const userId = req.token.userId;
@@ -55,9 +55,11 @@ const deleteOneProductByIdOfCart = (req, res) => {
   console.log("jojo");
   console.log(id);
   cartModule
-    .findOneAndUpdate({ user: userId },
-       { products: [{$pull:id}] },
-        { new: true })
+    .findOneAndUpdate(
+      { user: userId },
+      { products: [{ $pull: id }] },
+      { new: true }
+    )
     .then((result) => {
       res
         .status(201)
@@ -67,10 +69,22 @@ const deleteOneProductByIdOfCart = (req, res) => {
       res.status(404).json(err);
     });
 };
+const UpdateShangCart = (req, res) => {
+  const userId = req.token.userId;
+  console.log( userId);
+  console.log("xqx");
+    console.log(req.body);
+  cartModule.findOneAndUpdate({ user: userId },{ products:req.body}, { new: true }).then((result)=>{
+    res.status(201).json(result)
+  }).catch((err)=>{
+      res.status(404).json(err)
+  })
+};
 
 module.exports = {
   getCartByUser,
   deleteCartById,
   UpdateCart,
   deleteOneProductByIdOfCart,
+  UpdateShangCart,
 };

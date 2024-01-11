@@ -78,7 +78,7 @@ function OneProduct() {
       [{product:1,q:1}, {product:1,q:1}]
       [{product:1,q:2}]
     */
-
+      
     const pro = copy.products.find((product) => product.product === id);
     if (!pro) {
       copy.products.push({

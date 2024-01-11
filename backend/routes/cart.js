@@ -5,6 +5,7 @@ const {
   deleteCartById,
   getCartByUser,
   deleteOneProductByIdOfCart,
+  UpdateShangCart
 } = require("../controllers/cart,");
 const cartRouter = express();
 const authentication = require("../middleware/authentication");
@@ -19,5 +20,5 @@ cartRouter.delete(
 cartRouter.delete("/one/:id", authentication,deleteOneProductByIdOfCart);
 
 cartRouter.put("/:id", authentication, UpdateCart);
-
+cartRouter.put("/Shang/:id", authentication, UpdateShangCart);
 module.exports = cartRouter;

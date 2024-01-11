@@ -47,11 +47,11 @@ function Navbar() {
 
   console.log(cartProduct);
 
-  const deleteProductOfCart = (productId) => {
+  const deleteProductOfCart = (productId,copy) => {
     console.log(productId);
     console.log(token);
     axios
-      .delete(`http://localhost:5000/cart/one/${productId}`, {
+      .put(`http://localhost:5000/cart/Shang/${productId}`,copy, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -64,17 +64,9 @@ function Navbar() {
       });
   };
 
-const  NegativeQNT =()=>{
- 
-  console.log(cartProduct);
-
-
-
-
-
-
-
-}
+  const NegativeQNT = () => {
+    console.log(cartProduct);
+  };
   return (
     <div>
       {" "}
@@ -317,11 +309,11 @@ const  NegativeQNT =()=>{
                                     >
                                       quantity : {pro.quantity}{" "}
                                       <div style={{}}>
-                                        <div onClick={()=>{
-                                            NegativeQNT()
+                                        <div
+                                          onClick={() => {
+                                            NegativeQNT();
                                           }}
                                           className="positive"
-                                      
                                           style={{
                                             fontWeight: "bold",
                                             cursor: "pointer",
@@ -346,7 +338,7 @@ const  NegativeQNT =()=>{
                                   </div>
                                   <div
                                     onClick={() => {
-                                      deleteProductOfCart(pro.product._id);
+                                    
 
                                       const copy = cartProduct.filter(
                                         (prod, i) => {
@@ -358,6 +350,7 @@ const  NegativeQNT =()=>{
                                           }
                                         }
                                       );
+                                      deleteProductOfCart(pro.product._id,copy);
                                       console.log(copy);
                                       setCartProduct(copy);
                                     }}
