@@ -4,26 +4,76 @@ import { USEContext } from "../App";
 import { useNavigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
 function Login() {
-  const { InLogin, setInLogin, setUser_id,   setToken } = useContext(USEContext);
+  const { InLogin, setInLogin, setUser_id, setToken } = useContext(USEContext);
 
   const [userLoginDATA, setUserLoginDATA] = useState({
     email: undefined,
     password: undefined,
   });
+  const [massageInLogin, setMassageInLogin] = useState("");
+  const [inErr, setInErr] = useState(false);
+
+  const Login = () => {
+    axios
+      .post("http://localhost:5000/users/login", userLoginDATA)
+      .then((result) => {
+        setToken(result.data.token);
+        localStorage.setItem("token", result.data.token);
+        localStorage.setItem("InLogin", true);
+        setInLogin(true);
+        setInErr(false);
+
+        console.log(result.data.token);
+        // setMassageInLogin(result.response.massage)
+        Navigate("/");
+      })
+      .catch((err) => {
+        console.log(err);
+
+        console.log("a");
+        // console.log(err);
+        //   console.log(inErr);
+        // setInErr(true)
+        // setMassageInLogin(err.response.massage)
+      });
+  };
   const Navigate = useNavigate();
   return (
     <>
-      <div>
+      <div className="s">
         <h1
           style={{
-            paddingTop: "150px",
+            paddingTop: "250px",
             fontFamily: "-moz-initial",
             fontWeight: "bold",
           }}
         >
           Login
         </h1>
-
+        {InLogin && (
+          <h1
+            style={{
+              margin: "10px",
+              width: "200px",
+              height: "40px",
+              backgroundColor: "green",
+            }}
+          >
+            {massageInLogin}sds
+          </h1>
+        )}
+        {inErr && (
+          <div
+            style={{
+              margin: "10px",
+              width: "200px",
+              height: "40px",
+              backgroundColor: "red",
+            }}
+          >
+            {massageInLogin}
+          </div>
+        )}
         <div style={{ display: "flex", gap: "10px", justifyContent: "center" }}>
           <button
             className="Register btn btn-warning"
@@ -91,23 +141,7 @@ function Login() {
             <button
               onClick={(e) => {
                 e.preventDefault();
-                axios
-                  .post("http://localhost:5000/users/login", userLoginDATA)
-                  .then((result) => {
-                    setToken( result.data.token)
-                    localStorage.setItem("token", result.data.token);
-                    localStorage.setItem("InLogin", true);
-                    setInLogin(true);
-                    console.log(result);
-                    
-              
-
-                    console.log(result.data.token);
-                    Navigate("/");
-                  })
-                  .catch((err) => {
-                    console.log(err);
-                  });
+                Login();
               }}
               type="submit"
               class="btn btn-primary"

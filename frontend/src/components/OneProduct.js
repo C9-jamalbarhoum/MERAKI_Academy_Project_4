@@ -27,6 +27,7 @@ function OneProduct() {
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const proID = queryParams.get("pro") || "";
+
   console.log(proData);
   useEffect(() => {
     axios
@@ -37,7 +38,7 @@ function OneProduct() {
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+  }, [proID]);
   const ratingChanged = (newRating) => {
     console.log(newRating);
     // setReviews({...Reviews,reviews:newRating})

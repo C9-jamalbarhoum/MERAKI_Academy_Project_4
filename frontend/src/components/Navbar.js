@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { USEContext } from "../App";
 import { useNavigate } from "react-router-dom";
-
+import { motion } from "framer-motion";
 import axios from "axios";
 import Button from "react-bootstrap/Button";
 import Offcanvas from "react-bootstrap/Offcanvas";
@@ -23,53 +23,58 @@ function Navbar() {
     user_id,
     setUser_id,
     token,
-    setToken
+    setToken,
   } = useContext(USEContext);
 
-
-  const  getCartUser = ()=>{
+  const getCartUser = () => {
     axios
-    .get(`http://localhost:5000/cart/`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    })
-    .then((result) => {
-      setCartProduct(result.data.products);
-      console.log("true for api get cart");
-    
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-  }
+      .get(`http://localhost:5000/cart/`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((result) => {
+        setCartProduct(result.data.products);
+        console.log("true for api get cart");
+        console.log(result.data.products);
+        console.log(result);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  //!     http://localhost:5000/cart/
+
+  console.log(cartProduct);
+
+  const deleteProductOfCart = (productId) => {
+    console.log(productId);
+    console.log(token);
+    axios
+      .delete(`http://localhost:5000/cart/one/${productId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((result) => {
+        console.log(result);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+const  NegativeQNT =()=>{
+ 
+  console.log(cartProduct);
 
 
-  // function Example() {
-  //   const [show, setShow] = useState(false);
 
-  //   const handleClose = () => setShow(false);
-  //   const handleShow = () => setShow(true);
 
-  //   return (
-  //     <>
-  //       <Button variant="primary" onClick={handleShow}>
-  //         Launch
-  //       </Button>
 
-  //       <Offcanvas show={show} onHide={handleClose}>
-  //         <Offcanvas.Header closeButton>
-  //           <Offcanvas.Title>Offcanvas</Offcanvas.Title>
-  //         </Offcanvas.Header>
-  //         <Offcanvas.Body>
-  //           Some text as placeholder. In real life you can have the elements you
-  //           have chosen. Like, text, images, lists, etc.
-  //         </Offcanvas.Body>
-  //       </Offcanvas>
-  //     </>
-  //   );
-  // }
 
+
+}
   return (
     <div>
       {" "}
@@ -219,10 +224,13 @@ function Navbar() {
               )}
               <img
                 id="cart-img"
-                //!! =>    type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"
+                type="button"
+                data-bs-toggle="offcanvas"
+                data-bs-target="#offcanvasRight"
+                //=>    type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"
                 onClick={() => {
                   if (InLogin) {
-                    getCartUser()
+                    getCartUser();
                     setToggleCart(!toggleCart);
                   } else {
                   }
@@ -236,18 +244,152 @@ function Navbar() {
               ></img>
               {toggleCart && (
                 <>
-                  {/* //! for cart offcanvas ==> ==>{" "} */}
+                  <motion.div
+                    animate={{ x: 100, scale: 1 }}
+                    initial={{ scale: 0 }}
+                    style={{
+                      backgroundColor: "gray",
+                      position: "absolute",
+                      height: "100vh",
+                      width: "400px",
+                      height: "100vh",
+                      top: "-1px",
+                      right: "100px",
+                      overflow: "auto",
+                      border: "solid #000 6px",
+                    }}
+                    class="offcanvas offcanvas-end"
+                    tabindex="-1"
+                    id="offcanvasRight"
+                    aria-labelledby="offcanvasRightLabel"
+                  >
+                    <div class="offcanvas-header">
+                      <h5 style={{ fontFamily: "-moz-initial" }}>
+                        {" "}
+                        Shopping Cart
+                      </h5>
 
-                  {/* <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
-  <div class="offcanvas-header">
-    <h5 id="offcanvasRightLabel">Offcanvas right</h5>
-    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-  </div>
-  <div class="offcanvas-body">
-    ...
-  </div>
-</div> */}
-                  {console.log(cartProduct)}
+                      <div
+                        style={{
+                          display: "flex ",
+                          gap: "20px",
+                          flexDirection: "column",
+                        }}
+                      >
+                        {cartProduct.map((pro, i) => {
+                          if (pro.product) {
+                            return (
+                              <div>
+                                <div
+                                  style={{
+                                    display: "flex",
+                                    justifyContent: "space-between",
+                                    gap: "10px",
+                                  }}
+                                >
+                                  <div style={{ width: "70px" }}>
+                                    <img
+                                      onClick={() => {
+                                        Navigate({
+                                          pathname: "/OneProduct",
+                                          search: `?pro=${pro.product._id}`,
+                                        });
+                                      }}
+                                      style={{
+                                        height: "100%",
+                                        width: "100%",
+                                        cursor: "pointer",
+                                        borderRadius: "40px",
+                                        height: "10vh",
+                                      }}
+                                      src={pro.product.image}
+                                    ></img>
+                                  </div>
+                                  <div
+                                    style={{
+                                      textAlign: "left",
+                                      width: "250px",
+                                    }}
+                                  >
+                                    <div> title : {pro.product.title}</div>
+                                    <div
+                                      style={{ display: "flex", gap: "10px" }}
+                                    >
+                                      quantity : {pro.quantity}{" "}
+                                      <div style={{}}>
+                                        <div onClick={()=>{
+                                            NegativeQNT()
+                                          }}
+                                          className="positive"
+                                      
+                                          style={{
+                                            fontWeight: "bold",
+                                            cursor: "pointer",
+                                            padding: "5px",
+                                          }}
+                                        >
+                                          +
+                                        </div>{" "}
+                                        <span
+                                          className="Negative"
+                                          style={{
+                                            fontWeight: "bold",
+                                            cursor: "pointer",
+                                            padding: "5px",
+                                          }}
+                                        >
+                                          -
+                                        </span>{" "}
+                                      </div>
+                                    </div>
+                                    <div> price : ${pro.product.price}</div>
+                                  </div>
+                                  <div
+                                    onClick={() => {
+                                      deleteProductOfCart(pro.product._id);
+
+                                      const copy = cartProduct.filter(
+                                        (prod, i) => {
+                                          if (prod.product) {
+                                            return (
+                                              prod.product._id !==
+                                              pro.product._id
+                                            );
+                                          }
+                                        }
+                                      );
+                                      console.log(copy);
+                                      setCartProduct(copy);
+                                    }}
+                                    style={{
+                                      width: "20px",
+                                      cursor: "pointer",
+                                      color: "red",
+                                      fontWeight: "bold",
+                                    }}
+                                  >
+                                    x
+                                  </div>
+                                </div>
+                              </div>
+                            );
+                          }
+                        })}
+                        <button
+                          className="Register btn btn-warning"
+                          onClick={() => {
+                            setToggleCart(!toggleCart);
+                          }}
+                        >
+                          back
+                        </button>
+                      </div>
+                    </div>
+                    <div class="offcanvas-body">...</div>
+                  </motion.div>
+                  {/*               
+
+
                   <div className="Cart-box">
                     Shopping Cart //! lop => for cart product => !// arror => !!
                     {cartProduct.map((pro, i) => {
@@ -277,7 +419,7 @@ function Navbar() {
                     <div className="checkOut">
                       <button>checkOut</button>
                     </div>
-                  </div>
+                  </div> */}
                 </>
               )}
               {toggleGoLogin && Navigate("/Login")}

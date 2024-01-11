@@ -1,4 +1,5 @@
 const cartModule = require("../models/cart");
+const product = require("../models/product");
 ///  get cart  by id for user => =>  { id => User Id}
 const getCartByUser = (req, res) => {
   const userId = req.token.userId;
@@ -48,20 +49,22 @@ const deleteCartById = (req, res) => {
 
 //  Update for cart  => =>  => delete One product of cart
 const deleteOneProductByIdOfCart = (req, res) => {
-  const { cartId, productId } = req.query;
+  const { id } = req.params;
+
+  const userId = req.token.userId;
+  console.log("jojo");
+  console.log(id);
   cartModule
-    .findByIdAndUpdate(
-      { _id: cartId },
-      { $pullAll: { products: [productId] } },
-      { new: true }
-    )
+    .findOneAndUpdate({ user: userId },
+       { products: [{$pull:id}] },
+        { new: true })
     .then((result) => {
       res
         .status(201)
         .json({ productDeleted: result, massage: "Successful deleted" });
     })
     .catch((err) => {
-      res.status(404).json(res.massage);
+      res.status(404).json(err);
     });
 };
 
