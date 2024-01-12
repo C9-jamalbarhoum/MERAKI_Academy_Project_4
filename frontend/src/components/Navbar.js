@@ -47,11 +47,11 @@ function Navbar() {
 
   console.log(cartProduct);
 
-  const deleteProductOfCart = (productId,copy) => {
+  const ChangeProductOfCart = (productId, copy) => {
     console.log(productId);
     console.log(token);
     axios
-      .put(`http://localhost:5000/cart/Shang/${productId}`,copy, {
+      .put(`http://localhost:5000/cart/Shang/${productId}`, copy, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -64,9 +64,30 @@ function Navbar() {
       });
   };
 
-  const NegativeQNT = () => {
+  const positiveQNT = (id) => {
     console.log(cartProduct);
+
+    const copy = cartProduct.map((prod, i) => {
+      prod.quantity++;
+      return prod;
+    });
+
+    setCartProduct(copy);
+    ChangeProductOfCart(id, copy);
   };
+  const NegativeQNT = (id) => {
+    console.log(cartProduct);
+
+    const copy = cartProduct.map((prod, i) => {
+      prod.quantity--;
+
+      return prod;
+    });
+
+    setCartProduct(copy);
+    ChangeProductOfCart(id, copy);
+  };
+
   return (
     <div>
       {" "}
@@ -308,10 +329,10 @@ function Navbar() {
                                       style={{ display: "flex", gap: "10px" }}
                                     >
                                       quantity : {pro.quantity}{" "}
-                                      <div style={{}}>
+                                      <div style={{ display: "flex" }}>
                                         <div
                                           onClick={() => {
-                                            NegativeQNT();
+                                            positiveQNT(pro.product._id);
                                           }}
                                           className="positive"
                                           style={{
@@ -322,7 +343,13 @@ function Navbar() {
                                         >
                                           +
                                         </div>{" "}
-                                        <span
+                                        <div
+                                          onClick={() => {
+                                            console.log("a");
+                                            if (pro.quantity > 1) {
+                                              NegativeQNT(pro.product._id);
+                                            }
+                                          }}
                                           className="Negative"
                                           style={{
                                             fontWeight: "bold",
@@ -331,15 +358,13 @@ function Navbar() {
                                           }}
                                         >
                                           -
-                                        </span>{" "}
+                                        </div>{" "}
                                       </div>
                                     </div>
                                     <div> price : ${pro.product.price}</div>
                                   </div>
                                   <div
                                     onClick={() => {
-                                    
-
                                       const copy = cartProduct.filter(
                                         (prod, i) => {
                                           if (prod.product) {
@@ -350,7 +375,10 @@ function Navbar() {
                                           }
                                         }
                                       );
-                                      deleteProductOfCart(pro.product._id,copy);
+                                      ChangeProductOfCart(
+                                        pro.product._id,
+                                        copy
+                                      );
                                       console.log(copy);
                                       setCartProduct(copy);
                                     }}

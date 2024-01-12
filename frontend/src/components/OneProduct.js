@@ -212,7 +212,9 @@ function OneProduct() {
             }}
           >
             <button
-              onClick={() => addProductToCart(proData._id)}
+              onClick={() => 
+                
+                addProductToCart(proData._id)}
               className="btn btn-primary"
             >
               add to cart
