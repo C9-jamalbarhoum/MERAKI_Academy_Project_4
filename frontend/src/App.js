@@ -12,14 +12,14 @@ import Register from "./components/Register";
 import Cart from "./components/Cart";
 import Search from "./components/Search";
 import OneProduct from "./components/OneProduct";
-
+import CheckOut from "./components/CheckOut"
 export const USEContext = createContext();
 
 function App() {
 
   const [token , setToken ] = useState(localStorage.getItem("token") || null)
 
-
+  const [cartProduct, setCartProduct] = useState([]);
 
 
 
@@ -59,8 +59,9 @@ function App() {
           user_id,
           setUser_id,
           token,
-          setToken
-
+          setToken,
+          cartProduct, 
+          setCartProduct
         }}
       >
         <Navbar />
@@ -73,6 +74,7 @@ function App() {
           <Route path="/Cart" element={<Cart />} />
           <Route path="/Search" element={<Search />} />
           <Route path="/OneProduct" element={<OneProduct />} />
+          <Route path="/CheckOut" element={<CheckOut />} />
         </Routes>
 
         <Footer />

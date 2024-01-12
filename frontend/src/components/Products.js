@@ -3,6 +3,7 @@ import { USEContext } from "../App";
 
 import axios from "axios";
 import { useLocation, useNavigate } from "react-router-dom";
+import Button from "react-bootstrap/esm/Button";
 
 function Products() {
   const Navigate = useNavigate()
@@ -30,7 +31,11 @@ function Products() {
 
   return (
     <div>
+      
       <div style={{ paddingTop:"150px" }} className="container">
+      <div style={{display:"flex" ,justifyContent:"flex-start", padding:"40px"}}>
+      <Button onClick={()=>Navigate(-1)}>back</Button>
+      </div>
         <div style={{ gap: "20px" }} class="row">
           {Products.map((products, index) => {
             return (

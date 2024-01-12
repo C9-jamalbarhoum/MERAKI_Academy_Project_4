@@ -5,15 +5,12 @@ import { USEContext } from "../App";
 import ReactStars from "react-stars";
 
 function OneProduct() {
-  const { user_id, setUser_id,token } = useContext(USEContext);
+  const { user_id, setUser_id, token, cartProduct, setCartProduct } =
+    useContext(USEContext);
 
   const [cartUser, setCartUser] = useState({
     products: [],
     user: user_id,
-  });
-  const [cartQuantity, setQuantity] = useState({
-    product: undefined,
-    quantity: 1,
   });
 
   console.log(cartUser);
@@ -78,7 +75,7 @@ function OneProduct() {
       [{product:1,q:1}, {product:1,q:1}]
       [{product:1,q:2}]
     */
-      
+
     const pro = copy.products.find((product) => product.product === id);
     if (!pro) {
       copy.products.push({
@@ -93,11 +90,15 @@ function OneProduct() {
     console.log(copy);
     if (localStorage.getItem("token")) {
       try {
-        const res = await axios.put(`http://localhost:5000/cart/}`, copy.products, {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        });
+        const res = await axios.put(
+          `http://localhost:5000/cart/}`,
+          copy.products,
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+          }
+        );
         console.log(res);
       } catch (error) {
         console.log(error);
@@ -107,6 +108,22 @@ function OneProduct() {
 
   console.log("proData._id =>" + proData._id);
   console.log("user_id =>" + user_id);
+
+  const getCartUser = () => {
+    axios
+      .get(`http://localhost:5000/cart/`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((result) => {
+        setCartProduct(result.data.products);
+        console.log("true for api get cart");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   return (
     <div style={{ paddingTop: "140px" }} className="containerProduct">
@@ -212,9 +229,26 @@ function OneProduct() {
             }}
           >
             <button
-              onClick={() => 
-                
-                addProductToCart(proData._id)}
+              onClick={() => {
+            
+                console.log(proData._id);
+
+                const findId = cartProduct.find((elm, i) => {
+                  return elm.product._id === proData._id;
+                });
+
+                if (!findId) {
+                  addProductToCart(proData._id);
+                } else {
+                  // const copy = cartProduct.map((elm, i) => {
+                  //   if (elm.product._id === proData._id) {
+                  //        elm.quantity ++
+                  //   }
+                  //   return elm
+                  // });
+                  //   console.log(copy);
+                }
+              }}
               className="btn btn-primary"
             >
               add to cart

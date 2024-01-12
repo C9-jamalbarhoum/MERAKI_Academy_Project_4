@@ -11,7 +11,7 @@ function Navbar() {
   const [toggleCart, setToggleCart] = useState(false);
 
   const [toggleGoLogin, setToggleGoLogin] = useState(false);
-  const [cartProduct, setCartProduct] = useState([]);
+ 
 
   const {
     category,
@@ -24,6 +24,8 @@ function Navbar() {
     setUser_id,
     token,
     setToken,
+    cartProduct,
+     setCartProduct
   } = useContext(USEContext);
 
   const getCartUser = () => {
@@ -64,25 +66,27 @@ function Navbar() {
       });
   };
 
-  const positiveQNT = (id) => {
-    console.log(cartProduct);
-
-    const copy = cartProduct.map((prod, i) => {
-      prod.quantity++;
+  const positiveQNT = (id, i) => {
+    const copy = cartProduct.map((prod, index) => {
+      if (id === prod.product._id) {
+        prod.quantity++;
+      }
       return prod;
     });
+    console.log(copy);
 
     setCartProduct(copy);
     ChangeProductOfCart(id, copy);
   };
-  const NegativeQNT = (id) => {
-    console.log(cartProduct);
 
-    const copy = cartProduct.map((prod, i) => {
-      prod.quantity--;
-
+  const NegativeQNT = (id, i) => {
+    const copy = cartProduct.map((prod, index) => {
+      if (id === prod.product._id) {
+        prod.quantity--;
+      }
       return prod;
     });
+    console.log(copy);
 
     setCartProduct(copy);
     ChangeProductOfCart(id, copy);
@@ -346,8 +350,12 @@ function Navbar() {
                                         <div
                                           onClick={() => {
                                             console.log("a");
-                                            if (pro.quantity > 1) {
-                                              NegativeQNT(pro.product._id);
+                                            if (
+                                              pro.quantity > 1 &&
+                                              pro.product._id
+                                            ) {
+                                              console.log(pro.product._id, i);
+                                              NegativeQNT(pro.product._id, i);
                                             }
                                           }}
                                           className="Negative"
@@ -404,6 +412,15 @@ function Navbar() {
                         >
                           back
                         </button>
+                        <Button
+                          onClick={() => {
+                              console.log("jamal");
+                              Navigate("/Checkout")
+                              setToggleCart(!toggleCart);
+                          }}
+                        >
+                          Check out
+                        </Button>
                       </div>
                     </div>
                     <div class="offcanvas-body">...</div>
