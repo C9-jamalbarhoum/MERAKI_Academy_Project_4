@@ -3,15 +3,20 @@ import { USEContext } from "../App";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import axios from "axios";
-import Button from "react-bootstrap/Button";
 import Offcanvas from "react-bootstrap/Offcanvas";
+import Button from "react-bootstrap/Button";
+import Modal from "react-bootstrap/Modal";
 function Navbar() {
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
   const [total, setTotal] = useState(0);
   const Navigate = useNavigate();
   const [toggleCart, setToggleCart] = useState(false);
 
   const [toggleGoLogin, setToggleGoLogin] = useState(false);
- 
 
   const {
     category,
@@ -25,7 +30,9 @@ function Navbar() {
     token,
     setToken,
     cartProduct,
-     setCartProduct
+    setCartProduct,
+    copyCartPro,
+    setCopyCartPro,
   } = useContext(USEContext);
 
   const getCartUser = () => {
@@ -37,6 +44,7 @@ function Navbar() {
       })
       .then((result) => {
         setCartProduct(result.data.products);
+        setCopyCartPro(result.data.products)
         console.log("true for api get cart");
         console.log(result.data.products);
         console.log(result);
@@ -68,21 +76,26 @@ function Navbar() {
 
   const positiveQNT = (id, i) => {
     const copy = cartProduct.map((prod, index) => {
+  
       if (id === prod.product._id) {
         prod.quantity++;
+        prod.price  +=  prod.product.price
       }
+
       return prod;
     });
     console.log(copy);
-
+ 
     setCartProduct(copy);
     ChangeProductOfCart(id, copy);
   };
 
   const NegativeQNT = (id, i) => {
     const copy = cartProduct.map((prod, index) => {
+    
       if (id === prod.product._id) {
         prod.quantity--;
+        prod.price -= prod.product.price 
       }
       return prod;
     });
@@ -250,6 +263,7 @@ function Navbar() {
                     getCartUser();
                     setToggleCart(!toggleCart);
                   } else {
+                    handleShow();
                   }
                 }}
                 style={{
@@ -293,6 +307,7 @@ function Navbar() {
                           flexDirection: "column",
                         }}
                       >
+                        
                         {cartProduct.map((pro, i) => {
                           if (pro.product) {
                             return (
@@ -369,7 +384,8 @@ function Navbar() {
                                         </div>{" "}
                                       </div>
                                     </div>
-                                    <div> price : ${pro.product.price}</div>
+                                    <div> price : ${pro.price.toPrecision(4)}</div>
+                                   
                                   </div>
                                   <div
                                     onClick={() => {
@@ -404,6 +420,7 @@ function Navbar() {
                             );
                           }
                         })}
+                         <div> total :</div>
                         <button
                           className="Register btn btn-warning"
                           onClick={() => {
@@ -414,9 +431,9 @@ function Navbar() {
                         </button>
                         <Button
                           onClick={() => {
-                              console.log("jamal");
-                              Navigate("/Checkout")
-                              setToggleCart(!toggleCart);
+                   
+                            Navigate("/Checkout");
+                            setToggleCart(!toggleCart);
                           }}
                         >
                           Check out
@@ -462,6 +479,26 @@ function Navbar() {
               )}
               {toggleGoLogin && Navigate("/Login")}
             </div>
+            <Modal show={show} onHide={handleClose}>
+              <Modal.Header>
+                <Modal.Title>Please go login First</Modal.Title>
+              </Modal.Header>
+              <Modal.Body>Please go login First</Modal.Body>
+              <Modal.Footer>
+                <Button variant="secondary" onClick={handleClose}>
+                  Close
+                </Button>
+                <Button
+                  variant="primary"
+                  onClick={() => {
+                    Navigate("/Login");
+                    handleClose();
+                  }}
+                >
+                  Login
+                </Button>
+              </Modal.Footer>
+            </Modal>
           </form>
         </div>
       </nav>

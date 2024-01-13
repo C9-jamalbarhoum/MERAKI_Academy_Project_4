@@ -3,9 +3,15 @@ import React, { useEffect, useState, useContext } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { USEContext } from "../App";
 import ReactStars from "react-stars";
+import Button from "react-bootstrap/Button";
+import Modal from "react-bootstrap/Modal";
 
 function OneProduct() {
-  const { user_id, setUser_id, token, cartProduct, setCartProduct } =
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+  const { user_id, setUser_id, token, cartProduct, setCartProduct, InLogin } =
     useContext(USEContext);
 
   const [cartUser, setCartUser] = useState({
@@ -25,7 +31,6 @@ function OneProduct() {
   const queryParams = new URLSearchParams(location.search);
   const proID = queryParams.get("pro") || "";
 
-  console.log(proData);
   useEffect(() => {
     axios
       .get(`http://localhost:5000/product/${proID}`)
@@ -46,7 +51,7 @@ function OneProduct() {
     reviews: 4,
   });
   const createComment = () => {
-    if (localStorage.getItem("token")) {
+    if (InLogin) {
       axios
         .post(`http://localhost:5000/product/${proData._id}`, Reviews, {
           headers: {
@@ -69,24 +74,21 @@ function OneProduct() {
     setProData({ ...proData, reviews: [...proData.reviews, Reviews] });
   };
 
-  const addProductToCart = async (id) => {
+  const addProductToCart = async (dataPro) => {
     const copy = { ...cartUser };
-    /* 
-      [{product:1,q:1}, {product:1,q:1}]
-      [{product:1,q:2}]
-    */
 
-    const pro = copy.products.find((product) => product.product === id);
+    const pro = copy.products.find((product) => product.product === dataPro._id);
     if (!pro) {
       copy.products.push({
-        product: id,
+        product: dataPro._id,
         quantity: 1,
+        price: dataPro.price
       });
     } else {
       pro.quantity++;
     }
 
-    console.log(id, pro);
+
     console.log(copy);
     if (localStorage.getItem("token")) {
       try {
@@ -230,31 +232,23 @@ function OneProduct() {
           >
             <button
               onClick={() => {
-            
-                console.log(proData._id);
-
-                const findId = cartProduct.find((elm, i) => {
-                  return elm.product._id === proData._id;
-                });
-
-                if (!findId) {
-                  addProductToCart(proData._id);
+                if (!InLogin) {
+                  handleShow();
                 } else {
-                  // const copy = cartProduct.map((elm, i) => {
-                  //   if (elm.product._id === proData._id) {
-                  //        elm.quantity ++
-                  //   }
-                  //   return elm
-                  // });
-                  //   console.log(copy);
+                  const findId = cartProduct.find((elm, i) => {
+                    return elm.product._id === proData._id;
+                  });
+
+                  if (!findId) {
+                    addProductToCart(proData);
+                  } else {
+                  }
                 }
               }}
               className="btn btn-primary"
             >
               add to cart
             </button>
-
-            <button class="btn btn-info">Buy it now</button>
           </div>
           <div>
             <h5 style={{ display: "flex", gap: "10px" }}>
@@ -438,6 +432,26 @@ function OneProduct() {
               >
                 Send message
               </button>
+              <Modal show={show} onHide={handleClose}>
+                <Modal.Header>
+                  <Modal.Title>Please go login First</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>Please go login First</Modal.Body>
+                <Modal.Footer>
+                  <Button variant="secondary" onClick={handleClose}>
+                    Close
+                  </Button>
+                  <Button
+                    variant="primary"
+                    onClick={() => {
+                      Navigate("/Login");
+                      handleClose();
+                    }}
+                  >
+                    Login
+                  </Button>
+                </Modal.Footer>
+              </Modal>
             </div>
           </div>
         </div>

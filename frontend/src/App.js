@@ -12,16 +12,14 @@ import Register from "./components/Register";
 import Cart from "./components/Cart";
 import Search from "./components/Search";
 import OneProduct from "./components/OneProduct";
-import CheckOut from "./components/CheckOut"
+import CheckOut from "./components/CheckOut";
 export const USEContext = createContext();
 
 function App() {
-
-  const [token , setToken ] = useState(localStorage.getItem("token") || null)
+  const [token, setToken] = useState(localStorage.getItem("token") || null);
 
   const [cartProduct, setCartProduct] = useState([]);
-
-
+  const [copyCartPro, setCopyCartPro] = useState([]);
 
   const [category, setCategory] = useState([]);
   const [Products, setProducts] = useState([]);
@@ -30,9 +28,6 @@ function App() {
   const [InLogin, setInLogin] = useState(
     localStorage.getItem("InLogin") || false
   );
-
-
-
 
   const [SearchVal, setSearchVal] = useState("");
   useEffect(() => {
@@ -60,8 +55,10 @@ function App() {
           setUser_id,
           token,
           setToken,
-          cartProduct, 
-          setCartProduct
+          cartProduct,
+          setCartProduct,
+          copyCartPro,
+          setCopyCartPro,
         }}
       >
         <Navbar />

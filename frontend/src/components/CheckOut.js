@@ -4,10 +4,10 @@ import axios from "axios";
 import Button from "react-bootstrap/esm/Button";
 import { useNavigate } from "react-router-dom";
 function CheckOut() {
-const Negative = useNavigate()
-
-
-  const {   category,
+  const Negative = useNavigate();
+let num = 0
+  const {
+    category,
     setIDCategory,
     setInLogin,
     InLogin,
@@ -18,80 +18,100 @@ const Negative = useNavigate()
     token,
     setToken,
     cartProduct,
-     setCartProduct} = useContext(USEContext);
- 
+    setCartProduct,
+  } = useContext(USEContext);
 
-    const [total , setTotal  ] = useState(0)
+  const [total, setTotal] = useState({
+    totalAll : 0
+  });
 
+  const chickCartDelete = () => {
+    axios
+      .put(
+        `http://localhost:5000/cart/deleteCart`,
+        { cartProduct },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
+      .then((result) => {
+        console.log(result);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
-
-
-
-    const ChangeProductOfCart = (productId, copy) => {
-        console.log(productId);
-        console.log(token);
-        axios
-          .put(`http://localhost:5000/cart/Shang/${productId}`, copy, {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          })
-          .then((result) => {
-            console.log(result);
-          })
-          .catch((err) => {
-            console.log(err);
-          });
-      };
-
-
-
-
-
+  const ChangeProductOfCart = (productId, copy) => {
+    console.log(productId);
+    console.log(token);
+    axios
+      .put(`http://localhost:5000/cart/Shang/${productId}`, copy, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((result) => {
+        console.log(result);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   return (
     <div style={{ padding: "50px" }}>
-       
       <div style={{ paddingTop: "100px" }}></div>
-      <div style={{display:"flex" ,justifyContent:"flex-start", padding:"40px"}}>
-      <Button onClick={()=>Negative(-1)}>back</Button>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "flex-start",
+          padding: "40px",
+        }}
+      >
+        <Button onClick={() => Negative(-1)}>back</Button>
       </div>
       <div>
         <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
           {cartProduct.map((elm, i) => {
             return (
               <>
-                <div style={{ display: "flex", gap: "10px" , justifyContent:"center" }}>
+                <div
+                  style={{
+                    display: "flex",
+                    gap: "10px",
+                    justifyContent: "center",
+                  }}
+                >
                   <div>
                     <img
-                      style={{ width: "120px", height: "120px",borderRadius:"100px" }}
+                      style={{
+                        width: "120px",
+                        height: "120px",
+                        borderRadius: "100px",
+                      }}
                       src={elm.product.image}
                     ></img>
                   </div>
                   <div style={{ textAlign: "left" }}>
                     <h5>title : {elm.product.title}</h5>
-                    <h6>price: ${elm.product.price}</h6>
+                    <h6>price: ${elm.price.toPrecision(4)}</h6>
                     <h7>quantity : {elm.quantity}</h7>
                   </div>
                   <div>
-                    <div onClick={()=>{
-                           const copy = cartProduct.filter(
-                            (prod, i) => {
-                              if (prod.product) {
-                                return (
-                                  prod.product._id !==
-                                  elm.product._id
-                                );
-                              }
-                            }
-                          );
-                          ChangeProductOfCart(
-                            elm.product._id,
-                            copy
-                          );
-                          console.log(copy);
-                          setCartProduct(copy);
-                    }}
+                    <div
+                      onClick={() => {
+                        const copy = cartProduct.filter((prod, i) => {
+                          if (prod.product) {
+                            return prod.product._id !== elm.product._id;
+                          }
+                        });
+                        ChangeProductOfCart(elm.product._id, copy);
+                        console.log(copy);
+                        setCartProduct(copy);
+                      }}
                       style={{
                         width: "20px",
                         cursor: "pointer",
@@ -108,8 +128,8 @@ const Negative = useNavigate()
           })}
         </div>
       </div>
-
-      <div style={{paddingTop:"80px"}} class="chickOut">
+      <hr style={{ border: "3px solid #f1f1f1" }} />
+      <div style={{ paddingTop: "80px" }} class="chickOut">
         <div class="col-75">
           <div class="container">
             <form action="/action_page.php">
@@ -230,37 +250,88 @@ const Negative = useNavigate()
                   </div>
                 </div>
               </div>
-              <label>
-                <input type="checkbox" checked="checked" name="sameadr" />{" "}
-                Shipping address same as billing
-              </label>
+
               <input
+                onClick={(e) => {
+                  e.preventDefault();
+                }}
                 type="submit"
                 value="Continue to checkout"
-                class="btnChick"
+                class="btnChick btn btn-primary"
+                data-toggle="modal"
+                data-target="#exampleModalCenter"
               />
             </form>
+            <div
+              class="modal fade"
+              id="exampleModalCenter"
+              tabindex="-1"
+              role="dialog"
+              aria-labelledby="exampleModalCenterTitle"
+              aria-hidden="true"
+            >
+              <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">
+                      Purchase completed
+                    </h5>
+                    <button
+                      type="button"
+                      class="close"
+                      data-dismiss="modal"
+                      aria-label="Close"
+                    >
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    For shipping 3 days The representative will contact you
+                  </div>
+                  <div class="modal-footer">
+                    <button
+                      type="button"
+                      class="btn btn-secondary"
+                      data-dismiss="modal"
+                    >
+                      Close
+                    </button>
+                    <button
+
+                      onClick={(e) => {
+                      
+                        // Negative("/");
+                        // setCartProduct([]);   ?????????//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                        // chickCartDelete()
+                      }}
+                      type="button"
+                      class="btn btn-primary"
+                    >
+                      Confirm the operation
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
         <div class="col-25">
-          <div class="container">
+          <div class="container-chick">
             <h4>
               Cart{" "}
               <span class="price" style={{ color: "black" }}>
                 <i class="fa fa-shopping-cart"></i> <b>{cartProduct.length}</b>
               </span>
             </h4>
-           
+
             {cartProduct.map((elm, i) => {
-             
-           
-           
-                
+              num  += elm.price
               return (
                 <>
                   {" "}
                   <p>
-                    <a>Product {i+1}</a> <span class="price">${elm.product.price}</span>
+                    <a>Product {i + 1}</a>{" "}
+                    <span class="price">${elm.price}</span>
                   </p>
                 </>
               );
@@ -269,7 +340,7 @@ const Negative = useNavigate()
             <p>
               Total{" "}
               <span class="price" style={{ color: "black" }}>
-                <b>${total}</b>
+                <b>${num}</b>
               </span>
             </p>
           </div>
