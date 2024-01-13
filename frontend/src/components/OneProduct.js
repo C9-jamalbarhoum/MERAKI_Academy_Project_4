@@ -23,7 +23,7 @@ function OneProduct() {
   const Navigate = useNavigate();
   const [toggle, setToggle] = useState(false);
   const [proData, setProData] = useState({});
-
+  const [ratingNum ,setRatingNum ] =useState(4)
   const [ImgSrc, setImgSrc] = useState("");
   const [ToggleReviews, setToggleReviews] = useState(false);
 
@@ -42,18 +42,19 @@ function OneProduct() {
       });
   }, [proID]);
   const ratingChanged = (newRating) => {
-    console.log(newRating);
+    setRatingNum(Math.round(newRating))
     // setReviews({...Reviews,reviews:newRating})
+    console.log(ratingNum);
   };
 
   const [Reviews, setReviews] = useState({
     comment: undefined,
-    reviews: 4,
+    reviews: ratingNum,
   });
   const createComment = () => {
     if (InLogin) {
       axios
-        .post(`http://localhost:5000/product/${proData._id}`, Reviews, {
+        .post(`http://localhost:5000/product/${proID}`, Reviews, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -77,17 +78,18 @@ function OneProduct() {
   const addProductToCart = async (dataPro) => {
     const copy = { ...cartUser };
 
-    const pro = copy.products.find((product) => product.product === dataPro._id);
+    const pro = copy.products.find(
+      (product) => product.product === dataPro._id
+    );
     if (!pro) {
       copy.products.push({
         product: dataPro._id,
         quantity: 1,
-        price: dataPro.price
+        price: dataPro.price,
       });
     } else {
       pro.quantity++;
     }
-
 
     console.log(copy);
     if (localStorage.getItem("token")) {
@@ -294,6 +296,7 @@ function OneProduct() {
           <button
             onClick={() => {
               setToggle(true);
+             
             }}
             data-toggle="modal"
             data-target="#exampleModal"
@@ -397,7 +400,16 @@ function OneProduct() {
                     proData.reviews.map((reviews, i) => {
                       return (
                         <>
-                          <p>user : {reviews.comment}</p>{" "}
+                          <div style={{ display: "flex", gap: "10px" }}>
+                            <img
+                              style={{ height: "100%", paddingTop: "5px" }}
+                              src="person-circle.svg"
+                            ></img>
+                            <p>
+                              {localStorage.getItem("userName")} :{" "}
+                              {reviews.comment}
+                            </p>
+                          </div>{" "}
                         </>
                       );
                     })}

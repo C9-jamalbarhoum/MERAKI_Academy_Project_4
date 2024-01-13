@@ -11,6 +11,6 @@ const reviewsRouter = express();
 
 reviewsRouter.post("/product/:id",authentication, CreateReviews);
 reviewsRouter.delete("/",authentication, deleteReviews);
-reviewsRouter.get("/",authentication, getAllCommentByIdProduct);
+reviewsRouter.get("/getAll/:id",authentication, getAllCommentByIdProduct);
 
 module.exports = reviewsRouter;

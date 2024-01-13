@@ -4,12 +4,11 @@ const reviews = require("../models/reviews");
 
 // ! for create Reviews => => => http://localhost:5000/product/:id    ==> {id : productID}
 const CreateReviews = (req, res) => {
-  const id = req.params.id;
   // Comment: [{ type: String }],
   // reviews: { type: Number },
-
+    const {id} = req.params
   const { comment, reviews } = req.body;
-
+  console.log(id);
   const userId = req.token.userId;
   const NewReviews = new reviewsModule({
     comment,
@@ -18,22 +17,22 @@ const CreateReviews = (req, res) => {
   });
   NewReviews.save().then((result) => {
     productModule
-      .findByIdAndUpdate(
-        { _id: userId },
+      .findOneAndUpdate(
+        { _id: id },
         { $push: { reviews: result._id } },
         { new: true }
       )
-      .then(() => {
+      .then((results) => {
         res.status(201).json({
           success: true,
           message: `reviews added`,
-          comment: result,
+          comment: results,
         });
       })
       .catch((err) => {
         res.status(500).json({
           success: false,
-          message:err.message,
+          message: err.message,
           err: err,
         });
       });
@@ -66,6 +65,19 @@ const deleteReviews = (req, res) => {
       res.json(err.message);
     });
 };
-const getAllCommentByIdProduct = (req, res) => {};
+
+//! api => => http://localhost:5000/getAll/:id   { id => product}
+const getAllCommentByIdProduct = (req, res) => {
+  const { id } = req.params;
+  productModule
+    .findById({ _id: id })
+    .populate("reviews")
+    .then((result) => {
+      res.status(200).json(result);
+    })
+    .catch((err) => {
+      res.status(404).json(err);
+    });
+};
 
 module.exports = { CreateReviews, deleteReviews, getAllCommentByIdProduct };

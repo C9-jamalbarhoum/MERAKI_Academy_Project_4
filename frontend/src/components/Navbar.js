@@ -12,7 +12,7 @@ function Navbar() {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  const [total, setTotal] = useState(0);
+let num = 0
   const Navigate = useNavigate();
   const [toggleCart, setToggleCart] = useState(false);
 
@@ -208,13 +208,17 @@ function Navbar() {
                 </a>
               </div>
             </li>
-            <li className="nav-item">
+            {/* <li className="nav-item">
               <a className="nav-link disabled" href="#">
                 Admin Dashboard
               </a>
-            </li>
+            </li> */}
           </ul>
           <form className="form-inline my-2 my-lg-0">
+           {InLogin&& <div style={{display:"flex", gap:"5px" ,minWidth:"100px" ,height:"5vh" ,justifyContent:"center" ,alignItems:"center"}}>
+              <img style={{width:"40%"}} src="person-circle.svg"></img>
+              <p   style={{width:"100%",color:"MediumSeaGreen" ,height:"100%",  textAlign: "left", paddingTop:"10px"}} class="font-weight-bold">{localStorage.getItem("userName")}</p>
+            </div>}
             <input
               onChange={(e) => {
                 setSearchVal(e.target.value);
@@ -310,6 +314,7 @@ function Navbar() {
                         
                         {cartProduct.map((pro, i) => {
                           if (pro.product) {
+                            num += pro.price
                             return (
                               <div>
                                 <div
@@ -420,7 +425,7 @@ function Navbar() {
                             );
                           }
                         })}
-                         <div> total :</div>
+                         <div> total :  ${num.toPrecision(4)}</div>
                         <button
                           className="Register btn btn-warning"
                           onClick={() => {

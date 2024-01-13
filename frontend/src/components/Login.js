@@ -20,10 +20,11 @@ function Login() {
         setToken(result.data.token);
         localStorage.setItem("token", result.data.token);
         localStorage.setItem("InLogin", true);
+        localStorage.setItem("userName",result.data.userName)
         setInLogin(true);
         setInErr(false);
 
-        console.log(result.data.token);
+        console.log(result);
         // setMassageInLogin(result.response.massage)
         Navigate("/");
       })

@@ -39,7 +39,7 @@ const UpdateCart = (req, res) => {
 const deleteCartById = (req, res) => {
   const userId = req.token.userId;
   cartModule
-    .findOneAndUpdate({user:userId },{products:req.body},{new:true})
+    .findOneAndUpdate({user:userId },{products:[]},{new:true})
     .then((result) => {
       res.status(200).json(result);
     })

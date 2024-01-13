@@ -9,7 +9,7 @@ function Home() {
   //{category[1].image}
   return (
     <>
-      <div style={{ backgroundColor: "#fff" }}>
+      <div  style={{ backgroundColor: "#fff" }}>
    
         <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
   <div style={{height:"100vh" , width:"80vw" , margin: "0 130px" }}  class="carousel-inner">

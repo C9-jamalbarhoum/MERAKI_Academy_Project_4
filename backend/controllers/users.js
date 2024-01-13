@@ -69,7 +69,7 @@ const login = (req, res) => {
           location: result.location,
         };
         const options = {
-          expiresIn: "120m",
+          expiresIn: "5000m",
         };
 
         const token = jwt.sign(payload, process.env.SECRET , options);
@@ -78,7 +78,8 @@ const login = (req, res) => {
           success: true,
           message: `Valid login credentials`,
           token: token,
-          userId : result._id
+          userId : result._id,
+          userName : result.userName
         });
       }
       console.log(result);

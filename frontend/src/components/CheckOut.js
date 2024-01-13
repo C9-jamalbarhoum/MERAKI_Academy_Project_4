@@ -5,7 +5,7 @@ import Button from "react-bootstrap/esm/Button";
 import { useNavigate } from "react-router-dom";
 function CheckOut() {
   const Negative = useNavigate();
-let num = 0
+  let num = 0;
   const {
     category,
     setIDCategory,
@@ -22,14 +22,14 @@ let num = 0
   } = useContext(USEContext);
 
   const [total, setTotal] = useState({
-    totalAll : 0
+    totalAll: 0,
   });
 
   const chickCartDelete = () => {
     axios
       .put(
         `http://localhost:5000/cart/deleteCart`,
-        { cartProduct },
+        {},
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -129,6 +129,7 @@ let num = 0
         </div>
       </div>
       <hr style={{ border: "3px solid #f1f1f1" }} />
+
       <div style={{ paddingTop: "80px" }} class="chickOut">
         <div class="col-75">
           <div class="container">
@@ -286,7 +287,7 @@ let num = 0
                     </button>
                   </div>
                   <div class="modal-body">
-                    For shipping 3 days The representative will contact you
+                   <p>For shipping 3 days The representative will contact you </p> <img src="car-front.svg"></img>
                   </div>
                   <div class="modal-footer">
                     <button
@@ -297,15 +298,15 @@ let num = 0
                       Close
                     </button>
                     <button
-
                       onClick={(e) => {
-                      
-                        // Negative("/");
-                        // setCartProduct([]);   ?????????//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-                        // chickCartDelete()
+                        Negative("/");
+                        setCartProduct([]);  
+                        chickCartDelete()
                       }}
                       type="button"
-                      class="btn btn-primary"
+                    
+                      class="btn btn-secondary"
+                      data-dismiss="modal"
                     >
                       Confirm the operation
                     </button>
@@ -325,13 +326,13 @@ let num = 0
             </h4>
 
             {cartProduct.map((elm, i) => {
-              num  += elm.price
+              num += elm.price;
               return (
                 <>
                   {" "}
                   <p>
                     <a>Product {i + 1}</a>{" "}
-                    <span class="price">${elm.price}</span>
+                    <span class="price">${elm.price.toPrecision(4)}</span>
                   </p>
                 </>
               );
@@ -340,7 +341,7 @@ let num = 0
             <p>
               Total{" "}
               <span class="price" style={{ color: "black" }}>
-                <b>${num}</b>
+                <b>${num.toPrecision(4)}</b>
               </span>
             </p>
           </div>
