@@ -5,20 +5,16 @@ const {
   deleteCartById,
   getCartByUser,
   deleteOneProductByIdOfCart,
-  UpdateShangCart
+  UpdateShangCart,
 } = require("../controllers/cart,");
 const cartRouter = express();
 const authentication = require("../middleware/authentication");
 const authorization = require("../middleware/authorization");
 
 cartRouter.get("/", authentication, getCartByUser);
-cartRouter.put(
-  "/deleteCart",
-  authentication,
-  deleteCartById
-);
-cartRouter.delete("/one/:id", authentication,deleteOneProductByIdOfCart);
+cartRouter.put("/deleteCart", authentication, deleteCartById);
+cartRouter.delete("/one/:id", authentication, deleteOneProductByIdOfCart);
 
-cartRouter.put("/:id", authentication, UpdateCart);
+cartRouter.put("/", authentication, UpdateCart);
 cartRouter.put("/Shang/:id", authentication, UpdateShangCart);
 module.exports = cartRouter;

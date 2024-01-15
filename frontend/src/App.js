@@ -24,7 +24,7 @@ function App() {
   const [category, setCategory] = useState([]);
   const [Products, setProducts] = useState([]);
 
-  const [user_id, setUser_id] = useState("");
+  const [userId, setUserId] = useState(localStorage.getItem("idUser")||"");
   const [InLogin, setInLogin] = useState(
     localStorage.getItem("InLogin") || false
   );
@@ -51,8 +51,8 @@ function App() {
           setInLogin,
           SearchVal,
           setSearchVal,
-          user_id,
-          setUser_id,
+           userId,
+          setUserId,
           token,
           setToken,
           cartProduct,

@@ -12,7 +12,7 @@ function Navbar() {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-let num = 0
+  let num = 0;
   const Navigate = useNavigate();
   const [toggleCart, setToggleCart] = useState(false);
 
@@ -44,7 +44,7 @@ let num = 0
       })
       .then((result) => {
         setCartProduct(result.data.products);
-        setCopyCartPro(result.data.products)
+        setCopyCartPro(result.data.products);
         console.log("true for api get cart");
         console.log(result.data.products);
         console.log(result);
@@ -76,26 +76,24 @@ let num = 0
 
   const positiveQNT = (id, i) => {
     const copy = cartProduct.map((prod, index) => {
-  
       if (id === prod.product._id) {
         prod.quantity++;
-        prod.price  +=  prod.product.price
+        prod.price += prod.product.price;
       }
 
       return prod;
     });
     console.log(copy);
- 
+
     setCartProduct(copy);
     ChangeProductOfCart(id, copy);
   };
 
   const NegativeQNT = (id, i) => {
     const copy = cartProduct.map((prod, index) => {
-    
       if (id === prod.product._id) {
         prod.quantity--;
-        prod.price -= prod.product.price 
+        prod.price -= prod.product.price;
       }
       return prod;
     });
@@ -158,11 +156,6 @@ let num = 0
                 Home <span className="sr-only">(current)</span>
               </a>
             </li>
-            <li className="nav-item">
-              <a className="nav-link" href="#">
-                about us
-              </a>
-            </li>
             <li className="nav-item dropdown">
               <a
                 className="nav-link dropdown-toggle"
@@ -215,10 +208,32 @@ let num = 0
             </li> */}
           </ul>
           <form className="form-inline my-2 my-lg-0">
-           {InLogin&& <div style={{display:"flex", gap:"5px" ,minWidth:"100px" ,height:"5vh" ,justifyContent:"center" ,alignItems:"center"}}>
-              <img style={{width:"40%"}} src="person-circle.svg"></img>
-              <p   style={{width:"100%",color:"MediumSeaGreen" ,height:"100%",  textAlign: "left", paddingTop:"10px"}} class="font-weight-bold">{localStorage.getItem("userName")}</p>
-            </div>}
+            {InLogin && (
+              <div
+                style={{
+                  display: "flex",
+                  gap: "5px",
+                  minWidth: "100px",
+                  height: "5vh",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                <img style={{ width: "40%" }} src="person-circle.svg"></img>
+                <p
+                  style={{
+                    width: "100%",
+                    color: "MediumSeaGreen",
+                    height: "100%",
+                    textAlign: "left",
+                    paddingTop: "10px",
+                  }}
+                  class="font-weight-bold"
+                >
+                  {localStorage.getItem("userName")}
+                </p>
+              </div>
+            )}
             <input
               onChange={(e) => {
                 setSearchVal(e.target.value);
@@ -311,10 +326,9 @@ let num = 0
                           flexDirection: "column",
                         }}
                       >
-                        
                         {cartProduct.map((pro, i) => {
                           if (pro.product) {
-                            num += pro.price
+                            num += pro.price;
                             return (
                               <div>
                                 <div
@@ -389,8 +403,14 @@ let num = 0
                                         </div>{" "}
                                       </div>
                                     </div>
-                                    <div> price : ${pro.price.toPrecision(4)}</div>
-                                   
+                                    <div>
+                                      {" "}
+                                     price : ${pro.product.price}
+                                    </div>
+                                    <div>
+                                      {" "}
+                                     total price : ${pro.price.toPrecision(4)}
+                                    </div>
                                   </div>
                                   <div
                                     onClick={() => {
@@ -425,7 +445,7 @@ let num = 0
                             );
                           }
                         })}
-                         <div> total :  ${num.toPrecision(4)}</div>
+                        <div> total : ${num.toPrecision(4)}</div>
                         <button
                           className="Register btn btn-warning"
                           onClick={() => {
@@ -436,7 +456,6 @@ let num = 0
                         </button>
                         <Button
                           onClick={() => {
-                   
                             Navigate("/Checkout");
                             setToggleCart(!toggleCart);
                           }}

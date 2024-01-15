@@ -6,7 +6,7 @@ const reviews = require("../models/reviews");
 const CreateReviews = (req, res) => {
   // Comment: [{ type: String }],
   // reviews: { type: Number },
-    const {id} = req.params
+  const { id } = req.params;
   const { comment, reviews } = req.body;
   console.log(id);
   const userId = req.token.userId;
@@ -55,7 +55,7 @@ const deleteReviews = (req, res) => {
           { new: true }
         )
         .then((result) => {
-          res.status(203).json("deleted reviews");
+          res.status(203).json({ massage: "deleted Reviews", result: result });
         })
         .catch((err) => {
           res.json(err.message);

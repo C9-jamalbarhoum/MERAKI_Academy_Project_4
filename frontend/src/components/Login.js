@@ -2,9 +2,9 @@ import axios from "axios";
 import React, { useState, useContext } from "react";
 import { USEContext } from "../App";
 import { useNavigate } from "react-router-dom";
-import { jwtDecode } from "jwt-decode";
+
 function Login() {
-  const { InLogin, setInLogin, setUser_id, setToken } = useContext(USEContext);
+  const { InLogin, setInLogin, setToken ,setUserId} = useContext(USEContext);
 
   const [userLoginDATA, setUserLoginDATA] = useState({
     email: undefined,
@@ -21,6 +21,8 @@ function Login() {
         localStorage.setItem("token", result.data.token);
         localStorage.setItem("InLogin", true);
         localStorage.setItem("userName",result.data.userName)
+        localStorage.setItem("idUser",result.data.userId)
+        setUserId(result.data.userId)
         setInLogin(true);
         setInErr(false);
 

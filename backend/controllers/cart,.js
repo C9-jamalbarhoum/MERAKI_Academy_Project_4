@@ -20,11 +20,12 @@ const getCartByUser = (req, res) => {
 
 const UpdateCart = (req, res) => {
   const userId = req.token.userId;
-  console.log(userId);
+
+
   cartModule
     .findOneAndUpdate(
       { user: userId },
-      { $push: { products: req.body } },
+      { products: req.body, user: userId },
       { new: true }
     )
     .populate("products")
@@ -39,7 +40,7 @@ const UpdateCart = (req, res) => {
 const deleteCartById = (req, res) => {
   const userId = req.token.userId;
   cartModule
-    .findOneAndUpdate({user:userId },{products:[]},{new:true})
+    .findOneAndUpdate({ user: userId }, { products: [] }, { new: true })
     .then((result) => {
       res.status(200).json(result);
     })
@@ -72,14 +73,17 @@ const deleteOneProductByIdOfCart = (req, res) => {
 };
 const UpdateShangCart = (req, res) => {
   const userId = req.token.userId;
-  console.log( userId);
+  console.log(userId);
   console.log("xqx");
-    console.log(req.body);
-  cartModule.findOneAndUpdate({ user: userId },{ products:req.body}, { new: true }).then((result)=>{
-    res.status(201).json(result)
-  }).catch((err)=>{
-      res.status(404).json(err)
-  })
+  console.log(req.body);
+  cartModule
+    .findOneAndUpdate({ user: userId }, { products: req.body }, { new: true })
+    .then((result) => {
+      res.status(201).json(result);
+    })
+    .catch((err) => {
+      res.status(404).json(err);
+    });
 };
 
 module.exports = {

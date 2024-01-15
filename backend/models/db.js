@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-// "mongodb://localhost:27017/E-Commerce" 
+// "mongodb://localhost:27017/E-Commerce"
 mongoose
   .connect(process.env.DB_URI)
   .then((result) => {

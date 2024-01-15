@@ -8,22 +8,20 @@ import Modal from "react-bootstrap/Modal";
 
 function OneProduct() {
   const [show, setShow] = useState(false);
-
+  const [ToggleDelete, setToggleDelete] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  const { user_id, setUser_id, token, cartProduct, setCartProduct, InLogin } =
+  const { userId, setUserId, token, cartProduct, setCartProduct, InLogin } =
     useContext(USEContext);
 
   const [cartUser, setCartUser] = useState({
     products: [],
-    user: user_id,
   });
 
-  console.log(cartUser);
   const Navigate = useNavigate();
   const [toggle, setToggle] = useState(false);
   const [proData, setProData] = useState({});
-  const [ratingNum ,setRatingNum ] =useState(4)
+  const [ratingNum, setRatingNum] = useState(4);
   const [ImgSrc, setImgSrc] = useState("");
   const [ToggleReviews, setToggleReviews] = useState(false);
 
@@ -42,14 +40,15 @@ function OneProduct() {
       });
   }, [proID]);
   const ratingChanged = (newRating) => {
-    setRatingNum(Math.round(newRating))
-    // setReviews({...Reviews,reviews:newRating})
-    console.log(ratingNum);
+    setRatingNum(Math.round(newRating));
+    setReviews({ ...Reviews, reviews: newRating });
+    console.log(Reviews);
   };
 
   const [Reviews, setReviews] = useState({
     comment: undefined,
     reviews: ratingNum,
+    commenter: userId,
   });
   const createComment = () => {
     if (InLogin) {
@@ -60,7 +59,11 @@ function OneProduct() {
           },
         })
         .then((result) => {
-          console.log(result);
+          console.log({
+            proData,
+            Reviews,
+          });
+          setProData({ ...proData, reviews: [...proData.reviews, Reviews] });
         })
         .catch((err) => {
           console.log(err);
@@ -68,50 +71,62 @@ function OneProduct() {
     } else {
     }
   };
-
-  const filterProductForComment = () => {
-    console.log("S");
-
-    setProData({ ...proData, reviews: [...proData.reviews, Reviews] });
+  const deletedCommit = async (commentId) => {
+    try {
+      const deletedCommitR = await axios.delete(
+        `http://localhost:5000/?reviewsId=${commentId}&productId=${proID}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+    } catch (err) {
+      console.log(err);
+    }
   };
 
-  const addProductToCart = async (dataPro) => {
-    const copy = { ...cartUser };
+  const filterProductForDeleteComment = (index) => {
+    const copyForDeleteComment = proData.reviews.filter((comment, i) => {
+      return index !== i;
+    });
 
-    const pro = copy.products.find(
-      (product) => product.product === dataPro._id
-    );
+    setProData({ ...proData, reviews: copyForDeleteComment });
+  };
+  console.log({ cartProduct });
+  const addProductToCart = async (dataPro) => {
+    const copy = [...cartProduct];
+    const pro = copy.find((product) => {
+      if (typeof product.product !== "string")
+        return product.product._id === dataPro._id;
+
+      return product.product === dataPro._id;
+    });
+    console.log({ dataPro, copy, pro });
     if (!pro) {
-      copy.products.push({
+      copy.push({
         product: dataPro._id,
         quantity: 1,
         price: dataPro.price,
       });
     } else {
       pro.quantity++;
+      pro.price += pro.product.price;
     }
 
-    console.log(copy);
-    if (localStorage.getItem("token")) {
+    if (InLogin) {
       try {
-        const res = await axios.put(
-          `http://localhost:5000/cart/}`,
-          copy.products,
-          {
-            headers: {
-              Authorization: `Bearer ${localStorage.getItem("token")}`,
-            },
-          }
-        );
-        console.log(res);
+        const res = await axios.put(`http://localhost:5000/cart`, copy, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        });
+        setCartProduct(copy);
       } catch (error) {
         console.log(error);
       }
     }
   };
-
-  console.log("proData._id =>" + proData._id);
-  console.log("user_id =>" + user_id);
 
   const getCartUser = () => {
     axios
@@ -188,11 +203,15 @@ function OneProduct() {
                       onClick={(e) => {
                         setImgSrc(e.target.src);
                       }}
-                      style={{ width: "100%", cursor: "pointer" }}
+                      style={{
+                        width: "100%",
+                        height: "25%",
+                        cursor: "pointer",
+                      }}
                       className="imgs-pro"
                     >
                       <img
-                        style={{ width: "100%", height: "100px" }}
+                        style={{ width: "100%", height: "100%" }}
                         src={img}
                       ></img>
                     </div>
@@ -202,22 +221,24 @@ function OneProduct() {
             </div>
             <div className="firstImg">
               <img
-                style={{ width: "100%", height: "100%" }}
+                style={{ width: "100%", height: "50%" }}
                 src={proData.image[0]}
               ></img>
             </div>
           </div>
         ) : (
-          <img className="firstImg" src={proData.image}></img>
+          <img  className="firstImg" src={proData.image}></img>
         )}
 
         <div className="box2-data">
           <h2>{proData.title}</h2>
           <h4 style={{ display: "flex", gap: "10px" }}>
-            prating :{" "}
+            Rating :{" "}
             <ReactStars
+              edit={false}
               count={5}
               onChange={ratingChanged}
+              value={4}
               size={24}
               color2={"#ffd700"}
             />{" "}
@@ -237,14 +258,7 @@ function OneProduct() {
                 if (!InLogin) {
                   handleShow();
                 } else {
-                  const findId = cartProduct.find((elm, i) => {
-                    return elm.product._id === proData._id;
-                  });
-
-                  if (!findId) {
-                    addProductToCart(proData);
-                  } else {
-                  }
+                  addProductToCart(proData);
                 }
               }}
               className="btn btn-primary"
@@ -296,7 +310,6 @@ function OneProduct() {
           <button
             onClick={() => {
               setToggle(true);
-             
             }}
             data-toggle="modal"
             data-target="#exampleModal"
@@ -399,8 +412,19 @@ function OneProduct() {
                   {toggle &&
                     proData.reviews.map((reviews, i) => {
                       return (
-                        <>
-                          <div style={{ display: "flex", gap: "10px" }}>
+                        <div
+                          style={{
+                            display: "flex",
+                            justifyContent: "space-between",
+                          }}
+                        >
+                          <div
+                            style={{
+                              display: "flex",
+                              gap: "10px",
+                              width: "2000px",
+                            }}
+                          >
                             <img
                               style={{ height: "100%", paddingTop: "5px" }}
                               src="person-circle.svg"
@@ -409,12 +433,53 @@ function OneProduct() {
                               {localStorage.getItem("userName")} :{" "}
                               {reviews.comment}
                             </p>
+                            <ReactStars
+                              edit={false}
+                              count={5}
+                              value={reviews.reviews}
+                              size={24}
+                              color2={"#ffd700"}
+                            />
                           </div>{" "}
-                        </>
+                          {reviews.commenter === userId && (
+                            <h1
+                              onClick={() => {
+                                deletedCommit(reviews._id);
+                                filterProductForDeleteComment(i);
+                                console.log(reviews._id);
+                              }}
+                              style={{ color: "red", cursor: "pointer" }}
+                            >
+                              x
+                            </h1>
+                          )}
+                          {/* <h1
+                            onClick={() => {
+                              deletedCommit(reviews._id);
+                              console.log(reviews._id);
+                            }}
+                            style={{ color: "red", cursor: "pointer" }}
+                          >
+                            x
+                          </h1> */}
+                        </div>
                       );
                     })}
+                  <div style={{ display: "flex" }}>
+                    {" "}
+                    <h5>Rating Here : </h5>
+                    <div>
+                      {" "}
+                      <ReactStars
+                        count={5}
+                        onChange={ratingChanged}
+                        value={ratingNum}
+                        size={24}
+                        color2={"#ffd700"}
+                      />
+                    </div>
+                  </div>
                   <textarea
-                    defaultValue={""}
                     onChange={(e) => {
                       setReviews({ ...Reviews, comment: e.target.value });
                       // console.log(e.target.value);
@@ -436,7 +501,6 @@ function OneProduct() {
               <button
                 onClick={() => {
                   createComment();
-                  filterProductForComment();
                 }}
                 type="button"
                 class="btn btn-primary"

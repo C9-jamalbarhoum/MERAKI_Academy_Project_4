@@ -27,8 +27,6 @@ style="transform: translate3d(-36.405%, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg)
    width="93" alt=""></div><div class="infinite-loop-card"><img src="https://assets-global.website-files.com/617b1b1f42c1da41aeae3413/62ce0c9ff7b515177ae3cbdb_bakkt.png" loading="lazy" width="93" alt=""></div><div class="infinite-loop-card"><img src="https://assets-global.website-files.com/617b1b1f42c1da41aeae3413/62ce0ca99981a44f28f13dce_clover.png" loading="lazy" width="93" alt=""></div><div class="infinite-loop-card"><img src="https://assets-global.website-files.com/617b1b1f42c1da41aeae3413/641d32e1f39774d10e39fc44_kaiser-x-labs.png" loading="lazy" width="133" alt=""></div><div class="infinite-loop-card"><img src="https://assets-global.website-files.com/617b1b1f42c1da41aeae3413/641d329ba61ee0e8fa192a6b_stihl.svg" loading="lazy" width="93" alt=""></div><div class="infinite-loop-card"><img src="https://assets-global.website-files.com/617b1b1f42c1da41aeae3413/62cc846372640f7c44a647e6_elfontheshelf.png" loading="lazy" width="93" alt=""></div><div class="infinite-loop-card"><img src="https://assets-global.website-files.com/617b1b1f42c1da41aeae3413/641d33394862792aa616cbeb_zenni.png" loading="lazy" width="93" alt=""></div><div class="infinite-loop-card"><img src="https://assets-global.website-files.com/617b1b1f42c1da41aeae3413/62ce0cd18327d08dbb5fc975_frontdoor.png" loading="lazy" width="93" alt=""></div><div class="infinite-loop-card"><img src="https://assets-global.website-files.com/617b1b1f42c1da41aeae3413/62ce0cdcb8332daa4ea050d4_hollywood.com.png" loading="lazy" width="103" alt=""></div><div class="infinite-loop-card"><img src="https://assets-global.website-files.com/617b1b1f42c1da41aeae3413/62ce0ce691000070869fdd08_mythical.png" loading="lazy" width="110" alt=""></div><div class="infinite-loop-card"><img src="https://assets-global.website-files.com/617b1b1f42c1da41aeae3413/62ce0c8b30d0225be1ee39de_edmodo.png" loading="lazy" alt="" width="106"></div><div class="infinite-loop-card"><img src="https://assets-global.website-files.com/617b1b1f42c1da41aeae3413/630952df0dc0119ed9b07ee1_obvio-health.png" loading="lazy" width="110" alt=""></div><div class="infinite-loop-card"><img src="https://assets-global.website-files.com/617b1b1f42c1da41aeae3413/62ce0cfd69ea38eed2190b4b_pwc.png" loading="lazy" width="93" alt=""></div><div class="infinite-loop-card"><img src="https://assets-global.website-files.com/617b1b1f42c1da41aeae3413/62ce0d089981a40c1ff1410d_take2-interactive.png" loading="lazy" width="93" alt=""></div><div class="infinite-loop-card"><img src="https://assets-global.website-files.com/617b1b1f42c1da41aeae3413/62ce0d11f870ab72315afe34_waterford.png" loading="lazy" width="110" alt=""></div><div class="infinite-loop-card"><img src="https://assets-global.website-files.com/617b1b1f42c1da41aeae3413/62ce0d2645ebff17af9aadd4_open-exchange.png" loading="lazy" alt="" width="120"></div><div class="infinite-loop-card"><img src="https://assets-global.website-files.com/617b1b1f42c1da41aeae3413/62ce0d31f7b5157068e3d6b5_purevpn.png" loading="lazy" alt="" width="110"></div><div class="infinite-loop-card"><img src="https://assets-global.website-files.com/617b1b1f42c1da41aeae3413/62cf2d6625b9f15a2b2ddada_underdog-fantasy.png" loading="lazy" alt="" width="110"></div><div class="infinite-loop-card"><img src="https://assets-global.website-files.com/617b1b1f42c1da41aeae3413/62ce0d53ddc9efd0f6c9943e_split.io.png" loading="lazy" alt="" width="110"></div><div class="infinite-loop-card"><img src="https://assets-global.website-files.com/617b1b1f42c1da41aeae3413/62ce0d64c31e42eebc794ae4_fnatic.png" loading="lazy" alt="" width="110"></div><div class="infinite-loop-card"><img src="https://assets-global.website-files.com/
 617b1b1f42c1da41aeae3413/62ce0c7df7b5151cebe3cb0c_fat%20shark.png" loading="lazy" alt="" width="96"></div></div> */
 
-
-
 .heading {
   font-size: 25px;
   margin-right: 25px;
@@ -109,70 +107,79 @@ style="transform: translate3d(-36.405%, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg)
   .middle {
     width: 100%;
   }
+  #carouselExampleControls {
+    padding-top: 100px;
+    width: 50vw;
+    height: 40vh;
+    padding-left: 1px;
+  }
+  .sm-3-img {
+    width: 100%;
+  }
+
+  .col-sm {
+    display: flex;
+    justify-content: center;
+  }
   .right {
     display: none;
   }
 }
-.containerBox{
+.containerBox {
   width: 100%;
   display: flex;
-
-
 }
-.box2-data{
-width: 50%;
-display: flex;
-flex-direction: column;
-gap: 20px;
-padding-right: 200px;
 
-
-}
-.image-4{
+.box2-data {
   width: 50%;
-  height: 60vh;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding-right: 200px;
+}
+.image-4 {
+  width: 50%;
+  height: 50%;
   display: flex;
   gap: 20px;
   justify-content: center;
 }
 
-.box2-data *{
+.box2-data * {
   text-align: left;
 }
-.sm-3-img{
+.sm-3-img {
   width: 20%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   gap: 10px;
-
 }
-.firstImg{
+.firstImg {
   width: 50%;
-
 }
-.Cart-box{
+.Cart-box {
   border-radius: 20px;
   background-color: rgb(194, 193, 193);
   width: 30vw;
   height: 70vh;
   z-index: 3;
   position: absolute;
-right: 5px;
-top:70px;
+  right: 5px;
+  top: 70px;
 }
-.go-login{
+.go-login {
   border-radius: 20px;
   background-color: rgb(194, 193, 193);
   width: 20vw;
   height: 30vh;
   z-index: 3;
   position: absolute;
-right: 5px;
-top:70px;
+  right: 5px;
+  top: 70px;
 }
 
-
-.chickOut{
+.chickOut {
   display: -ms-flexbox; /* IE10 */
   display: flex;
   -ms-flex-wrap: wrap; /* IE10 */
@@ -201,14 +208,14 @@ top:70px;
   padding: 0 16px;
 }
 
-.container-chick{
+.container-chick {
   background-color: #f2f2f2;
   padding: 5px 20px 15px 20px;
   border: 1px solid lightgrey;
   border-radius: 3px;
 }
 
-input[type=text] {
+input[type="text"] {
   width: 100%;
   margin-bottom: 20px;
   padding: 12px;
@@ -227,8 +234,8 @@ label {
   font-size: 24px;
 }
 
-.btnChick{
-  background-color: #04AA6D;
+.btnChick {
+  background-color: #04aa6d;
   color: white;
   padding: 12px;
   margin: 10px 0;
@@ -239,12 +246,12 @@ label {
   font-size: 17px;
 }
 
-.btnChick{
+.btnChick {
   background-color: #45a049;
 }
 
 a {
-  color: #2196F3;
+  color: #2196f3;
 }
 
 hr {
@@ -261,7 +268,58 @@ span.price {
   .row {
     flex-direction: column-reverse;
   }
+  .box2-data h2 {
+    font-size: 20px;
+  }
+  .box2-data {
+    padding: 20px;
+  }
+  .box2-data p {
+    overflow-x: scroll;
+  }
+  .box2-data p::-webkit-scrollbar {
+    display: none;
+  }
+
+  .box2-data h4 {
+    font-size: 20px;
+    flex-direction: column;
+  }
+  .containerBox {
+    width: 90%;
+
+    height: 100vh;
+  }
+  .sm-3-img {
+    width: 100%;
+  }
+  .firstImg {
+    display: none;
+  }
+  .col-sm {
+    display: flex;
+    justify-content: center;
+  }
   .col-25 {
     margin-bottom: 20px;
   }
+  .row {
+    width: 400px;
+  }
+  .modal-content {
+    width: 98%;
+  }
+  #carouselExampleControls {
+    display: none;
+  }
+  .row {
+    padding-top: 20px;
+  }
+  .col-sm {
+    padding: 0;
+  }
+}
+.col-sm{
+  display: flex;
+  justify-content: center;
 }
