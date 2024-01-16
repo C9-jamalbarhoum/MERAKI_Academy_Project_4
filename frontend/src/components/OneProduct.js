@@ -289,7 +289,8 @@ function OneProduct() {
           </div>
           <div>
             <h5 style={{ display: "flex", gap: "10px" }}>
-              Share: <img src="facebook.svg"></img>
+              Share: <img href="/https://web.facebook.com/share.php?u=url" 
+              src="facebook.svg"></img>
               <img src="instagram.svg"></img>
             </h5>
           </div>

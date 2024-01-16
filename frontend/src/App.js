@@ -24,7 +24,9 @@ function App() {
   const [category, setCategory] = useState([]);
   const [Products, setProducts] = useState([]);
 
-  const [userId, setUserId] = useState(localStorage.getItem("idUser")||"");
+  const [toggleOrder, setToggleOrder] = useState(localStorage.getItem("toggleOrd")|| false);
+
+  const [userId, setUserId] = useState(localStorage.getItem("idUser") || "");
   const [InLogin, setInLogin] = useState(
     localStorage.getItem("InLogin") || false
   );
@@ -51,7 +53,7 @@ function App() {
           setInLogin,
           SearchVal,
           setSearchVal,
-           userId,
+          userId,
           setUserId,
           token,
           setToken,
@@ -59,6 +61,8 @@ function App() {
           setCartProduct,
           copyCartPro,
           setCopyCartPro,
+          toggleOrder,
+          setToggleOrder,
         }}
       >
         <Navbar />

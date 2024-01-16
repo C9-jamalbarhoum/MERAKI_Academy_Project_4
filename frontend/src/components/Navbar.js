@@ -6,6 +6,7 @@ import axios from "axios";
 import Offcanvas from "react-bootstrap/Offcanvas";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
+
 function Navbar() {
   const [show, setShow] = useState(false);
 
@@ -20,20 +21,18 @@ function Navbar() {
 
   const {
     category,
-    setIDCategory,
     setInLogin,
     InLogin,
-    SearchVal,
     setSearchVal,
-    user_id,
-    setUser_id,
     token,
-    setToken,
     cartProduct,
     setCartProduct,
-    copyCartPro,
     setCopyCartPro,
+    toggleOrder,
+    setToggleOrder,
   } = useContext(USEContext);
+
+  console.log(cartProduct);
 
   const getCartUser = () => {
     axios
@@ -58,7 +57,6 @@ function Navbar() {
   console.log(cartProduct);
 
   const ChangeProductOfCart = (productId, copy) => {
-
     axios
       .put(`http://localhost:5000/cart/Shang/${productId}`, copy, {
         headers: {
@@ -200,11 +198,21 @@ function Navbar() {
                 </a>
               </div>
             </li>
-            {/* <li className="nav-item">
-              <a className="nav-link disabled" href="#">
-                Admin Dashboard
-              </a>
-            </li> */}
+            {toggleOrder && InLogin&&
+              <li style={{display:"flex"}} className="nav-item active">
+                <a
+                  style={{ cursor: "pointer" }}
+                  onClick={() => {
+                    Navigate("/");
+                  }}
+                  className="nav-link"
+                >
+                  Order status <span className="sr-only">(current)</span>
+                </a>
+                <img src="box-seam.svg"></img>
+              </li>
+           
+            }
           </ul>
           <form className="form-inline my-2 my-lg-0">
             {InLogin && (
@@ -402,13 +410,10 @@ function Navbar() {
                                         </div>{" "}
                                       </div>
                                     </div>
+                                    <div> price : ${pro.product.price}</div>
                                     <div>
                                       {" "}
-                                     price : ${pro.product.price}
-                                    </div>
-                                    <div>
-                                      {" "}
-                                     total price : ${pro.price.toPrecision(3)}
+                                      total price : ${pro.price.toPrecision(3)}
                                     </div>
                                   </div>
                                   <div
@@ -455,8 +460,8 @@ function Navbar() {
                         </button>
                         <Button
                           onClick={() => {
-                            Navigate("/Checkout");
                             setToggleCart(!toggleCart);
+                            Navigate("/Checkout");
                           }}
                         >
                           Check out
@@ -465,39 +470,6 @@ function Navbar() {
                     </div>
                     <div class="offcanvas-body">...</div>
                   </motion.div>
-                  {/*               
-
-
-                  <div className="Cart-box">
-                    Shopping Cart //! lop => for cart product => !// arror => !!
-                    {cartProduct.map((pro, i) => {
-                      // setTotal(total + pro.price);
-                      return (
-                        <>
-                          <div>
-                            <div className="x"> x</div>
-                            <div className="productCart">
-                              <div>
-                                {" "}
-                                <img src={pro.image}></img>
-                              </div>
-                              <div>
-                                {" "}
-                                <p>{pro.title}</p>
-                                <span className="price">{pro.price} </span>
-                              </div>
-                            </div>
-                          </div>
-                        </>
-                      );
-                    })}
-                    <div className="totalCart">
-                      <p>Total:{total}</p>
-                    </div>
-                    <div className="checkOut">
-                      <button>checkOut</button>
-                    </div>
-                  </div> */}
                 </>
               )}
               {toggleGoLogin && Navigate("/Login")}

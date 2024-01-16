@@ -1,34 +1,32 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { USEContext } from "../App";
 import axios from "axios";
 import Button from "react-bootstrap/esm/Button";
 import { useNavigate } from "react-router-dom";
 function CheckOut() {
+  useEffect(() => {
+    axios
+      .get("http://localhost:5000/order/get", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((result) => {
+        console.log(result);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
   const Negative = useNavigate();
   let num = 0;
-  const {
-    category,
-    setIDCategory,
-    setInLogin,
-    InLogin,
-    SearchVal,
-    setSearchVal,
-    user_id,
-    setUser_id,
-    token,
-    setToken,
-    cartProduct,
-    setCartProduct,
-  } = useContext(USEContext);
+  const { token, cartProduct, setCartProduct, toggleOrder, setToggleOrder } =
+    useContext(USEContext);
   console.log(cartProduct); // for order //
-  
+
   const [total, setTotal] = useState([]);
-  const [order, setOrder] = useState({
-    products: cartProduct,
-    total: total[total.length - 1],
-    status: "Pending",
-  });
-  console.log(total[total.length - 1]);
+
   const chickCartDelete = () => {
     axios
       .put(
@@ -64,14 +62,32 @@ function CheckOut() {
         console.log(err);
       });
   };
+
+  const [order, setOrder] = useState({
+    products: cartProduct,
+    total: undefined,
+    status: "Pending",
+  });
   const createOrder = () => {
+    let totals = 0;
+
+    for (let i = 0; i < cartProduct.length; i++) {
+      totals += cartProduct[i].price;
+    }
+
     axios
-      .post("http://localhost:5000/order/", order, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
+      .post(
+        "http://localhost:5000/order/",
+        { ...order, total: totals, products: cartProduct },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
+      .then((result) => {
+        console.log(result);
       })
-      .then((result) => {})
       .catch((err) => {
         console.log(err);
       });
@@ -270,7 +286,10 @@ function CheckOut() {
 
               <input
                 onClick={(e) => {
+                  setToggleOrder(true)
+                  localStorage.setItem("toggleOrd",true)
                   e.preventDefault();
+                  createOrder();
                 }}
                 type="submit"
                 value="Continue to checkout"
@@ -318,7 +337,6 @@ function CheckOut() {
                     </button>
                     <button
                       onClick={(e) => {
-                        createOrder();
                         Negative("/");
                         // setCartProduct([]);
                         chickCartDelete();
