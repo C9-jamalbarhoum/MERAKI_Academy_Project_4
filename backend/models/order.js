@@ -13,7 +13,6 @@ const order = new mongoose.Schema({
   status: {
     type: String,
     default: "Pending",
-    enum: ["Pending", "confirm", "Cancelled"],
   },
 });
 module.exports = mongoose.model("order", order);

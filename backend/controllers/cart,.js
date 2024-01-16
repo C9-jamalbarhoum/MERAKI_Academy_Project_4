@@ -20,12 +20,10 @@ const getCartByUser = (req, res) => {
 
 const UpdateCart = (req, res) => {
   const userId = req.token.userId;
-
-
   cartModule
     .findOneAndUpdate(
       { user: userId },
-      { products: req.body, user: userId },
+      { products: req.body, user:userId},
       { new: true }
     )
     .populate("products")

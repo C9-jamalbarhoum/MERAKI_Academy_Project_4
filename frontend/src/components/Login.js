@@ -3,6 +3,34 @@ import React, { useState, useContext } from "react";
 import { USEContext } from "../App";
 import { useNavigate } from "react-router-dom";
 
+import Alert from 'react-bootstrap/Alert';
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 function Login() {
   const { InLogin, setInLogin, setToken ,setUserId} = useContext(USEContext);
 
@@ -12,6 +40,22 @@ function Login() {
   });
   const [massageInLogin, setMassageInLogin] = useState("");
   const [inErr, setInErr] = useState(false);
+  const [errMassage , setErrorMassage] =useState("")
+
+  function LinksExample() {
+    return (
+      <>
+        {[
+          'danger',
+        ].map((variant) => (
+          <Alert key={variant} variant={variant}>
+              {errMassage}
+          </Alert>
+        ))}
+      </>
+    );
+  }
+
 
   const Login = () => {
     axios
@@ -27,39 +71,33 @@ function Login() {
         setInErr(false);
 
         console.log(result);
-        // setMassageInLogin(result.response.massage)
+       
         Navigate("/");
       })
       .catch((err) => {
-        console.log(err);
+        setErrorMassage(err.response.data.massage)
 
+          console.log(errMassage);
       });
   };
   const Navigate = useNavigate();
   return (
     <>
-      <div className="s">
+      <div>
+        {/* <div style={{height:"200px", width:"200"}}></div> */}
+   
         <h1
           style={{
-            paddingTop: "250px",
+            paddingTop: "150px",
             fontFamily: "-moz-initial",
             fontWeight: "bold",
           }}
         >
           Login
         </h1>
-        {InLogin && (
-          <h1
-            style={{
-              margin: "10px",
-              width: "200px",
-              height: "40px",
-              backgroundColor: "green",
-            }}
-          >
-            {massageInLogin}
-          </h1>
-        )}
+        
+        
+      
         {inErr && (
           <div
             style={{
@@ -69,7 +107,7 @@ function Login() {
               backgroundColor: "red",
             }}
           >
-            {massageInLogin}
+            {errMassage}
           </div>
         )}
         <div style={{ display: "flex", gap: "10px", justifyContent: "center" }}>
@@ -127,7 +165,8 @@ function Login() {
               />
             </div>
         
-            <button
+            <button 
+            style={{marginBottom:"10px"}}
               onClick={(e) => {
                 e.preventDefault();
                 Login();
@@ -138,7 +177,9 @@ function Login() {
               Submit
             </button>
           </form>
+ 
         </div>
+        {LinksExample()}
         <section dclass="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
           <div>
             <a class="me-4 text-reset">

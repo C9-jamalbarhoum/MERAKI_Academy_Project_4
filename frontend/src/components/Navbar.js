@@ -58,8 +58,7 @@ function Navbar() {
   console.log(cartProduct);
 
   const ChangeProductOfCart = (productId, copy) => {
-    console.log(productId);
-    console.log(token);
+
     axios
       .put(`http://localhost:5000/cart/Shang/${productId}`, copy, {
         headers: {
@@ -409,7 +408,7 @@ function Navbar() {
                                     </div>
                                     <div>
                                       {" "}
-                                     total price : ${pro.price.toPrecision(4)}
+                                     total price : ${pro.price.toPrecision(3)}
                                     </div>
                                   </div>
                                   <div
@@ -445,7 +444,7 @@ function Navbar() {
                             );
                           }
                         })}
-                        <div> total : ${num.toPrecision(4)}</div>
+                        <div> total : ${num.toPrecision(3)}</div>
                         <button
                           className="Register btn btn-warning"
                           onClick={() => {

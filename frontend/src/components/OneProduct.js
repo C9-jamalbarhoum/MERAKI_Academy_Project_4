@@ -6,6 +6,26 @@ import ReactStars from "react-stars";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 
+//
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 function OneProduct() {
   const [show, setShow] = useState(false);
   const [ToggleDelete, setToggleDelete] = useState(false);
@@ -111,7 +131,8 @@ function OneProduct() {
       });
     } else {
       pro.quantity++;
-      pro.price += pro.product.price;
+      pro.price = dataPro.price *   pro.quantity ;
+    
     }
 
     if (InLogin) {
@@ -227,7 +248,7 @@ function OneProduct() {
             </div>
           </div>
         ) : (
-          <img  className="firstImg" src={proData.image}></img>
+          <img className="firstImg" src={proData.image}></img>
         )}
 
         <div className="box2-data">
@@ -501,6 +522,7 @@ function OneProduct() {
               <button
                 onClick={() => {
                   createComment();
+                 
                 }}
                 type="button"
                 class="btn btn-primary"

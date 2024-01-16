@@ -20,11 +20,15 @@ function CheckOut() {
     cartProduct,
     setCartProduct,
   } = useContext(USEContext);
-
-  const [total, setTotal] = useState({
-    totalAll: 0,
+  console.log(cartProduct); // for order //
+  
+  const [total, setTotal] = useState([]);
+  const [order, setOrder] = useState({
+    products: cartProduct,
+    total: total[total.length - 1],
+    status: "Pending",
   });
-
+  console.log(total[total.length - 1]);
   const chickCartDelete = () => {
     axios
       .put(
@@ -56,6 +60,18 @@ function CheckOut() {
       .then((result) => {
         console.log(result);
       })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  const createOrder = () => {
+    axios
+      .post("http://localhost:5000/order/", order, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((result) => {})
       .catch((err) => {
         console.log(err);
       });
@@ -287,7 +303,10 @@ function CheckOut() {
                     </button>
                   </div>
                   <div class="modal-body">
-                   <p>For shipping 3 days The representative will contact you </p> <img src="car-front.svg"></img>
+                    <p>
+                      For shipping 3 days The representative will contact you{" "}
+                    </p>{" "}
+                    <img src="car-front.svg"></img>
                   </div>
                   <div class="modal-footer">
                     <button
@@ -299,12 +318,12 @@ function CheckOut() {
                     </button>
                     <button
                       onClick={(e) => {
+                        createOrder();
                         Negative("/");
-                        setCartProduct([]);  
-                        chickCartDelete()
+                        // setCartProduct([]);
+                        chickCartDelete();
                       }}
                       type="button"
-                    
                       class="btn btn-secondary"
                       data-dismiss="modal"
                     >
@@ -327,6 +346,7 @@ function CheckOut() {
 
             {cartProduct.map((elm, i) => {
               num += elm.price;
+
               return (
                 <>
                   {" "}
@@ -342,6 +362,7 @@ function CheckOut() {
               Total{" "}
               <span class="price" style={{ color: "black" }}>
                 <b>${num.toPrecision(4)}</b>
+                {total.push(num.toPrecision(4))}
               </span>
             </p>
           </div>
