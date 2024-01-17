@@ -6,24 +6,6 @@ import ReactStars from "react-stars";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 
-//
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 function OneProduct() {
@@ -131,8 +113,7 @@ function OneProduct() {
       });
     } else {
       pro.quantity++;
-      pro.price = dataPro.price *   pro.quantity ;
-    
+      pro.price = dataPro.price * pro.quantity;
     }
 
     if (InLogin) {
@@ -289,8 +270,11 @@ function OneProduct() {
           </div>
           <div>
             <h5 style={{ display: "flex", gap: "10px" }}>
-              Share: <img href="/https://web.facebook.com/share.php?u=url" 
-              src="facebook.svg"></img>
+              Share:{" "}
+              <img
+                href="/https://web.facebook.com/share.php?u=url"
+                src="facebook.svg"
+              ></img>
               <img src="instagram.svg"></img>
             </h5>
           </div>
@@ -523,7 +507,6 @@ function OneProduct() {
               <button
                 onClick={() => {
                   createComment();
-                 
                 }}
                 type="button"
                 class="btn btn-primary"

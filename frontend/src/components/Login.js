@@ -2,37 +2,80 @@ import axios from "axios";
 import React, { useState, useContext } from "react";
 import { USEContext } from "../App";
 import { useNavigate } from "react-router-dom";
-
-import Alert from 'react-bootstrap/Alert';
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+import { GoogleLogin } from "@react-oauth/google";
+import Alert from "react-bootstrap/Alert";
+import { jwtDecode } from "jwt-decode";
 
 function Login() {
-  const { InLogin, setInLogin, setToken ,setUserId} = useContext(USEContext);
+
+  const { InLogin, setInLogin, setToken, setUserId } = useContext(USEContext);
+
+
+
+ const  RegisterGoogle =(credentialResponseDecode)=>{
+  axios
+  .post("http://localhost:5000/users/register", {email:credentialResponseDecode.email,password:credentialResponseDecode.sub,userName:credentialResponseDecode.name})
+  .then((result) => {
+    console.log(result);
+    // setSuccessful(true)
+  })
+  .catch((err) => {
+    console.log(err);
+  });
+
+ }
+ const LoginGoogle =(credentialResponseDecode)=>{
+  axios
+  .post("http://localhost:5000/users/login", {email:credentialResponseDecode.email,password:credentialResponseDecode.sub})
+  .then((result) => {
+    setToken(result.data.token);
+    localStorage.setItem("token", result.data.token);
+    localStorage.setItem("InLogin", true);
+    localStorage.setItem("userName", result.data.userName);
+    localStorage.setItem("idUser", result.data.userId);
+    setUserId(result.data.userId);
+    setInLogin(true);
+    setInErr(false);
+
+    console.log(result);
+
+    Navigate("/");
+  })
+  .catch((err) => {
+    setErrorMassage(err.response.data.massage);
+
+    console.log(errMassage);
+  });
+ }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   const [userLoginDATA, setUserLoginDATA] = useState({
     email: undefined,
@@ -40,22 +83,19 @@ function Login() {
   });
   const [massageInLogin, setMassageInLogin] = useState("");
   const [inErr, setInErr] = useState(false);
-  const [errMassage , setErrorMassage] =useState("")
+  const [errMassage, setErrorMassage] = useState("");
 
   function LinksExample() {
     return (
       <>
-        {[
-          'danger',
-        ].map((variant) => (
+        {["danger"].map((variant) => (
           <Alert key={variant} variant={variant}>
-              {errMassage}
+            {errMassage}
           </Alert>
         ))}
       </>
     );
   }
-
 
   const Login = () => {
     axios
@@ -64,20 +104,20 @@ function Login() {
         setToken(result.data.token);
         localStorage.setItem("token", result.data.token);
         localStorage.setItem("InLogin", true);
-        localStorage.setItem("userName",result.data.userName)
-        localStorage.setItem("idUser",result.data.userId)
-        setUserId(result.data.userId)
+        localStorage.setItem("userName", result.data.userName);
+        localStorage.setItem("idUser", result.data.userId);
+        setUserId(result.data.userId);
         setInLogin(true);
         setInErr(false);
 
         console.log(result);
-       
+
         Navigate("/");
       })
       .catch((err) => {
-        setErrorMassage(err.response.data.massage)
+        setErrorMassage(err.response.data.massage);
 
-          console.log(errMassage);
+        console.log(errMassage);
       });
   };
   const Navigate = useNavigate();
@@ -85,7 +125,6 @@ function Login() {
     <>
       <div>
         {/* <div style={{height:"200px", width:"200"}}></div> */}
-   
         <h1
           style={{
             paddingTop: "150px",
@@ -95,9 +134,8 @@ function Login() {
         >
           Login
         </h1>
-        
-        
-      
+   
+  
         {inErr && (
           <div
             style={{
@@ -164,9 +202,9 @@ function Login() {
                 placeholder="Password"
               />
             </div>
-        
-            <button 
-            style={{marginBottom:"10px"}}
+
+            <button
+              style={{ marginBottom: "10px" }}
               onClick={(e) => {
                 e.preventDefault();
                 Login();
@@ -177,7 +215,22 @@ function Login() {
               Submit
             </button>
           </form>
- 
+          
+        </div>
+        <div style={{display:"flex",justifyContent:"center", padding:"20px"}}>
+        <GoogleLogin
+          onSuccess={(credentialResponse) => {
+            const credentialResponseDecode = jwtDecode(
+              credentialResponse.credential
+            );
+            console.log(credentialResponseDecode);
+            RegisterGoogle(credentialResponseDecode)
+            LoginGoogle(credentialResponseDecode)
+          }}
+          onError={() => {
+            console.log("Login Failed");
+          }}
+        />
         </div>
         {LinksExample()}
         <section dclass="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">

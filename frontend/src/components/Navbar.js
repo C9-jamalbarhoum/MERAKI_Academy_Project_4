@@ -203,7 +203,7 @@ function Navbar() {
                 <a
                   style={{ cursor: "pointer" }}
                   onClick={() => {
-                    Navigate("/");
+                    Navigate("/OrderStatus");
                   }}
                   className="nav-link"
                 >
@@ -226,10 +226,10 @@ function Navbar() {
                   alignItems: "center",
                 }}
               >
-                <img style={{ width: "40%" }} src="person-circle.svg"></img>
+                <img style={{ width: "20%" }} src="person-circle.svg"></img>
                 <p
                   style={{
-                    width: "100%",
+                    width: "200px",
                     color: "MediumSeaGreen",
                     height: "100%",
                     textAlign: "left",

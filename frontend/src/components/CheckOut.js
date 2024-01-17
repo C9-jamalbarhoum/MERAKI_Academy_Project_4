@@ -19,14 +19,33 @@ function CheckOut() {
       });
   }, []);
 
+
+
   const Negative = useNavigate();
   let num = 0;
-  const { token, cartProduct, setCartProduct, toggleOrder, setToggleOrder } =
+  const { token, cartProduct, setCartProduct, toggleOrder, setToggleOrder,copyCartPro, setCopyCartPro } =
     useContext(USEContext);
   console.log(cartProduct); // for order //
 
   const [total, setTotal] = useState([]);
-
+  useEffect(() => {
+    axios
+      .get(`http://localhost:5000/cart/`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((result) => {
+        setCartProduct(result.data.products);
+        setCopyCartPro(result.data.products);
+        console.log("true for api get cart");
+        console.log(result.data.products);
+        console.log(result);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
   const chickCartDelete = () => {
     axios
       .put(
@@ -286,8 +305,8 @@ function CheckOut() {
 
               <input
                 onClick={(e) => {
-                  setToggleOrder(true)
-                  localStorage.setItem("toggleOrd",true)
+                  setToggleOrder(true);
+                  localStorage.setItem("toggleOrd", true);
                   e.preventDefault();
                   createOrder();
                 }}

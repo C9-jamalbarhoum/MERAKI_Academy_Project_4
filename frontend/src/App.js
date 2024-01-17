@@ -13,6 +13,7 @@ import Cart from "./components/Cart";
 import Search from "./components/Search";
 import OneProduct from "./components/OneProduct";
 import CheckOut from "./components/CheckOut";
+import OrderStatus from "./components/OrderStatus";
 export const USEContext = createContext();
 
 function App() {
@@ -76,6 +77,7 @@ function App() {
           <Route path="/Search" element={<Search />} />
           <Route path="/OneProduct" element={<OneProduct />} />
           <Route path="/CheckOut" element={<CheckOut />} />
+          <Route path="/OrderStatus" element={<OrderStatus />} />
         </Routes>
 
         <Footer />
