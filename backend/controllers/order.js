@@ -1,6 +1,6 @@
 const orderModule = require("../models/order");
 
-const createOrder = (req, res) => {
+const createOrder = (req, res, next) => {
   const { products, total, status } = req.body;
   const userId = req.token.userId;
 
@@ -13,7 +13,9 @@ const createOrder = (req, res) => {
   newOrder
     .save()
     .then((result) => {
-      res.status(201).json("successful created order");
+     return  next();
+
+      // res.status(201).json("successful created order");
     })
     .catch((err) => {
       res.status(500).json(err);

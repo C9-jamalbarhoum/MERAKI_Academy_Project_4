@@ -15,14 +15,13 @@ const order = new mongoose.Schema({
     default: "Pending",
   },
 });
+
 module.exports = mongoose.model("order", order);
 
+//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+//////                                    ///
 
-
-    //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
- //////                                    ///
-
- // ?  cart && order && checkout ==>>>
- // Cart On click   ===> no itm     ==> { product : [], user : id for user }
- // on add itm of cart    ===>  update in cart for push itm of product 
- // on click  checkout  ==>  login == > copy {product of cart} ===> {product of order}
+// ?  cart && order && checkout ==>>>
+// Cart On click   ===> no itm     ==> { product : [], user : id for user }
+// on add itm of cart    ===>  update in cart for push itm of product
+// on click  checkout  ==>  login == > copy {product of cart} ===> {product of order}

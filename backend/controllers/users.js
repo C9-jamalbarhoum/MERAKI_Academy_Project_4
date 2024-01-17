@@ -63,6 +63,7 @@ const login = (req, res) => {
 
       if (valid) {
         payload = {
+          email: result.email,
           userId: result._id,
           author: result.userName,
           role: result.role,
