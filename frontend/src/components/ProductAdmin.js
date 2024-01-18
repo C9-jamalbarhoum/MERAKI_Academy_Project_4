@@ -73,7 +73,7 @@ function ProductAdmin() {
   };
   const DeleteProduct = (id) => {
     axios
-      .delete(`http://localhost:5000/product/${id}`,{
+      .delete(`http://localhost:5000/product/${id}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -87,11 +87,6 @@ function ProductAdmin() {
       });
   };
 
-
-
-
- 
-
   return (
     <div>
       <div style={{ paddingTop: "80px" }} className="container">
@@ -102,7 +97,10 @@ function ProductAdmin() {
             padding: "40px",
           }}
         >
-          <Button onClick={() => Navigate(-1)}>back</Button>
+            <Button onClick={()=>{
+        Navigate(-1)
+        setProducts([])
+        }}>back</Button>
         </div>
         <div style={{ gap: "20px" }} class="row">
           {Products.map((products, index) => {
@@ -143,9 +141,13 @@ function ProductAdmin() {
                       >
                         update
                       </button>
-                      <button onClick={()=>{
-                        DeleteProduct(products._id)
-                      }} type="button" className="btn btn-danger">
+                      <button
+                        onClick={() => {
+                          DeleteProduct(products._id);
+                        }}
+                        type="button"
+                        className="btn btn-danger"
+                      >
                         delete
                       </button>
                     </div>
@@ -166,7 +168,13 @@ function ProductAdmin() {
             );
           })}
         </div>
-        <button type="button" class="btn btn-outline-info" style={{margin:"20px 0 10px 0",fontWeight:"bold"}}>Create Product</button>
+        <button
+          type="button"
+          class="btn btn-outline-info"
+          style={{ margin: "20px 0 10px 0", fontWeight: "bold" }}
+        >
+          Create Product{}
+        </button>
         <section dclass="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
           <div>
             <a class="me-4 text-reset">

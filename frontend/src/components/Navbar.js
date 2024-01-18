@@ -277,6 +277,8 @@ function Navbar() {
                   onClick={() => {
                     localStorage.clear();
                     setInLogin(false);
+                    setUserId("")
+                    setToggleOrder(false)
                   }}
                   type="button"
                   class="btn btn-danger"

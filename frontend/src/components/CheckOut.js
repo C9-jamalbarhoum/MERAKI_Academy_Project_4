@@ -19,12 +19,17 @@ function CheckOut() {
       });
   }, []);
 
-
-
   const Negative = useNavigate();
   let num = 0;
-  const { token, cartProduct, setCartProduct, toggleOrder, setToggleOrder,copyCartPro, setCopyCartPro } =
-    useContext(USEContext);
+  const {
+    token,
+    cartProduct,
+    setCartProduct,
+    toggleOrder,
+    setToggleOrder,
+    copyCartPro,
+    setCopyCartPro,
+  } = useContext(USEContext);
   console.log(cartProduct); // for order //
 
   const [total, setTotal] = useState([]);
@@ -342,7 +347,9 @@ function CheckOut() {
                   </div>
                   <div class="modal-body">
                     <p>
-                      For shipping 3 days The representative will contact you{" "}
+                      A message has been sent to your Gmail
+                      <br /> For shipping 3 days The representative will contact
+                      you{" "}
                     </p>{" "}
                     <img src="car-front.svg"></img>
                   </div>
@@ -398,8 +405,8 @@ function CheckOut() {
             <p>
               Total{" "}
               <span class="price" style={{ color: "black" }}>
-                <b>${num.toPrecision(4)}</b>
-                {total.push(num.toPrecision(4))}
+                <b>${num.toPrecision(3)}</b>
+                {/* {total.push(num.toPrecision(3))} */}
               </span>
             </p>
           </div>
