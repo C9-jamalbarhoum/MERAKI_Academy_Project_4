@@ -17,6 +17,7 @@
     "react-date-range": "^2.0.0-alpha.4",
     "react-dom": "^18.2.0",
     "react-grid-system": "^8.1.9",
+    "react-image": "^4.1.0",
     "react-router-dom": "^6.21.1",
     "react-scripts": "5.0.1",
     "react-stars": "^2.2.5",

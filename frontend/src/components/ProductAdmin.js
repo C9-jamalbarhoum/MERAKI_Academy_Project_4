@@ -43,6 +43,7 @@ function ProductAdmin() {
     title: undefined,
     price: undefined,
     stockQuantity: undefined,
+    description: undefined,
   });
   const getDataOneProduct = (id) => {
     axios
@@ -63,14 +64,33 @@ function ProductAdmin() {
       })
       .then((result) => {
         console.log(result);
-        setToggleInUpdate(true);
+        setToggleInUpdate(!toggleInUpdate);
         handleShow();
       })
       .catch((err) => {
         console.log(err);
       });
   };
-  console.log(DataOneForProduct);
+  const DeleteProduct = (id) => {
+    axios
+      .delete(`http://localhost:5000/product/${id}`,{
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((result) => {
+        console.log(result);
+        setToggleInUpdate(!toggleInUpdate);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+
+
+
+ 
 
   return (
     <div>
@@ -123,7 +143,9 @@ function ProductAdmin() {
                       >
                         update
                       </button>
-                      <button type="button" className="btn btn-danger">
+                      <button onClick={()=>{
+                        DeleteProduct(products._id)
+                      }} type="button" className="btn btn-danger">
                         delete
                       </button>
                     </div>
@@ -144,6 +166,7 @@ function ProductAdmin() {
             );
           })}
         </div>
+        <button type="button" class="btn btn-outline-info" style={{margin:"20px 0 10px 0",fontWeight:"bold"}}>Create Product</button>
         <section dclass="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
           <div>
             <a class="me-4 text-reset">
@@ -153,13 +176,6 @@ function ProductAdmin() {
                 }}
                 style={{ padding: "10px", cursor: "pointer" }}
                 src="arrow-left.svg"
-              ></img>
-            </a>
-            <a class="me-4 text-reset">
-              <img
-                onClick={() => {}}
-                style={{ padding: "10px", cursor: "pointer" }}
-                src="arrow-right.svg"
               ></img>
             </a>
           </div>
@@ -210,6 +226,20 @@ function ProductAdmin() {
                 }}
                 type="email"
                 defaultValue={DataOneForProduct.stockQuantity}
+                autoFocus
+              />
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+              <Form.Label>description</Form.Label>
+              <Form.Control
+                onChange={(e) => {
+                  setDataOneForProduct({
+                    ...DataOneForProduct,
+                    description: e.target.value,
+                  });
+                }}
+                type="email"
+                defaultValue={DataOneForProduct.description}
                 autoFocus
               />
             </Form.Group>

@@ -82,11 +82,6 @@ function Products() {
       Navigate(-1)
          }}  style={{padding:"10px" ,cursor:"pointer"}} src="arrow-left.svg"></img>
        </a>
-       <a class="me-4 text-reset">
-         <img onClick={()=>{
- 
-         }}  style={{padding:"10px",cursor:"pointer"}}  src="arrow-right.svg"></img>
-       </a>
      </div>
    </section>
       </div>

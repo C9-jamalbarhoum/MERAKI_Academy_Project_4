@@ -8,8 +8,8 @@ const  productRouter = express()
 
 productRouter.get("/", getAllProduct)
 productRouter.get("/:id", getProductById)
-productRouter.delete("/:id", deleteProductById)
-productRouter.post("/create", createProduct)
+productRouter.delete("/:id",authentication,authorization("delete_product"), deleteProductById)
+productRouter.post("/create",authentication,authorization("create_category"), createProduct)
 productRouter.put("/:id",authentication, authorization("update_product"),updateProduct)
 productRouter.get("/idCate/:id", getAllProductByIdCategory)
 
