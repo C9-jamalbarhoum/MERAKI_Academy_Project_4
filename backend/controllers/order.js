@@ -40,5 +40,15 @@ const getOrder = (req, res) => {
       }
     });
 };
+const getAllOrder = (req,res)=>{
 
-module.exports = { createOrder, getOrder };
+  orderModule.find({}).then((result)=>{
+    res.status(200).json(result)
+  }).catch((Err)=>{
+    res.status(500).json(Err)
+  })
+
+
+}
+
+module.exports = { createOrder, getOrder , getAllOrder};

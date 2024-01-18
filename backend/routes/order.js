@@ -1,6 +1,6 @@
 const express = require("express");
 
-const { createOrder, getOrder } = require("../controllers/order");
+const { createOrder, getOrder,getAllOrder } = require("../controllers/order");
 const { SendMassage } = require("../controllers/SendMassage");
 
 const orderRouter = express();
@@ -15,5 +15,6 @@ orderRouter.post(
   SendMassage
 );
 orderRouter.get("/get", authentication, getOrder);
+orderRouter.get("/getAll", authentication, getAllOrder);
 
 module.exports = orderRouter;

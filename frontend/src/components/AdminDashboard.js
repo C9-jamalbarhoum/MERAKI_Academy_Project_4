@@ -19,11 +19,33 @@ function AdminDashboard() {
   }, []);
   return (
     <>
-      <div style={{backgroundColor:"red", paddingTop: "100px", fontWeight: "bold" }}>
-        Admin Dashboard
+      <div
+        style={{
+          display: "flex",
+          gap: "10px",
+          justifyContent: "center",
+          backgroundColor: "red",
+          paddingTop: "100px",
+          fontWeight: "bold",
+        }}
+      >
+        <h6>Admin Dashboard</h6>
+        <h6 onClick={()=>{
+          Navigate("/AdminOrder")
+        }}>Order</h6>
       </div>
-      <div style={{display:"flex",justifyContent:"center" }}>
-        <h6 style={{fontWeight: "bold" ,padding:"15px",borderRadius:"10px", marginTop:"20px" }}> Choose which category you want to edit</h6>
+      <div style={{ display: "flex", justifyContent: "center" }}>
+        <h6
+          style={{
+            fontWeight: "bold",
+            padding: "15px",
+            borderRadius: "10px",
+            marginTop: "20px",
+          }}
+        >
+          {" "}
+          Choose which category you want to edit
+        </h6>
       </div>
       <div style={{ padding: "10px  0" }} className="container">
         <div style={{ gap: "10px" }} class="row">

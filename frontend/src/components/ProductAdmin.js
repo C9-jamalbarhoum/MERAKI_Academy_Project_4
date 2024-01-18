@@ -119,14 +119,15 @@ function ProductAdmin() {
 
   return (
     <div>
-        <div style={{backgroundColor:"red", paddingTop: "100px", fontWeight: "bold" }}>
-        Admin Dashboard
+        <div style={{display:"flex",gap:"10px",justifyContent:"center",backgroundColor:"red", paddingTop: "100px", fontWeight: "bold" }}>
+        <h6>Admin Dashboard</h6>
+        <h6>Order</h6>
       </div>
-     
+    
 
       <div style={{ paddingTop: "80px" }} className="container">
       <div style={{display:"flex",justifyContent:"center" }}>
-        <h5 style={{backgroundColor:"red" ,fontWeight: "bold" ,padding:"10px",borderRadius:"10px" }}> (Edit, delete, add )for Product</h5>
+        <h5 style={{backgroundColor:"gray" ,fontWeight: "bold" ,padding:"5px",borderRadius:"10px" }}> (Edit, delete, add )for Product</h5>
       </div>
         <div
           style={{

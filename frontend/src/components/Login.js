@@ -7,82 +7,56 @@ import Alert from "react-bootstrap/Alert";
 import { jwtDecode } from "jwt-decode";
 
 function Login() {
-
   const { InLogin, setInLogin, setToken, setUserId } = useContext(USEContext);
+  const [inErr, setInErr] = useState(false);
+  const RegisterGoogle = (credentialResponseDecode) => {
+    axios
+      .post("http://localhost:5000/users/register", {
+        email: credentialResponseDecode.email,
+        password: credentialResponseDecode.sub,
+        userName: credentialResponseDecode.name,
+      })
+      .then((result) => {
+        console.log(result);
+        // setSuccessful(true)
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  const LoginGoogle = (credentialResponseDecode) => {
+    axios
+      .post("http://localhost:5000/users/login", {
+        email: credentialResponseDecode.email,
+        password: credentialResponseDecode.sub,
+      })
+      .then((result) => {
+        setToken(result.data.token);
+        localStorage.setItem("token", result.data.token);
+        localStorage.setItem("InLogin", true);
+        localStorage.setItem("userName", result.data.userName);
+        localStorage.setItem("idUser", result.data.userId);
+        setUserId(result.data.userId);
+        setInLogin(true);
+        setInErr(false);
 
+        console.log(result);
 
+        Navigate("/");
+      })
+      .catch((err) => {
+        setErrorMassage(err.response.data.massage);
 
- const  RegisterGoogle =(credentialResponseDecode)=>{
-  axios
-  .post("http://localhost:5000/users/register", {email:credentialResponseDecode.email,password:credentialResponseDecode.sub,userName:credentialResponseDecode.name})
-  .then((result) => {
-    console.log(result);
-    // setSuccessful(true)
-  })
-  .catch((err) => {
-    console.log(err);
-  });
-
- }
- const LoginGoogle =(credentialResponseDecode)=>{
-  axios
-  .post("http://localhost:5000/users/login", {email:credentialResponseDecode.email,password:credentialResponseDecode.sub})
-  .then((result) => {
-    setToken(result.data.token);
-    localStorage.setItem("token", result.data.token);
-    localStorage.setItem("InLogin", true);
-    localStorage.setItem("userName", result.data.userName);
-    localStorage.setItem("idUser", result.data.userId);
-    setUserId(result.data.userId);
-    setInLogin(true);
-    setInErr(false);
-
-    console.log(result);
-
-    Navigate("/");
-  })
-  .catch((err) => {
-    setErrorMassage(err.response.data.massage);
-
-    console.log(errMassage);
-  });
- }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        console.log(errMassage);
+      });
+  };
 
   const [userLoginDATA, setUserLoginDATA] = useState({
     email: undefined,
     password: undefined,
   });
   const [massageInLogin, setMassageInLogin] = useState("");
-  const [inErr, setInErr] = useState(false);
+
   const [errMassage, setErrorMassage] = useState("");
 
   function LinksExample() {
@@ -111,11 +85,12 @@ function Login() {
         setInErr(false);
 
         console.log(result);
-
+        setInErr(false);
         Navigate("/");
       })
       .catch((err) => {
         setErrorMassage(err.response.data.massage);
+        setInErr(true);
 
         console.log(errMassage);
       });
@@ -134,20 +109,7 @@ function Login() {
         >
           Login
         </h1>
-   
-  
-        {inErr && (
-          <div
-            style={{
-              margin: "10px",
-              width: "200px",
-              height: "40px",
-              backgroundColor: "red",
-            }}
-          >
-            {errMassage}
-          </div>
-        )}
+
         <div style={{ display: "flex", gap: "10px", justifyContent: "center" }}>
           <button
             className="Register btn btn-warning"
@@ -215,24 +177,25 @@ function Login() {
               Submit
             </button>
           </form>
-          
         </div>
-        <div style={{display:"flex",justifyContent:"center", padding:"20px"}}>
-        <GoogleLogin
-          onSuccess={(credentialResponse) => {
-            const credentialResponseDecode = jwtDecode(
-              credentialResponse.credential
-            );
-            console.log(credentialResponseDecode);
-            RegisterGoogle(credentialResponseDecode)
-            LoginGoogle(credentialResponseDecode)
-          }}
-          onError={() => {
-            console.log("Login Failed");
-          }}
-        />
+        <div
+          style={{ display: "flex", justifyContent: "center", padding: "20px" }}
+        >
+          <GoogleLogin
+            onSuccess={(credentialResponse) => {
+              const credentialResponseDecode = jwtDecode(
+                credentialResponse.credential
+              );
+              console.log(credentialResponseDecode);
+              RegisterGoogle(credentialResponseDecode);
+              LoginGoogle(credentialResponseDecode);
+            }}
+            onError={() => {
+              console.log("Login Failed");
+            }}
+          />
         </div>
-        {LinksExample()}
+        {inErr && LinksExample()}
         <section dclass="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
           <div>
             <a class="me-4 text-reset">
