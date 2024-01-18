@@ -110,7 +110,7 @@ function ProductAdmin() {
       })
       .then((result) => {
         console.log(result);
-        setToggleInUpdate(!toggleInUpdate)
+        setToggleInUpdate(!toggleInUpdate);
       })
       .catch((err) => {
         console.log(err);
@@ -119,7 +119,15 @@ function ProductAdmin() {
 
   return (
     <div>
+        <div style={{backgroundColor:"red", paddingTop: "100px", fontWeight: "bold" }}>
+        Admin Dashboard
+      </div>
+     
+
       <div style={{ paddingTop: "80px" }} className="container">
+      <div style={{display:"flex",justifyContent:"center" }}>
+        <h5 style={{backgroundColor:"red" ,fontWeight: "bold" ,padding:"10px",borderRadius:"10px" }}> (Edit, delete, add )for Product</h5>
+      </div>
         <div
           style={{
             display: "flex",
@@ -338,8 +346,7 @@ function ProductAdmin() {
           </Button>
         </Modal.Footer>
       </Modal>
-      <var></var>{" "}
-      //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
       <Modal show={showInputCreate} onHide={handleCloseInputCreate}>
         <Modal.Header>
           <Modal.Title>Create New product</Modal.Title>
