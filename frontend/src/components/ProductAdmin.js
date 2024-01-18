@@ -14,6 +14,12 @@ function ProductAdmin() {
 
   const handleCloseInput = () => setShowInput(false);
   const handleShowInput = () => setShowInput(true);
+
+  const [showInputCreate, setShowInputCreate] = useState(false);
+
+  const handleCloseInputCreate = () => setShowInputCreate(false);
+  const handleShowInputCreate = () => setShowInputCreate(true);
+
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
@@ -44,6 +50,14 @@ function ProductAdmin() {
     price: undefined,
     stockQuantity: undefined,
     description: undefined,
+  });
+  const [DataOneForProductCReate, setDataOneForProductCreate] = useState({
+    title: undefined,
+    price: undefined,
+    stockQuantity: undefined,
+    description: undefined,
+    image: [],
+    category: searchQuery,
   });
   const getDataOneProduct = (id) => {
     axios
@@ -87,6 +101,22 @@ function ProductAdmin() {
       });
   };
 
+  const AddNewProduct = () => {
+    axios
+      .post("http://localhost:5000/product/create/", DataOneForProductCReate, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((result) => {
+        console.log(result);
+        setToggleInUpdate(!toggleInUpdate)
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   return (
     <div>
       <div style={{ paddingTop: "80px" }} className="container">
@@ -97,10 +127,14 @@ function ProductAdmin() {
             padding: "40px",
           }}
         >
-            <Button onClick={()=>{
-        Navigate(-1)
-        setProducts([])
-        }}>back</Button>
+          <Button
+            onClick={() => {
+              Navigate(-1);
+              setProducts([]);
+            }}
+          >
+            back
+          </Button>
         </div>
         <div style={{ gap: "20px" }} class="row">
           {Products.map((products, index) => {
@@ -169,6 +203,9 @@ function ProductAdmin() {
           })}
         </div>
         <button
+          onClick={() => {
+            handleShowInputCreate();
+          }}
           type="button"
           class="btn btn-outline-info"
           style={{ margin: "20px 0 10px 0", fontWeight: "bold" }}
@@ -279,7 +316,6 @@ function ProductAdmin() {
         </Modal.Footer>
       </Modal>
       <br />
-
       <Modal
         show={show}
         onHide={handleClose}
@@ -299,6 +335,113 @@ function ProductAdmin() {
             onClick={handleClose}
           >
             Close
+          </Button>
+        </Modal.Footer>
+      </Modal>
+      <var></var>{" "}
+      //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+      <Modal show={showInputCreate} onHide={handleCloseInputCreate}>
+        <Modal.Header>
+          <Modal.Title>Create New product</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Form>
+            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+              <Form.Label>title</Form.Label>
+              <Form.Control
+                onChange={(e) => {
+                  setDataOneForProductCreate({
+                    ...DataOneForProductCReate,
+                    title: e.target.value,
+                  });
+                }}
+                type="email"
+                defaultValue={DataOneForProduct.title}
+                autoFocus
+              />
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+              <Form.Label>price</Form.Label>
+              <Form.Control
+                onChange={(e) => {
+                  setDataOneForProductCreate({
+                    ...DataOneForProductCReate,
+                    price: e.target.value,
+                  });
+                }}
+                type="email"
+                defaultValue={DataOneForProduct.price}
+                autoFocus
+              />
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+              <Form.Label>Stock Quantity</Form.Label>
+              <Form.Control
+                onChange={(e) => {
+                  setDataOneForProductCreate({
+                    ...DataOneForProductCReate,
+                    stockQuantity: e.target.value,
+                  });
+                }}
+                type="email"
+                defaultValue={DataOneForProduct.stockQuantity}
+                autoFocus
+              />
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+              <Form.Label>description</Form.Label>
+              <Form.Control
+                onChange={(e) => {
+                  setDataOneForProductCreate({
+                    ...DataOneForProductCReate,
+                    description: e.target.value,
+                  });
+                }}
+                type="email"
+                defaultValue={DataOneForProduct.description}
+                autoFocus
+              />
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+              <Form.Label>image</Form.Label>
+              <Form.Control
+                onChange={(e) => {
+                  setDataOneForProductCreate({
+                    ...DataOneForProductCReate,
+                    image: [e.target.value],
+                  });
+                }}
+                type="email"
+                defaultValue={DataOneForProduct.description}
+                autoFocus
+              />
+            </Form.Group>
+          </Form>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button
+            variant="secondary"
+            onClick={() => {
+              handleCloseInputCreate();
+              setDataOneForProductCreate({
+                title: undefined,
+                price: undefined,
+                stockQuantity: undefined,
+                description: undefined,
+                image: [],
+              });
+            }}
+          >
+            Close
+          </Button>
+          <Button
+            variant="primary"
+            onClick={() => {
+              handleCloseInputCreate();
+              AddNewProduct();
+            }}
+          >
+            Create Product
           </Button>
         </Modal.Footer>
       </Modal>
