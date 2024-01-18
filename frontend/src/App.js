@@ -14,6 +14,8 @@ import Search from "./components/Search";
 import OneProduct from "./components/OneProduct";
 import CheckOut from "./components/CheckOut";
 import OrderStatus from "./components/OrderStatus";
+import AdminDashboard from "./components/AdminDashboard";
+import ProductAdmin from "./components/ProductAdmin";
 export const USEContext = createContext();
 
 function App() {
@@ -78,6 +80,8 @@ function App() {
           <Route path="/OneProduct" element={<OneProduct />} />
           <Route path="/CheckOut" element={<CheckOut />} />
           <Route path="/OrderStatus" element={<OrderStatus />} />
+          <Route path="/AdminDashboard" element={<AdminDashboard />} />
+          <Route path="/ProductAdmin" element={<ProductAdmin />} />
         </Routes>
 
         <Footer />

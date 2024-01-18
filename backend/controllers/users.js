@@ -5,6 +5,7 @@ const jwt = require("jsonwebtoken");
 const role = require("../models/role");
 const IdAdmin = "6596b4d90cec78723d89954a";
 const IdUser = "6596b403056735dac934cce1";
+
 const register = (req, res) => {
   const { userName, email, password, phoneNumber, location } = req.body;
   const newUser = new userModule({

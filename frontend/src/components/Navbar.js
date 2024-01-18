@@ -30,6 +30,8 @@ function Navbar() {
     setCopyCartPro,
     toggleOrder,
     setToggleOrder,
+    userId,
+    setUserId,
   } = useContext(USEContext);
 
   console.log(cartProduct);
@@ -198,8 +200,8 @@ function Navbar() {
                 </a>
               </div>
             </li>
-            {toggleOrder && InLogin&&
-              <li style={{display:"flex"}} className="nav-item active">
+            {toggleOrder && InLogin && (
+              <li style={{ display: "flex" }} className="nav-item active">
                 <a
                   style={{ cursor: "pointer" }}
                   onClick={() => {
@@ -211,8 +213,20 @@ function Navbar() {
                 </a>
                 <img src="box-seam.svg"></img>
               </li>
-           
-            }
+            )}
+            {userId ==="65a8523490b338c8cbfa0269"&& (
+              <li style={{ display: "flex" }} className="nav-item active">
+                <a
+                  style={{ cursor: "pointer" }}
+                  onClick={() => {
+                    Navigate("/AdminDashboard");
+                  }}
+                  className="nav-link"
+                >
+                  Admin Dashboard <span className="sr-only">(current)</span>
+                </a>
+              </li>
+            )}
           </ul>
           <form className="form-inline my-2 my-lg-0">
             {InLogin && (
