@@ -1,10 +1,10 @@
 <p align="center">
-<a href="https://www.creativefabrica.com/wp-content/uploads/2023/10/15/Joy-with-Christmas-Nativity-Svg-Png-Graphics-81696579-1-1-580x387.jpg" target="_blank" rel="noopener noreferrer">
- <img width="400px" height="100px" src="https://www.creativefabrica.com/wp-content/uploads/2023/10/15/Joy-with-Christmas-Nativity-Svg-Png-Graphics-81696579-1-1-580x387.jpg" alt="Project logo">
+<a href="https://www.meraki-academy.org" target="_blank" rel="noopener noreferrer">
+ <img width="400px" height="100px" src="https://www.meraki-academy.org/assets/img/logov02.svg" alt="Project logo">
  </a>
 </p>
 
-<h3 align="center">Joy Joy
+<h3 align="center">Joy  Joy
 </h3>
 
 ---

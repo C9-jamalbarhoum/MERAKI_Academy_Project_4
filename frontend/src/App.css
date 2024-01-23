@@ -128,7 +128,7 @@ style="transform: translate3d(-36.405%, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg)
 
   .col-sm {
     display: flex;
-    justify-content: center;
+    /* justify-content: center; */
   }
   .right {
     display: none;

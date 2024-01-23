@@ -39,11 +39,11 @@ function Products() {
         setProducts([])
         }}>back</Button>
       </div>
-        <div style={{ gap: "20px" }} class="row">
+        <div style={{ gap: "10px" }} class="row">
           {Products.map((products, index) => {
             return (
               <>
-                <div onClick={() => {
+                <div style={{border :"solid 2px #E2DCD0", backgroundColor:"#DCDCDC", padding:"5px"}} onClick={() => {
                  Navigate({
                   pathname:"/OneProduct",
                   search:`?pro=${products._id}`
@@ -52,14 +52,14 @@ function Products() {
                   <div
                     className="card"
                     style={{
-                      width: "18rem",
+                      width: "15rem",
                       height: "50vh",
-                      borderRadius: "30px",
+                    
                       cursor: "pointer",
                     }}
                   >
                     <img
-                      style={{ height: "30vh", borderRadius: "30px" }}
+                      style={{ height: "30vh" ,padding:"10px", borderBottom:"solid 1px #000"}}
                       className="card-img-top"
                       src={products.image[0]}
                       alt="Card image cap"

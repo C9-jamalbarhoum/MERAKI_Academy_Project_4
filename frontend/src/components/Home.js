@@ -16,7 +16,6 @@ function Home() {
     <>
       <div>
         <div
-          style={{ paddingBottom: "10px" }}
           id="carouselExampleControls"
           class="carousel slide"
           data-ride="carousel"
@@ -51,7 +50,6 @@ function Home() {
                   {" "}
                   Joy <span style={{ color: "#fff" }}>Joy </span>{" "}
                 </h1>
-                
               </div>
               <img
                 class="a-block w-100"
@@ -62,14 +60,11 @@ function Home() {
           </div>
         </div>
         <Container>
-          <Row style={{ gap: "10px" }}>
+          <Row style={{ gap: "10px", padding: "15px 0" }}>
             {category.map((category, i) => {
               return (
                 <>
-                  <Col style={{width:"26rem"}}
-                    xs
-                   
-                  >
+                  <Col style={{ width: "26rem" }} xs>
                     <Card
                       style={{
                         width: "26rem",
@@ -85,12 +80,23 @@ function Home() {
                         <Card.Title>{category.title}</Card.Title>
 
                         <Card.Text>{category.de}</Card.Text>
-                        <Button style={{backgroundColor:"gray", borderColor:"gray"}}  onClick={() => {
-                      Navigate({
-                        pathname: "/products",
-                        search: `?catId=${category._id}`,
-                      });
-                    }} variant="primary">Go to category</Button>
+                        <Button
+                          style={{
+                            backgroundColor: "#E2DCD0",
+                            borderColor: "#E2DCD0",
+                            color:"#000",
+                            fontWeight:"bold"
+                          }}
+                          onClick={() => {
+                            Navigate({
+                              pathname: "/products",
+                              search: `?catId=${category._id}`,
+                            });
+                          }}
+                          variant="primary"
+                        >
+                          Go to category
+                        </Button>
                       </Card.Body>
                     </Card>
                   </Col>
