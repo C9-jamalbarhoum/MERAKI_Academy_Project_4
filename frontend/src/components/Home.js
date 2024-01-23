@@ -1,57 +1,118 @@
-
 import { useEffect, useState, useContext } from "react";
-
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import Image from "react-bootstrap/Image";
+import Button from "react-bootstrap/Button";
+import Card from "react-bootstrap/Card";
 import { USEContext } from "../App";
 import { useNavigate } from "react-router-dom";
 function Home() {
-  const Navigate  =useNavigate()
-  const {category,setIDCategory,IDCategory} = useContext(USEContext)
+  const Navigate = useNavigate();
+  const { category } = useContext(USEContext);
   //{category[1].image}
+  console.log(category);
   return (
     <>
-      <div  style={{ backgroundColor: "#fff" }}>
-   
-        <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-  <div style={{height:"100vh" , width:"80vw" , margin: "0 130px" }}  class="carousel-inner">
-    <div  class="carousel-item active">
-      <img  class="d-block w-100" src= "https://m.media-amazon.com/images/I/81TcQ2E2EML._SL1500_.jpg"  alt="First slide"/>
-    </div>
-    <div class="carousel-item">
-      <img class="d-block w-100" src= "https://images.unsplash.com/3/www.madebyvadim.com.jpg?q=80&w=1782&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Second slide"/>
-      {/* {} */}
-    </div>
-    <div class="carousel-item">
-      <img class="d-block w-100" src= "https://w0.peakpx.com/wallpaper/975/852/HD-wallpaper-books-reading-books-background-with-books-bookshelf.jpg"alt="Third slide"/>
-    </div>
-  </div>
-  <a style={{margin : "300px"}} class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-    <span  style={{padding:"20px",margin:"0 500px 0 0 "}} class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="sr-only">Previous</span>
-  </a>
-  <a style={{margin : "300px  0"}}   class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-    <span style={{padding:"20px", margin:"0 200px 0  0"}}   class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="sr-only">Next</span>
-  </a>
-</div>
-      
+      <div>
         <div
-          style={{ color: "#000", fontWeight: "bold" }}
-          class="p-3 mb-2 bg-transparent text-#fff"
+          style={{ paddingBottom: "10px" }}
+          id="carouselExampleControls"
+          class="carousel slide"
+          data-ride="carousel"
         >
-          Shop By Department
+          <div
+            style={{
+              paddingTop: "105px",
+              zIndex: "1",
+              height: "58vh",
+              width: "80vw",
+              margin: "0 130px",
+            }}
+            class="carousel-inner"
+          >
+            <div style={{ position: "relative" }} class="carousel-item active">
+              <div
+                style={{
+                  position: "absolute",
+                  left: "55%",
+                  top: "7%",
+                  height: "40vh",
+                  background: "#E2DCD0",
+                }}
+              >
+                <h1
+                  style={{ color: "#000", fontFamily: "Courier, monospace " }}
+                >
+                  Safe and fast shipping
+                </h1>
+                <h1 style={{ color: "#000" }}>Delivery within three days</h1>
+                <h1 style={{ color: "#000" }}>
+                  {" "}
+                  Joy <span style={{ color: "#fff" }}>Joy </span>{" "}
+                </h1>
+                
+              </div>
+              <img
+                class="a-block w-100"
+                src="https://cdn.salla.sa/form-builder/sw22pVtC23Vk9BKMegqid82k0JvieBgkR21bXlBi.png"
+                alt="First slide"
+              />
+            </div>
+          </div>
         </div>
-        <div style={{ padding: "10px  0" }} className="container">
+        <Container>
+          <Row style={{ gap: "10px" }}>
+            {category.map((category, i) => {
+              return (
+                <>
+                  <Col style={{width:"26rem"}}
+                    xs
+                   
+                  >
+                    <Card
+                      style={{
+                        width: "26rem",
+                        backgroundColor: "rgba(246, 247, 249, 0.94)",
+                      }}
+                    >
+                      <Card.Body>
+                        <Image
+                          style={{ height: "300px", width: "500px" }}
+                          src={category.image}
+                          thumbnail
+                        />
+                        <Card.Title>{category.title}</Card.Title>
+
+                        <Card.Text>{category.de}</Card.Text>
+                        <Button style={{backgroundColor:"gray", borderColor:"gray"}}  onClick={() => {
+                      Navigate({
+                        pathname: "/products",
+                        search: `?catId=${category._id}`,
+                      });
+                    }} variant="primary">Go to category</Button>
+                      </Card.Body>
+                    </Card>
+                  </Col>
+                </>
+              );
+            })}
+          </Row>
+        </Container>
+        {/* <div style={{ padding: "10px  0" }} className="container">
           <div style={{ gap: "10px" }} class="row">
             {category.map((category, index) => {
               return (
                 <>
-                  <div onClick={()=>{
-                    Navigate({
-                      pathname: "/products",
-                      search: `?catId=${category._id}`,
-                    })
-
-                  }} className="col-sm">
+                  <div
+                    onClick={() => {
+                      Navigate({
+                        pathname: "/products",
+                        search: `?catId=${category._id}`,
+                      });
+                    }}
+                    className="col-sm"
+                  >
                     <div
                       className="card"
                       style={{
@@ -77,7 +138,7 @@ function Home() {
               );
             })}
           </div>
-        </div>
+        </div> */}
       </div>
     </>
   );

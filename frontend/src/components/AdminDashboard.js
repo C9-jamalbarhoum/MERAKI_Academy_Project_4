@@ -29,8 +29,10 @@ function AdminDashboard() {
           fontWeight: "bold",
         }}
       >
-        <h6>Admin Dashboard</h6>
-        <h6 onClick={()=>{
+      <h6 onClick={()=>{
+              Navigate("/AdminDashboard")
+        }}>Admin Dashboard</h6>
+        <h6 style={{cursor:"pointer"}} onClick={()=>{
           Navigate("/AdminOrder")
         }}>Order</h6>
       </div>

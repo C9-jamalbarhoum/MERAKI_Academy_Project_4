@@ -281,7 +281,7 @@ function OneProduct() {
         </div>
       </div>
 
-      <section dclass="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
+      <section style={{backgroundColor:"gray"}} dclass="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
         <div>
           <a class="me-4 text-reset">
             <img

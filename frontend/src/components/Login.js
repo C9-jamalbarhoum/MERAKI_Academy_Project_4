@@ -97,12 +97,10 @@ function Login() {
   };
   const Navigate = useNavigate();
   return (
-    <>
-      <div>
-        {/* <div style={{height:"200px", width:"200"}}></div> */}
+    <div style={{display:"flex",justifyContent:"center",paddingTop:"120px", paddingBottom:"20px"  }}>
+      <div style={{width:"50vw",height:"80vh" ,   backgroundColor: "rgba(246, 247, 249, 0.94)" }} className="boxLog">
         <h1
           style={{
-            paddingTop: "150px",
             fontFamily: "-moz-initial",
             fontWeight: "bold",
           }}
@@ -220,7 +218,7 @@ function Login() {
         </section>
         <hr style={{ border: "3px solid #f1f1f1" }} />
       </div>
-    </>
+    </div>
   );
 }
 

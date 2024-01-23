@@ -53,7 +53,7 @@ function Products() {
                     className="card"
                     style={{
                       width: "18rem",
-                      height: "40vh",
+                      height: "50vh",
                       borderRadius: "30px",
                       cursor: "pointer",
                     }}
@@ -67,6 +67,9 @@ function Products() {
                     <div className="card-body">
                       <p style={{ fontWeight: "bold" }} className="card-text">
                         {products.title}
+                      </p>
+                      <p style={{ fontWeight: "bold" }} className="card-text">
+                      price : ${products.price}
                       </p>
                     </div>
                   </div>

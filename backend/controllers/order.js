@@ -42,7 +42,7 @@ const getOrder = (req, res) => {
 };
 const getAllOrder = (req,res)=>{
 
-  orderModule.find({}).then((result)=>{
+  orderModule.find({}).populate("user").then((result)=>{
     res.status(200).json(result)
   }).catch((Err)=>{
     res.status(500).json(Err)

@@ -120,8 +120,12 @@ function ProductAdmin() {
   return (
     <div>
         <div style={{display:"flex",gap:"10px",justifyContent:"center",backgroundColor:"red", paddingTop: "100px", fontWeight: "bold" }}>
-        <h6>Admin Dashboard</h6>
-        <h6>Order</h6>
+        <h6 onClick={()=>{
+              Navigate("/AdminDashboard")
+        }}>Admin Dashboard</h6>
+        <h6 style={{cursor:"pointer"}} onClick={()=>{
+          Navigate("/AdminOrder")
+        }}>Order</h6>
       </div>
     
 

@@ -108,27 +108,27 @@ function Navbar() {
       <nav
         style={{
           borderRadius: "5px",
-          color: "",
+          backgroundColor: "#E2DCD0",
+          color:"black",
           position: "fixed",
           width: "100%",
           zIndex: "2",
         }}
-        class="navbar navbar-expand-lg navbar-dark bg-dark"
+        class="navbar navbar-expand-lg navbar-dark "
       >
         {/* {navbar navbar-dark bg-dark} */}
         <a
-          style={{ color: "#fff", fontWeight: "bold" }}
+          style={{ color: "#000", fontWeight: "bold" }}
           className="navbar-brand"
           href="#"
         >
           <div className="boxLogo">
             <img
-              style={{ height: "100%" }}
-              src="./Yoyo Nail Zone Logo.png"
-              alt="fill image "
+              style={{ height: "120%" }}
+              src="—Pngtree—joy svg design_5692202.png"
             />
           </div>
-          Joy <span style={{ color: "pink" }}>Joy </span>
+          Joy <span style={{ color: "#fff" }}>Joy </span>
         </a>
         <button
           className="navbar-toggler"
@@ -146,7 +146,7 @@ function Navbar() {
           <ul className="navbar-nav mr-auto">
             <li className="nav-item active">
               <a
-                style={{ cursor: "pointer" }}
+                style={{ cursor: "pointer" ,color:"#000" }}
                 onClick={() => {
                   Navigate("/");
                 }}
@@ -156,7 +156,7 @@ function Navbar() {
               </a>
             </li>
             <li className="nav-item dropdown">
-              <a
+              <a style={{color:"#000"}}
                 className="nav-link dropdown-toggle"
                 href="#"
                 id="navbarDropdown"
@@ -186,18 +186,6 @@ function Navbar() {
                     </>
                   );
                 })}
-                <a
-                  style={{ cursor: "pointer" }}
-                  onClick={() => {
-                    Navigate({
-                      pathname: "/Allproducts",
-                      search: `?catId=${category._id}`,
-                    });
-                  }}
-                  className="dropdown-item"
-                >
-                  All items
-                </a>
               </div>
             </li>
             {toggleOrder && InLogin && (
