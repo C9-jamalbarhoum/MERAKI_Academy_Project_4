@@ -1,6 +1,6 @@
 <p align="center">
 <a href="—Pngtree—joy svg design_5692202.png" target="_blank" rel="noopener noreferrer">
- <img width="400px" height="100px" src="—Pngtree—joy svg design_5692202.png" alt="Project logo">
+ <img width="400px" height="100px" src="https://www.creativefabrica.com/wp-content/uploads/2023/10/15/Joy-with-Christmas-Nativity-Svg-Png-Graphics-81696579-1-1-580x387.jpg" alt="Project logo">
  </a>
 </p>
 
