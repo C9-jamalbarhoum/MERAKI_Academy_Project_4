@@ -109,7 +109,7 @@ function Navbar() {
         style={{
           borderRadius: "5px",
           backgroundColor: "#E2DCD0",
-          color:"black",
+          color: "black",
           position: "fixed",
           width: "100%",
           zIndex: "2",
@@ -146,7 +146,7 @@ function Navbar() {
           <ul className="navbar-nav mr-auto">
             <li className="nav-item active">
               <a
-                style={{ cursor: "pointer" ,color:"#000" }}
+                style={{ cursor: "pointer", color: "#000" }}
                 onClick={() => {
                   Navigate("/");
                 }}
@@ -156,7 +156,8 @@ function Navbar() {
               </a>
             </li>
             <li className="nav-item dropdown">
-              <a style={{color:"#000"}}
+              <a
+                style={{ color: "#000" }}
                 className="nav-link dropdown-toggle"
                 href="#"
                 id="navbarDropdown"
@@ -202,7 +203,7 @@ function Navbar() {
                 <img src="box-seam.svg"></img>
               </li>
             )}
-            {userId ==="65a8523490b338c8cbfa0269"&& (
+            {userId === "65a8523490b338c8cbfa0269" && (
               <li style={{ display: "flex" }} className="nav-item active">
                 <a
                   style={{ cursor: "pointer" }}
@@ -265,8 +266,8 @@ function Navbar() {
                   onClick={() => {
                     localStorage.clear();
                     setInLogin(false);
-                    setUserId("")
-                    setToggleOrder(false)
+                    setUserId("");
+                    setToggleOrder(false);
                   }}
                   type="button"
                   class="btn btn-danger"

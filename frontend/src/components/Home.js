@@ -59,7 +59,67 @@ function Home() {
             </div>
           </div>
         </div>
+
         <Container>
+          <Container style={{ paddingTop: "100px" }}>
+            <Row style={{ alignItems: "center" }}>
+              <Col
+                style={{
+                  border: "solid 1px gray",
+                  position: "relative",
+                  backgroundColor: "#E2DCD0",
+                  borderColor: "#E2DCD0",
+                  color: "#000",
+                  fontWeight: "bold",
+                }}
+                md={2.5}
+              >
+                {" "}
+                <div className="nav-item dropdown">
+                  <a
+                    style={{ color: "#000" }}
+                    className="nav-link dropdown-toggle"
+                    href="#"
+                    id="navbarDropdown"
+                    role="button"
+                    data-toggle="dropdown"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                  >
+                    Shop By Department
+                  </a>
+                  <div
+                    style={{ width: "100%" }}
+                    className="dropdown-menu"
+                    aria-labelledby="navbarDropdown"
+                  >
+                    {category.map((category, index) => {
+                      return (
+                        <>
+                          <a
+                            style={{ cursor: "pointer", width: "100%" }}
+                            onClick={() => {
+                              Navigate({
+                                pathname: "/products",
+                                search: `?catId=${category._id}`,
+                              });
+                            }}
+                            className="dropdown-item"
+                          >
+                            {category.title}
+                          </a>
+                        </>
+                      );
+                    })}
+                  </div>
+                </div>
+              </Col>
+              <div class="spacer">{/* ::before */}</div>
+
+              <Col md={2}>Organized</Col>
+              <Col md={{ span: 3, offset: 4 }}>{`Categorys`}</Col>
+            </Row>
+          </Container>
           <Row style={{ gap: "10px", padding: "15px 0" }}>
             {category.map((category, i) => {
               return (
@@ -84,8 +144,8 @@ function Home() {
                           style={{
                             backgroundColor: "#E2DCD0",
                             borderColor: "#E2DCD0",
-                            color:"#000",
-                            fontWeight:"bold"
+                            color: "#000",
+                            fontWeight: "bold",
                           }}
                           onClick={() => {
                             Navigate({

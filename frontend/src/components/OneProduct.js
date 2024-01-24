@@ -6,13 +6,12 @@ import ReactStars from "react-stars";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 
-
-
 function OneProduct() {
   const [show, setShow] = useState(false);
-  const [ToggleDelete, setToggleDelete] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  const [ToggleDelete, setToggleDelete] = useState(false);
+
   const { userId, setUserId, token, cartProduct, setCartProduct, InLogin } =
     useContext(USEContext);
 
@@ -130,29 +129,12 @@ function OneProduct() {
     }
   };
 
-  const getCartUser = () => {
-    axios
-      .get(`http://localhost:5000/cart/`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
-      .then((result) => {
-        setCartProduct(result.data.products);
-        console.log("true for api get cart");
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-
   return (
     <div style={{ paddingTop: "140px" }} className="containerProduct">
       <div className="containerBox">
         {typeof proData.image === typeof [] ? (
           <div className="image-4">
             <div className="sm-3-img">
-              {/* { for img on Click show img  => } */}
               <div
                 class="modal fade"
                 id="exampleModalLong"
@@ -256,6 +238,12 @@ function OneProduct() {
             }}
           >
             <button
+              style={{
+                backgroundColor: "#E2DCD0",
+                borderColor: "#E2DCD0",
+                color: "#000",
+                fontWeight: "bold",
+              }}
               onClick={() => {
                 if (!InLogin) {
                   handleShow();
@@ -281,7 +269,10 @@ function OneProduct() {
         </div>
       </div>
 
-      <section style={{backgroundColor:"gray"}} dclass="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
+      <section
+        style={{ backgroundColor: "gray" }}
+        dclass="d-flex justify-content-center justify-content-lg-between p-4 border-bottom"
+      >
         <div>
           <a class="me-4 text-reset">
             <img

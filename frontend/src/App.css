@@ -21,9 +21,9 @@ font-weight: bold;
   width: "18rem";
   height: "40vh";
   border-radius: "30px";
-  cursor: "pointer";
+  
 }
-.card:hover {
+.buttonAdd:hover {
   background-color: aliceblue;
 }
 
@@ -331,4 +331,13 @@ span.price {
 .col-sm{
   display: flex;
   justify-content: center;
+}
+
+.spacer{
+  position: absolute;
+  height: 1px;
+  width: 100%;
+  background-color: #cbd5e1;
+  max-width:500px ;
+  left: 36%;
 }
