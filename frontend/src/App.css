@@ -1,7 +1,8 @@
 body{
- background-image :     linear-gradient(#fcf9f9, rgba(229, 226, 226, 0.5)),  url( "https://themes.valinteca.com/assets/electron/store_bg.webp") ;
+ /* background-image :     linear-gradient(#fcf9f9, rgba(229, 226, 226, 0.5)),  url( "https://themes.valinteca.com/assets/electron/store_bg.webp") ;
 background-size: cover;
-font-weight: bold;
+font-weight: bold; */
+background-color: #fff;
 
  
 }
@@ -341,3 +342,10 @@ span.price {
   max-width:500px ;
   left: 36%;
 }
+.col-sm{
+  flex-basis: 0;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+  max-width: 220px;
+}
+

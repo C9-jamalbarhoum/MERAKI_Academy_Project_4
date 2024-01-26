@@ -119,7 +119,7 @@ function CheckOut() {
 
   return (
     <div style={{ padding: "50px" }}>
-      <div style={{ paddingTop: "100px" }}></div>
+      <div style={{ paddingTop: "20px" }}>
       <div
         style={{
           display: "flex",
@@ -127,8 +127,21 @@ function CheckOut() {
           padding: "40px",
         }}
       >
-        <Button onClick={() => Negative(-1)}>back</Button>
+        <Button
+          style={{
+            width:"120px",
+            backgroundColor: "#E2DCD0",
+            borderColor: "#E2DCD0",
+            color: "#000",
+            fontWeight: "bold",
+          }}
+          onClick={() => Negative(-1)}
+        >
+          back
+        </Button>
       </div>
+      </div>
+    
       <div>
         <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
           {cartProduct.map((elm, i) => {

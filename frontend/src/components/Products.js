@@ -104,7 +104,7 @@ function Products() {
         </Button>
       </div>
       <div className="container">
-        <div style={{ gap: "10px" }} class="row">
+        <div class="row">
           {Products.map((products, index) => {
             return (
               <>
