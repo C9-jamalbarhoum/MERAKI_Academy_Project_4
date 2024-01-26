@@ -118,7 +118,7 @@ function Products() {
                   <div
                     className="card"
                     style={{
-                      border: "solid 3px #E2DCD0",
+                      border: "solid 1px #E1DCD0",
                       width: "15rem",
                       height: "50vh",
                     }}
@@ -140,7 +140,7 @@ function Products() {
                       src={products.image[0]}
                       alt="Card image cap"
                     />
-                    <div className="card-body">
+                    <div style={{display:"flex",flexDirection:"column", gap:"2px", alignItems:"center"}} className="">
                       <p
                         style={{
                           fontWeight: "bold",

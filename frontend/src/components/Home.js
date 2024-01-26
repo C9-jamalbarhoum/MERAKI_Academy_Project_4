@@ -15,64 +15,20 @@ function Home() {
   return (
     <>
       <div>
-        <div
-          id="carouselExampleControls"
-          class="carousel slide"
-          data-ride="carousel"
-        >
-          <div
-            style={{
-              paddingTop: "105px",
-              zIndex: "1",
-              height: "58vh",
-              width: "80vw",
-              margin: "0 130px",
-            }}
-            class="carousel-inner"
-          >
-            <div style={{ position: "relative" }} class="carousel-item active">
-              <div
-                style={{
-                  position: "absolute",
-                  left: "55%",
-                  top: "7%",
-                  height: "40vh",
-                  background: "#E2DCD0",
-                }}
-              >
-                <h1
-                  style={{ color: "#000", fontFamily: "Courier, monospace " }}
-                >
-                  Safe and fast shipping
-                </h1>
-                <h1 style={{ color: "#000" }}>Delivery within three days</h1>
-                <h1 style={{ color: "#000" }}>
-                  {" "}
-                  Joy <span style={{ color: "#fff" }}>Joy </span>{" "}
-                </h1>
-              </div>
-              <img
-                class="a-block w-100"
-                src="https://cdn.salla.sa/form-builder/sw22pVtC23Vk9BKMegqid82k0JvieBgkR21bXlBi.png"
-                alt="First slide"
-              />
-            </div>
-          </div>
-        </div>
-
         <Container>
           <Container style={{ paddingTop: "100px" }}>
-            <Row style={{ alignItems: "center" }}>
+            <Row
+              style={{ alignItems: "center", justifyContent: "space-around" }}
+            >
               <Col
                 style={{
-                  border: "solid 1px gray",
                   position: "relative",
-                  backgroundColor: "#E2DCD0",
+
                   borderColor: "#E2DCD0",
                   color: "#000",
                   fontWeight: "bold",
                 }}
-                md={2.5}
+                md={2.4}
               >
                 {" "}
                 <div className="nav-item dropdown">
@@ -117,27 +73,34 @@ function Home() {
               <div class="spacer">{/* ::before */}</div>
 
               <Col md={2}>Organized</Col>
-              <Col md={{ span: 3, offset: 4 }}>{`Categorys`}</Col>
+              <Col md={{ span: 3.5, offset: 5 }}>{`Categorys`}</Col>
             </Row>
           </Container>
-          <Row style={{ gap: "10px", padding: "15px 0" }}>
+       
+          <Row style={{ gap: "10px", padding: "0px 0" }}>
             {category.map((category, i) => {
               return (
                 <>
                   <Col style={{ width: "26rem" }} xs>
                     <Card
                       style={{
-                        width: "26rem",
-                        backgroundColor: "rgba(246, 247, 249, 0.94)",
+                        width: "14rem",
+                        backgroundColor: "#fff",
                       }}
                     >
-                      <Card.Body>
+                      <Card.Body style={{gap:"10px",}}>
                         <Image
-                          style={{ height: "300px", width: "500px" }}
+                          style={{ height: "200px", width: "400px" }}
                           src={category.image}
                           thumbnail
                         />
-                        <Card.Title>{category.title}</Card.Title>
+                        <Card.Title
+                          style={{
+                            overflow: "hidden",
+                          }}
+                        >
+                          {category.title}
+                        </Card.Title>
 
                         <Card.Text>{category.de}</Card.Text>
                         <Button
@@ -165,46 +128,6 @@ function Home() {
             })}
           </Row>
         </Container>
-        {/* <div style={{ padding: "10px  0" }} className="container">
-          <div style={{ gap: "10px" }} class="row">
-            {category.map((category, index) => {
-              return (
-                <>
-                  <div
-                    onClick={() => {
-                      Navigate({
-                        pathname: "/products",
-                        search: `?catId=${category._id}`,
-                      });
-                    }}
-                    className="col-sm"
-                  >
-                    <div
-                      className="card"
-                      style={{
-                        width: "18rem",
-                        borderRadius: "30px",
-                        cursor: "pointer",
-                      }}
-                    >
-                      <img
-                        style={{ height: "30vh", borderRadius: "30px" }}
-                        className="card-img-top"
-                        src={category.image}
-                        alt="Card image cap"
-                      />
-                      <div className="card-body">
-                        <p style={{ fontWeight: "bold" }} className="card-text">
-                          {category.title}
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </>
-              );
-            })}
-          </div>
-        </div> */}
       </div>
     </>
   );
