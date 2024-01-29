@@ -374,3 +374,13 @@ span.price {
   padding: 0;
   margin: 0;
 }
+.centenary-cart{
+  width: 73vw;
+  height: 100vh;
+  background-color: rgba(36, 35, 35, 0.818);
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 2;
+
+}

@@ -305,7 +305,11 @@ function Navbar() {
                 src="./cart.svg"
               ></img>
               {toggleCart && (
-                <>
+                <div>
+                  <div  className="centenary-cart" onClick={()=>{
+                  setToggleCart(!toggleCart);
+
+                }}></div>
                   <motion.div
                     animate={{ x: 100, scale: 1 }}
                     initial={{ scale: 0 }}
@@ -318,7 +322,7 @@ function Navbar() {
                       top: "-1px",
                       right: "100px",
                       overflow: "auto",
-                      border: "solid #000 6px",
+                      border: "solid #000 3px",
                     }}
                     class="offcanvas offcanvas-end"
                     tabindex="-1"
@@ -475,7 +479,7 @@ function Navbar() {
                     </div>
                     <div class="offcanvas-body">...</div>
                   </motion.div>
-                </>
+                </div>
               )}
               {toggleGoLogin && Navigate("/Login")}
             </div>
