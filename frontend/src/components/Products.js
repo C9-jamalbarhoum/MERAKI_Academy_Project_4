@@ -64,7 +64,11 @@ function Products() {
     }
 
     if (InLogin) {
+// ! 
 
+console.log(cartProduct);
+console.log(copy);
+   setCartProduct(copy)
       try {
         const res = await axios.put(`http://localhost:5000/cart`, copy, {
           headers: {

@@ -7,6 +7,8 @@ import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import { USEContext } from "../App";
 import { useNavigate } from "react-router-dom";
+import Cord from "./Cord";
+import SwipeableTextMobileStepper from "./Carousel"
 function Home() {
   const Navigate = useNavigate();
   const { category } = useContext(USEContext);
@@ -15,6 +17,27 @@ function Home() {
   return (
     <>
       <div>
+<<<<<<< HEAD
+ 
+        <Container
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          
+          <Container style={{ paddingTop: "100px" }}>
+         
+          </Container>
+          <SwipeableTextMobileStepper category={category}/>
+          <Row style={{ gap: "10px", padding: "15px 0", width: "100% " }}>
+            {category.map((category, i) => {
+              return (
+                <>
+                  <Cord image={category.image} header={category.title} id={category._id}/>
+=======
         <Container>
           <Container style={{ paddingTop: "100px" }}>
             <Row
@@ -123,6 +146,7 @@ function Home() {
                       </Card.Body>
                     </Card>
                   </Col>
+>>>>>>> 41c1be45e7ff2c1c9988be7f5a42ba29d84e2d81
                 </>
               );
             })}

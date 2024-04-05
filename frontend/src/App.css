@@ -1,10 +1,15 @@
 body{
+<<<<<<< HEAD
+background-color: #ffffff;
+
+=======
  /* background-image :     linear-gradient(#fcf9f9, rgba(229, 226, 226, 0.5)),  url( "https://themes.valinteca.com/assets/electron/store_bg.webp") ;
 background-size: cover;
 font-weight: bold; */
 background-color: #fff;
   margin: 0;
   padding: 0;
+>>>>>>> 41c1be45e7ff2c1c9988be7f5a42ba29d84e2d81
  
 }
 

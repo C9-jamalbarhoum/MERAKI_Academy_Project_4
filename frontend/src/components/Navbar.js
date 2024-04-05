@@ -108,8 +108,8 @@ function Navbar() {
       <nav
         style={{
           borderRadius: "5px",
-          backgroundColor: "#E2DCD0",
-          color: "black",
+          backgroundColor: "#000",
+          color: "#fff",
           position: "fixed",
           width: "100%",
           zIndex: "2",
@@ -118,17 +118,20 @@ function Navbar() {
       >
         {/* {navbar navbar-dark bg-dark} */}
         <a
-          style={{ color: "#000", fontWeight: "bold" }}
+          style={{ color: "#fff", fontWeight: "bold" }}
           className="navbar-brand"
           href="#"
         >
           <div className="boxLogo">
             <img
-              style={{ height: "120%" }}
+              style={{ height: "100%", backgroundColor: "#fff" }}
               src="—Pngtree—joy svg design_5692202.png"
             />
           </div>
-          Joy <span style={{ color: "#fff" }}>Joy </span>
+          <div style={{ fontSize: "10px" }}>
+            {" "}
+            Joy <span style={{ color: "rgb(108,117,125)" }}>Joy </span>
+          </div>
         </a>
         <button
           className="navbar-toggler"
@@ -146,7 +149,7 @@ function Navbar() {
           <ul className="navbar-nav mr-auto">
             <li className="nav-item active">
               <a
-                style={{ cursor: "pointer", color: "#000" }}
+                style={{ cursor: "pointer", color: "#fff" }}
                 onClick={() => {
                   Navigate("/");
                 }}
@@ -157,7 +160,7 @@ function Navbar() {
             </li>
             <li className="nav-item dropdown">
               <a
-                style={{ color: "#000" }}
+                style={{ color: "#fff" }}
                 className="nav-link dropdown-toggle"
                 href="#"
                 id="navbarDropdown"
@@ -229,14 +232,14 @@ function Navbar() {
                   alignItems: "center",
                 }}
               >
-                <img style={{ width: "20%" }} src="person-circle.svg"></img>
                 <p
                   style={{
-                    width: "200px",
-                    color: "MediumSeaGreen",
+                    fontFamily: "-moz-initial",
+                    width: "400px",
+                    color: "#fff",
                     height: "100%",
                     textAlign: "left",
-                    paddingTop: "10px",
+                    paddingTop: "12px",
                   }}
                   class="font-weight-bold"
                 >
@@ -314,7 +317,7 @@ function Navbar() {
                     animate={{ x: 100, scale: 1 }}
                     initial={{ scale: 0 }}
                     style={{
-                      backgroundColor: "gray",
+                      backgroundColor: "#000",
                       position: "absolute",
                       height: "100vh",
                       width: "400px",
