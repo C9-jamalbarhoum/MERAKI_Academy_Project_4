@@ -1,10 +1,10 @@
 import { useContext, useEffect, useState } from "react";
 import { USEContext } from "../App";
-import Modal from "react-bootstrap/Modal";
+
 import axios from "axios";
 import { useLocation, useNavigate } from "react-router-dom";
 import Button from "react-bootstrap/esm/Button";
-
+import MultiActionAreaCard from "./MultiActionAreaCard";
 function Products() {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
@@ -42,45 +42,7 @@ function Products() {
       });
   }, [searchQuery]);
 
-  const addProductToCart = async (dataPro) => {
 
-    const copy = [...cartProduct];
-    const pro = copy.find((product) => {
-      if (typeof product.product !== "string")
-        return product.product._id === dataPro._id;
-
-      return product.product === dataPro._id;
-    });
-    console.log({ dataPro, copy, pro });
-    if (!pro) {
-      copy.push({
-        product: dataPro._id,
-        quantity: 1,
-        price: dataPro.price,
-      });
-    } else {
-      pro.quantity++;
-      pro.price = dataPro.price * pro.quantity;
-    }
-
-    if (InLogin) {
-// ! 
-
-console.log(cartProduct);
-console.log(copy);
-   setCartProduct(copy)
-      try {
-        const res = await axios.put(`http://localhost:5000/cart`, copy, {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        });
-        setCartProduct(copy);
-      } catch (error) {
-        console.log(error);
-      }
-    }
-  };
 
   return (
     <div  style={{ paddingTop: "80px" }}>
@@ -112,7 +74,8 @@ console.log(copy);
           {Products.map((products, index) => {
             return (
               <>
-                <div
+                 <MultiActionAreaCard products={products}/>
+                {/* <div
                   style={{
                     // backgroundColor: "#DCDCDC",
                     padding: "5px",
@@ -180,7 +143,7 @@ console.log(copy);
                     </div>
           
                   </div>
-                </div>
+                </div> */}
               </>
             );
           })}
@@ -199,26 +162,7 @@ console.log(copy);
           </div>
         </section>
       </div>
-      <Modal show={show} onHide={handleClose}>
-                      <Modal.Header>
-                        <Modal.Title>Please go login First</Modal.Title>
-                      </Modal.Header>
-                      <Modal.Body>Please go login First</Modal.Body>
-                      <Modal.Footer>
-                        <Button variant="secondary" onClick={handleClose}>
-                          Close
-                        </Button>
-                        <Button
-                          variant="primary"
-                          onClick={() => {
-                            Navigate("/Login");
-                            handleClose();
-                          }}
-                        >
-                          Login
-                        </Button>
-                      </Modal.Footer>
-                    </Modal>
+     
     </div>
     
   );

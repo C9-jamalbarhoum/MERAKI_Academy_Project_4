@@ -2,13 +2,17 @@ import { useEffect, useState, useContext } from "react";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import Image from "react-bootstrap/Image";
-import Button from "react-bootstrap/Button";
-import Card from "react-bootstrap/Card";
+// import Image from "react-bootstrap/Image";
+// import Button from "react-bootstrap/Button";
+// import Card from "react-bootstrap/Card";
 import { USEContext } from "../App";
 import { useNavigate } from "react-router-dom";
 import Cord from "./Cord";
 import SwipeableTextMobileStepper from "./Carousel"
+
+
+
+
 function Home() {
   const Navigate = useNavigate();
   const { category } = useContext(USEContext);
@@ -18,7 +22,7 @@ function Home() {
     <>
       <div>
         <Container>
-      
+   
           <Container style={{ paddingTop: "100px" }}>
              
             <Row
