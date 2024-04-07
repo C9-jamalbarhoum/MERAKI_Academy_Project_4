@@ -17,10 +17,10 @@ function Home() {
   return (
     <>
       <div>
-
-
         <Container>
+      
           <Container style={{ paddingTop: "100px" }}>
+             
             <Row
               style={{ alignItems: "center", justifyContent: "space-around" }}
             >
@@ -53,6 +53,7 @@ function Home() {
                     className="dropdown-menu"
                     aria-labelledby="navbarDropdown"
                   >
+                   
                     {category.map((category, index) => {
                       return (
                         <>
@@ -72,12 +73,13 @@ function Home() {
                       );
                     })}
                   </div>
+                  <SwipeableTextMobileStepper category={category}/>
                 </div>
               </Col>
               <div class="spacer">{/* ::before */}</div>
 
-              <Col md={2}>Organized</Col>
-              <Col md={{ span: 3.5, offset: 5 }}>{`Categorys`}</Col>
+             
+              <Col style={{fontFamily:"-moz-initial",fontSize:"30px",paddingLeft:"70px"}} md={{ span: 3.5, offset: 5 }}>{`Categorys`}</Col>
             </Row>
           </Container>
        
@@ -85,48 +87,7 @@ function Home() {
             {category.map((category, i) => {
               return (
                 <>
-                  <Col style={{ width: "26rem" }} xs>
-                    <Card
-                      style={{
-                        width: "14rem",
-                        backgroundColor: "#fff",
-                      }}
-                    >
-                      <Card.Body style={{gap:"10px",}}>
-                        <Image
-                          style={{ height: "200px", width: "400px" }}
-                          src={category.image}
-                          thumbnail
-                        />
-                        <Card.Title
-                          style={{
-                            overflow: "hidden",
-                          }}
-                        >
-                          {category.title}
-                        </Card.Title>
-
-                        <Card.Text>{category.de}</Card.Text>
-                        <Button
-                          style={{
-                            backgroundColor: "#E2DCD0",
-                            borderColor: "#E2DCD0",
-                            color: "#000",
-                            fontWeight: "bold",
-                          }}
-                          onClick={() => {
-                            Navigate({
-                              pathname: "/products",
-                              search: `?catId=${category._id}`,
-                            });
-                          }}
-                          variant="primary"
-                        >
-                          Go to category
-                        </Button>
-                      </Card.Body>
-                    </Card>
-                  </Col>
+                <Cord id={category._id} image= {category.image} header={category.title} />
 
                 </>
               );
