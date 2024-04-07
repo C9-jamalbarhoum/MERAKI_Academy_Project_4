@@ -3,7 +3,7 @@ import { USEContext } from "../App";
 
 import axios from "axios";
 import { useLocation, useNavigate } from "react-router-dom";
-import Button from "react-bootstrap/esm/Button";
+import Button from '@mui/material/Button';
 import MultiActionAreaCard from "./MultiActionAreaCard";
 function Products() {
   const [show, setShow] = useState(false);
@@ -53,7 +53,7 @@ function Products() {
           padding: "40px",
         }}
       >
-        <Button
+        {/* <Button
           style={{
             width: "100px",
             backgroundColor: "#E2DCD0",
@@ -61,13 +61,15 @@ function Products() {
             color: "#000",
             fontWeight: "bold",
           }}
-          onClick={() => {
-            Navigate(-1);
-            setProducts([]);
-          }}
+        
         >
           back
-        </Button>
+        </Button> */}
+        <Button   onClick={() => {
+            Navigate(-1);
+            setProducts([]);
+          }} variant="contained">back</Button>
+
       </div>
       <div className="container">
         <div class="row">

@@ -33,7 +33,7 @@ export function DisableElevation({ id }) {
 function Cord({ image, header, id }) {
   const theme = useTheme();
   return (
-    <Card
+    <Card 
       style={{
         width: "100%",
         height: "70vh",
@@ -60,6 +60,7 @@ function Cord({ image, header, id }) {
           justifySelf: "flex-end",
           width: "25vw",
           height: "55vh",
+          
         }}
         component="img"
         image={image}
