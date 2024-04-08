@@ -21,7 +21,7 @@ function Home() {
   return (
     <>
       <div>
-        <Container>
+        <Container >
    
           <Container style={{ paddingTop: "100px" }}>
              
@@ -36,10 +36,12 @@ function Home() {
                   color: "#000",
                   fontWeight: "bold",
                 }}
-                md={2.4}
+                
               >
                 {" "}
                 <div className="nav-item dropdown">
+                <div style={{fontFamily:"-moz-initial",fontSize:"30px"}} md={{ span: 3.5, offset: 5 }}>{`Categorys`}</div>
+                
                   <a
                     style={{ color: "#000" }}
                     className="nav-link dropdown-toggle"
@@ -52,6 +54,9 @@ function Home() {
                   >
                     Shop By Department
                   </a>
+                  <div className="name" style={{display:"flex",justifyContent:"center"}}>
+                  <SwipeableTextMobileStepper   category={category}/>
+                  </div>
                   <div
                     style={{ width: "100%" }}
                     className="dropdown-menu"
@@ -77,17 +82,17 @@ function Home() {
                       );
                     })}
                   </div>
-                  <SwipeableTextMobileStepper category={category}/>
+              
                 </div>
               </Col>
-              <div class="spacer">{/* ::before */}</div>
+           
 
              
-              <Col style={{fontFamily:"-moz-initial",fontSize:"30px",paddingLeft:"70px"}} md={{ span: 3.5, offset: 5 }}>{`Categorys`}</Col>
+          
             </Row>
           </Container>
        
-          <Row style={{ gap: "10px", padding: "0px 0" }}>
+          <Row  style={{ gap: "10px", padding: "0px 0",justifyContent:"center",alignItems:"center" }}>
             {category.map((category, i) => {
               return (
                 <>

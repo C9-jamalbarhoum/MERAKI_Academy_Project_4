@@ -66,7 +66,8 @@ console.log(copy);
   };
   return (
     <>
-    <Card  style={{width:"350px",margin:"10px" ,display:"flex" ,flexDirection:"column"}}>
+      <div class="div_card">    
+    <Card  style={{width:"350px",height:"  40vh",display:"flex" ,flexDirection:"column" , alignItems:"center",margin:"10px"}}>
       <CardActionArea   onClick={() => {
       Navigate({
         pathname: "/OneProduct",
@@ -81,7 +82,7 @@ console.log(copy);
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="div">
-           {products?.title}
+           {products?.title.slice(0,10)}
           </Typography>
           <Typography variant="body2" color="text.secondary">
            ${products.price}
@@ -120,6 +121,7 @@ console.log(copy);
        </Button>
      </Modal.Footer>
    </Modal>
+   </div>
    </>
   );
 }
