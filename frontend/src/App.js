@@ -17,6 +17,7 @@ import OrderStatus from "./components/OrderStatus";
 import AdminDashboard from "./components/AdminDashboard";
 import ProductAdmin from "./components/ProductAdmin";
 import AdminOrder from "./components/AdminOrder";
+import NotF from "./NotF";
 export const USEContext = createContext();
 
 function App() {
@@ -70,11 +71,12 @@ function App() {
         }}
       >
         <Navbar />
+    
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/products" element={<Previous />} />
           <Route path="/Allproducts" element={<Allproducts />} />
-          <Route path="/Login" element={<Login />} />
+     { !InLogin ?  <Route path="/Login" element={<Login />} /> : <Route path="/Login" element={<NotF />} />}
           <Route path="/Register" element={<Register />} />
           <Route path="/Cart" element={<Cart />} />
           <Route path="/Search" element={<Search />} />
@@ -84,6 +86,7 @@ function App() {
           <Route path="/AdminDashboard" element={<AdminDashboard />} />
           <Route path="/ProductAdmin" element={<ProductAdmin />} />
           <Route path="/AdminOrder" element={<AdminOrder/>} />
+          <Route path="*" element={<NotF/>} />
         </Routes>
 
         <Footer />

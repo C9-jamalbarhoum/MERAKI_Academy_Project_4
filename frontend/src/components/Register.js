@@ -13,8 +13,17 @@ function Register() {
   });
   const [Successful, setSuccessful] = useState(false);
   return (
-    <div style={{display:"flex",justifyContent:"center"}}> 
-      <div className="boxRe" style={{width:"70vw",height:"90vh" ,   backgroundColor: "rgba(246, 247, 249, 0.94)" }} >
+    <div
+      style={{ display: "flex", justifyContent: "center", padding: "100px" }}
+    >
+      <div
+        className="boxRe"
+        style={{
+          width: "70vw",
+          height: "90vh",
+          backgroundColor: "rgba(246, 247, 249, 0.94)",
+        }}
+      >
         <h1
           style={{
             paddingTop: "150px",
