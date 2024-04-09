@@ -11,7 +11,7 @@ function Login() {
   const [inErr, setInErr] = useState(false);
   const RegisterGoogle = (credentialResponseDecode) => {
     axios
-      .post("http://localhost:5000/users/register", {
+      .post("https://joy-joy-i0iy.onrender.com/users/register", {
         email: credentialResponseDecode.email,
         password: credentialResponseDecode.sub,
         userName: credentialResponseDecode.name,
@@ -26,7 +26,7 @@ function Login() {
   };
   const LoginGoogle = (credentialResponseDecode) => {
     axios
-      .post("http://localhost:5000/users/login", {
+      .post("https://joy-joy-i0iy.onrender.com/users/login", {
         email: credentialResponseDecode.email,
         password: credentialResponseDecode.sub,
       })
@@ -73,7 +73,7 @@ function Login() {
 
   const Login = () => {
     axios
-      .post("http://localhost:5000/users/login", userLoginDATA)
+      .post("https://joy-joy-i0iy.onrender.com/users/login", userLoginDATA)
       .then((result) => {
         setToken(result.data.token);
         localStorage.setItem("token", result.data.token);
@@ -97,8 +97,22 @@ function Login() {
   };
   const Navigate = useNavigate();
   return (
-    <div style={{display:"flex",justifyContent:"center",paddingTop:"120px", paddingBottom:"20px"  }}>
-      <div style={{width:"50vw",height:"80vh" ,   backgroundColor: "rgba(246, 247, 249, 0.94)" }} className="boxLog">
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        paddingTop: "120px",
+        paddingBottom: "20px",
+      }}
+    >
+      <div
+        style={{
+          width: "50vw",
+          height: "80vh",
+          backgroundColor: "rgba(246, 247, 249, 0.94)",
+        }}
+        className="boxLog"
+      >
         <h1
           style={{
             fontFamily: "-moz-initial",

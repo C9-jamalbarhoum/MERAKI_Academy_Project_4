@@ -35,7 +35,7 @@ function ProductAdmin() {
 
   useEffect(() => {
     axios
-      .get(` http://localhost:5000/product/idCate/${searchQuery}`)
+      .get(` https://joy-joy-i0iy.onrender.com/product/idCate/${searchQuery}`)
       .then((Products) => {
         console.log(Products.data);
         setProducts(Products.data);
@@ -61,7 +61,7 @@ function ProductAdmin() {
   });
   const getDataOneProduct = (id) => {
     axios
-      .get(`http://localhost:5000/product/${id}`)
+      .get(`https://joy-joy-i0iy.onrender.com/product/${id}`)
       .then((products) => {
         setDataOneForProduct(products.data);
       })
@@ -71,11 +71,15 @@ function ProductAdmin() {
   };
   const UpdateProduct = (id) => {
     axios
-      .put(`http://localhost:5000/product/${id}`, DataOneForProduct, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
+      .put(
+        `https://joy-joy-i0iy.onrender.com/product/${id}`,
+        DataOneForProduct,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
       .then((result) => {
         console.log(result);
         setToggleInUpdate(!toggleInUpdate);
@@ -87,7 +91,7 @@ function ProductAdmin() {
   };
   const DeleteProduct = (id) => {
     axios
-      .delete(`http://localhost:5000/product/${id}`, {
+      .delete(`https://joy-joy-i0iy.onrender.com/product/${id}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -103,11 +107,15 @@ function ProductAdmin() {
 
   const AddNewProduct = () => {
     axios
-      .post("http://localhost:5000/product/create/", DataOneForProductCReate, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
+      .post(
+        "https://joy-joy-i0iy.onrender.com/product/create/",
+        DataOneForProductCReate,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
       .then((result) => {
         console.log(result);
         setToggleInUpdate(!toggleInUpdate);
@@ -119,20 +127,47 @@ function ProductAdmin() {
 
   return (
     <div>
-        <div style={{display:"flex",gap:"10px",justifyContent:"center",backgroundColor:"red", paddingTop: "100px", fontWeight: "bold" }}>
-        <h6 onClick={()=>{
-              Navigate("/AdminDashboard")
-        }}>Admin Dashboard</h6>
-        <h6 style={{cursor:"pointer"}} onClick={()=>{
-          Navigate("/AdminOrder")
-        }}>Order</h6>
+      <div
+        style={{
+          display: "flex",
+          gap: "10px",
+          justifyContent: "center",
+          backgroundColor: "red",
+          paddingTop: "100px",
+          fontWeight: "bold",
+        }}
+      >
+        <h6
+          onClick={() => {
+            Navigate("/AdminDashboard");
+          }}
+        >
+          Admin Dashboard
+        </h6>
+        <h6
+          style={{ cursor: "pointer" }}
+          onClick={() => {
+            Navigate("/AdminOrder");
+          }}
+        >
+          Order
+        </h6>
       </div>
-    
 
       <div style={{ paddingTop: "80px" }} className="container">
-      <div style={{display:"flex",justifyContent:"center" }}>
-        <h5 style={{backgroundColor:"gray" ,fontWeight: "bold" ,padding:"5px",borderRadius:"10px" }}> (Edit, delete, add )for Product</h5>
-      </div>
+        <div style={{ display: "flex", justifyContent: "center" }}>
+          <h5
+            style={{
+              backgroundColor: "gray",
+              fontWeight: "bold",
+              padding: "5px",
+              borderRadius: "10px",
+            }}
+          >
+            {" "}
+            (Edit, delete, add )for Product
+          </h5>
+        </div>
         <div
           style={{
             display: "flex",

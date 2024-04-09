@@ -158,7 +158,7 @@ function Register() {
                 console.log(userRegisterDATA);
                 axios
                   .post(
-                    "http://localhost:5000/users/register",
+                    "https://joy-joy-i0iy.onrender.com/users/register",
                     userRegisterDATA
                   )
                   .then((result) => {

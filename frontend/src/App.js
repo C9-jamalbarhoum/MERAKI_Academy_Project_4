@@ -29,7 +29,9 @@ function App() {
   const [category, setCategory] = useState([]);
   const [Products, setProducts] = useState([]);
 
-  const [toggleOrder, setToggleOrder] = useState(localStorage.getItem("toggleOrd")|| false);
+  const [toggleOrder, setToggleOrder] = useState(
+    localStorage.getItem("toggleOrd") || false
+  );
 
   const [userId, setUserId] = useState(localStorage.getItem("idUser") || "");
   const [InLogin, setInLogin] = useState(
@@ -39,7 +41,7 @@ function App() {
   const [SearchVal, setSearchVal] = useState("");
   useEffect(() => {
     axios
-      .get("http://localhost:5000/category/")
+      .get("https://joy-joy-i0iy.onrender.com/category/")
       .then((result) => {
         setCategory(result.data);
       })
@@ -71,12 +73,16 @@ function App() {
         }}
       >
         <Navbar />
-    
+
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/products" element={<Previous />} />
           <Route path="/Allproducts" element={<Allproducts />} />
-     { !InLogin ?  <Route path="/Login" element={<Login />} /> : <Route path="/Login" element={<NotF />} />}
+          {!InLogin ? (
+            <Route path="/Login" element={<Login />} />
+          ) : (
+            <Route path="/Login" element={<NotF />} />
+          )}
           <Route path="/Register" element={<Register />} />
           <Route path="/Cart" element={<Cart />} />
           <Route path="/Search" element={<Search />} />
@@ -85,8 +91,8 @@ function App() {
           <Route path="/OrderStatus" element={<OrderStatus />} />
           <Route path="/AdminDashboard" element={<AdminDashboard />} />
           <Route path="/ProductAdmin" element={<ProductAdmin />} />
-          <Route path="/AdminOrder" element={<AdminOrder/>} />
-          <Route path="*" element={<NotF/>} />
+          <Route path="/AdminOrder" element={<AdminOrder />} />
+          <Route path="*" element={<NotF />} />
         </Routes>
 
         <Footer />

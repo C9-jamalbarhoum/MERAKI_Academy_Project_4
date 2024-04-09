@@ -2,7 +2,7 @@ const reviewsModule = require("../models/reviews");
 const productModule = require("../models/product");
 const reviews = require("../models/reviews");
 
-// ! for create Reviews => => => http://localhost:5000/product/:id    ==> {id : productID}
+// ! for create Reviews => => => https://joy-joy-i0iy.onrender.com/product/:id    ==> {id : productID}
 const CreateReviews = (req, res) => {
   // Comment: [{ type: String }],
   // reviews: { type: Number },
@@ -39,7 +39,7 @@ const CreateReviews = (req, res) => {
   });
 };
 
-//! API for delete reviews => => http://localhost:5000/?reviewsId=1&productId=2
+//! API for delete reviews => => https://joy-joy-i0iy.onrender.com/?reviewsId=1&productId=2
 const deleteReviews = (req, res) => {
   const { reviewsId, productId } = req.query;
 
@@ -66,7 +66,7 @@ const deleteReviews = (req, res) => {
     });
 };
 
-//! api => => http://localhost:5000/getAll/:id   { id => product}
+//! api => => https://joy-joy-i0iy.onrender.com/getAll/:id   { id => product}
 const getAllCommentByIdProduct = (req, res) => {
   const { id } = req.params;
   productModule

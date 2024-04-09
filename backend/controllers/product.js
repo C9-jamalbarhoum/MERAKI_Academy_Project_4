@@ -46,7 +46,7 @@ const getAllProduct = (req, res) => {
       res.status(404).json(err);
     });
 };
-//! http://localhost:5000/product/:id
+//! https://joy-joy-i0iy.onrender.com/product/:id
 const getProductById = (req, res) => {
   const { id } = req.params;
 
@@ -84,22 +84,24 @@ const updateProduct = (req, res) => {
       res.json(err);
     });
 };
-//!  http://localhost:5000/product/IdCategory/:id
-const getAllProductByIdCategory =(req,res)=>{
-
-     const {id} = req.params 
-     console.log(id);
-  productModule.find({category:id}).then((result)=>{
-    res.json(result)
-  }).catch((Err)=>{
-    console.log(Err);
-  })
-}
+//!  https://joy-joy-i0iy.onrender.com/product/IdCategory/:id
+const getAllProductByIdCategory = (req, res) => {
+  const { id } = req.params;
+  console.log(id);
+  productModule
+    .find({ category: id })
+    .then((result) => {
+      res.json(result);
+    })
+    .catch((Err) => {
+      console.log(Err);
+    });
+};
 module.exports = {
   createProduct,
   getAllProduct,
   getProductById,
   deleteProductById,
   updateProduct,
-  getAllProductByIdCategory
+  getAllProductByIdCategory,
 };

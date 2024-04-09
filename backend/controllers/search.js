@@ -1,6 +1,6 @@
 const productModule = require("../models/product");
 
-// !  API => =>    for Search    => =>     http://localhost:5000/search?q= e.target.value
+// !  API => =>    for Search    => =>     https://joy-joy-i0iy.onrender.com/search?q= e.target.value
 
 const SearchByNameProduct = (req, res) => {
   const { q } = req.query;

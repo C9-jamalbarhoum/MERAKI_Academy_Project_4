@@ -32,7 +32,7 @@ function OneProduct() {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/product/${proID}`)
+      .get(`https://joy-joy-i0iy.onrender.com/product/${proID}`)
       .then((products) => {
         setProData(products.data);
       })
@@ -54,7 +54,7 @@ function OneProduct() {
   const createComment = () => {
     if (InLogin) {
       axios
-        .post(`http://localhost:5000/product/${proID}`, Reviews, {
+        .post(`https://joy-joy-i0iy.onrender.com/product/${proID}`, Reviews, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -75,7 +75,7 @@ function OneProduct() {
   const deletedCommit = async (commentId) => {
     try {
       const deletedCommitR = await axios.delete(
-        `http://localhost:5000/?reviewsId=${commentId}&productId=${proID}`,
+        `https://joy-joy-i0iy.onrender.com/?reviewsId=${commentId}&productId=${proID}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -117,11 +117,15 @@ function OneProduct() {
 
     if (InLogin) {
       try {
-        const res = await axios.put(`http://localhost:5000/cart`, copy, {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        });
+        const res = await axios.put(
+          `https://joy-joy-i0iy.onrender.com/cart`,
+          copy,
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+          }
+        );
         setCartProduct(copy);
       } catch (error) {
         console.log(error);

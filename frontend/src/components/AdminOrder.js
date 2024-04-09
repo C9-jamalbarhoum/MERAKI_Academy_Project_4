@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 function AdminOrder() {
   const Navigate = useNavigate();
   const { token } = useContext(USEContext);
-  const [ DataForUser , SetDataForUser] = useState([])
+  const [DataForUser, SetDataForUser] = useState([]);
   const [DataHeaderOrder, serDataHeaderOrder] = useState([
     "NAME",
     "USER",
@@ -20,14 +20,14 @@ function AdminOrder() {
   ]);
   useEffect(() => {
     axios
-      .get("http://localhost:5000/order/getAll", {
+      .get("https://joy-joy-i0iy.onrender.com/order/getAll", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       })
       .then((result) => {
         console.log(result);
-        SetDataForUser(result.data)
+        SetDataForUser(result.data);
       })
       .catch((err) => {
         console.log(err);
@@ -39,7 +39,7 @@ function AdminOrder() {
       <div>
         <div
           style={{
-            cursor:"pointer",
+            cursor: "pointer",
             paddingTop: "90px",
             backgroundColor: "green",
             fontWeight: "bold",
@@ -47,8 +47,9 @@ function AdminOrder() {
         >
           Admin Order
         </div>
-        <h6    style={{
-              cursor:"pointer",
+        <h6
+          style={{
+            cursor: "pointer",
             backgroundColor: "gray",
             fontWeight: "bold",
           }}
@@ -92,27 +93,25 @@ function AdminOrder() {
             </tr>
           </thead>
           <tbody>
-           
-            {DataForUser.map((elm,i)=>{
-              return (<>
-               <tr>
-              <td>{i+1}</td>
-              {Array.from({ length: 6 }).map((_, index) => (
-                <td style={{ border: "solid 1px #fff" }} key={index}>
-                  {index === 2 && "$"+ elm.total}
-                  {index === 4 && elm.status}
-                  {index === 3 && "Amman"}
-                  {index === 0 && elm.user.userName}
-                  {index === 1 && elm.user.email}
-                  {index === 5 && `0795956217`}
-                </td>
-               
-              ))}
-               </tr>
-              
-              </>)
-            })} 
-         
+            {DataForUser.map((elm, i) => {
+              return (
+                <>
+                  <tr>
+                    <td>{i + 1}</td>
+                    {Array.from({ length: 6 }).map((_, index) => (
+                      <td style={{ border: "solid 1px #fff" }} key={index}>
+                        {index === 2 && "$" + elm.total}
+                        {index === 4 && elm.status}
+                        {index === 3 && "Amman"}
+                        {index === 0 && elm.user.userName}
+                        {index === 1 && elm.user.email}
+                        {index === 5 && `0795956217`}
+                      </td>
+                    ))}
+                  </tr>
+                </>
+              );
+            })}
           </tbody>
         </Table>
       </div>

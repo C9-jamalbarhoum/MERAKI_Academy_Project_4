@@ -38,7 +38,7 @@ function Navbar() {
 
   const getCartUser = () => {
     axios
-      .get(`http://localhost:5000/cart/`, {
+      .get(`https://joy-joy-i0iy.onrender.com/cart/`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -54,13 +54,13 @@ function Navbar() {
         console.log(err);
       });
   };
-  //!     http://localhost:5000/cart/
+  //!     https://joy-joy-i0iy.onrender.com/cart/
 
   console.log(cartProduct);
 
   const ChangeProductOfCart = (productId, copy) => {
     axios
-      .put(`http://localhost:5000/cart/Shang/${productId}`, copy, {
+      .put(`https://joy-joy-i0iy.onrender.com/cart/Shang/${productId}`, copy, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -257,7 +257,7 @@ function Navbar() {
               placeholder="Search"
               aria-label="Search"
             />
-            
+
             <div style={{ paddingLeft: "10px", display: "flex", gap: "10px" }}>
               {InLogin ? (
                 <button
@@ -304,10 +304,12 @@ function Navbar() {
               ></img>
               {toggleCart && (
                 <div>
-                  <div  className="centenary-cart" onClick={()=>{
-                  setToggleCart(!toggleCart);
-
-                }}></div>
+                  <div
+                    className="centenary-cart"
+                    onClick={() => {
+                      setToggleCart(!toggleCart);
+                    }}
+                  ></div>
                   <motion.div
                     animate={{ x: 100, scale: 1 }}
                     initial={{ scale: 0 }}

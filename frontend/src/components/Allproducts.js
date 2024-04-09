@@ -7,7 +7,7 @@ function Allproducts() {
   const { Products, setProducts } = useContext(USEContext);
   useEffect(() => {
     axios
-      .get("http://localhost:5000/product/")
+      .get("https://joy-joy-i0iy.onrender.com/product/")
       .then((Allproducts) => {
         setProducts(Allproducts.data);
       })

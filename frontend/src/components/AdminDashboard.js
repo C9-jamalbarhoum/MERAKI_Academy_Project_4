@@ -9,7 +9,7 @@ function AdminDashboard() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/category/")
+      .get("https://joy-joy-i0iy.onrender.com/category/")
       .then((result) => {
         setCategory(result.data);
       })
@@ -29,12 +29,21 @@ function AdminDashboard() {
           fontWeight: "bold",
         }}
       >
-      <h6 onClick={()=>{
-              Navigate("/AdminDashboard")
-        }}>Admin Dashboard</h6>
-        <h6 style={{cursor:"pointer"}} onClick={()=>{
-          Navigate("/AdminOrder")
-        }}>Order</h6>
+        <h6
+          onClick={() => {
+            Navigate("/AdminDashboard");
+          }}
+        >
+          Admin Dashboard
+        </h6>
+        <h6
+          style={{ cursor: "pointer" }}
+          onClick={() => {
+            Navigate("/AdminOrder");
+          }}
+        >
+          Order
+        </h6>
       </div>
       <div style={{ display: "flex", justifyContent: "center" }}>
         <h6

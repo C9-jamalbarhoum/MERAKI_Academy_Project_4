@@ -1,12 +1,12 @@
 import { useContext, useEffect, useState } from "react";
 import { USEContext } from "../App";
 import axios from "axios";
-import Button from '@mui/material/Button';
+import Button from "@mui/material/Button";
 import { useNavigate } from "react-router-dom";
 function CheckOut() {
   useEffect(() => {
     axios
-      .get("http://localhost:5000/order/get", {
+      .get("https://joy-joy-i0iy.onrender.com/order/get", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -35,7 +35,7 @@ function CheckOut() {
   const [total, setTotal] = useState([]);
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/cart/`, {
+      .get(`https://joy-joy-i0iy.onrender.com/cart/`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -54,7 +54,7 @@ function CheckOut() {
   const chickCartDelete = () => {
     axios
       .put(
-        `http://localhost:5000/cart/deleteCart`,
+        `https://joy-joy-i0iy.onrender.com/cart/deleteCart`,
         {},
         {
           headers: {
@@ -74,7 +74,7 @@ function CheckOut() {
     console.log(productId);
     console.log(token);
     axios
-      .put(`http://localhost:5000/cart/Shang/${productId}`, copy, {
+      .put(`https://joy-joy-i0iy.onrender.com/cart/Shang/${productId}`, copy, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -101,7 +101,7 @@ function CheckOut() {
 
     axios
       .post(
-        "http://localhost:5000/order/",
+        "https://joy-joy-i0iy.onrender.com/order/",
         { ...order, total: totals, products: cartProduct },
         {
           headers: {
@@ -120,22 +120,17 @@ function CheckOut() {
   return (
     <div style={{ padding: "50px" }}>
       <div style={{ paddingTop: "20px" }}>
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "flex-start",
-          padding: "40px",
-        }}
-      >
-        <Button
-        
-          onClick={() => Negative(-1)}
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "flex-start",
+            padding: "40px",
+          }}
         >
-          back
-        </Button>
+          <Button onClick={() => Negative(-1)}>back</Button>
+        </div>
       </div>
-      </div>
-    
+
       <div>
         <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
           {cartProduct.map((elm, i) => {
@@ -258,8 +253,6 @@ function CheckOut() {
                     </div>
                   </div>
                 </div>
-
-              
               </div>
 
               <input
