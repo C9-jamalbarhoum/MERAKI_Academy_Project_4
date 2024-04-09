@@ -3,7 +3,7 @@ const express = require("express");
 const { createOrder, getOrder,getAllOrder } = require("../controllers/order");
 const { SendMassage } = require("../controllers/SendMassage");
 
-const orderRouter = express();
+const orderRouter = express.Router();
 const authentication = require("../middleware/authentication");
 const authorization = require("../middleware/authorization");
 
