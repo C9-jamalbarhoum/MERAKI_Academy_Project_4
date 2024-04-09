@@ -533,8 +533,12 @@ span.price {
 }
 
 
-@media(max-width: 800px){
+@media(max-width: 1200px){
   .name{
     display: none;
   }
+  .centenary-cart{
+    display: none;
+  }
 }
+

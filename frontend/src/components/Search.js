@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useEffect, useContext, useState } from "react";
 import { USEContext } from "../App";
 import { useNavigate } from "react-router-dom";
+import MultiActionAreaCard from "./MultiActionAreaCard"
 function Search() {
   const  Navigate = useNavigate()
   const { SearchVal, setSearchVal } = useContext(USEContext);
@@ -21,11 +22,12 @@ console.log(SearchData);
   return (
     <>
    <div style={{ paddingTop: "150px" }} className="container">
-        <div style={{ gap: "100px" }} class="row">
+        <div style={{ gap: "20px" ,justifyContent:"center",alignItems:"center"}} class="row">
           {SearchData.map((products, index) => {
             return (
               <>
-                <div onClick={() => {
+<MultiActionAreaCard  products={products}/>
+                {/* <div onClick={() => {
                  Navigate({
                   pathname:"/OneProduct",
                   search:`?pro=${products._id}`
@@ -52,7 +54,7 @@ console.log(SearchData);
                       </p>
                     </div>
                   </div>
-                </div>
+                </div> */}
               </>
             );
           })}

@@ -67,7 +67,7 @@ console.log(copy);
   return (
     <>
       <div class="div_card">    
-    <Card  style={{width:"350px",height:"  40vh",display:"flex" ,flexDirection:"column" , alignItems:"center",margin:"10px"}}>
+    <Card  style={{width:"350px",height:"  40vh",display:"flex" ,flexDirection:"column" , alignItems:"center"}}>
       <CardActionArea   onClick={() => {
       Navigate({
         pathname: "/OneProduct",

@@ -257,12 +257,7 @@ function Navbar() {
               placeholder="Search"
               aria-label="Search"
             />
-            <button
-              className="btn btn-outline-success my-2 my-sm-0"
-              type="submit"
-            >
-              Search
-            </button>
+            
             <div style={{ paddingLeft: "10px", display: "flex", gap: "10px" }}>
               {InLogin ? (
                 <button
