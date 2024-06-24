@@ -7,6 +7,7 @@ export default function Reload() {
     <div style={{height:"100vh" , width:"100%",display:"flex",justifyContent:"center",alignItems:"center"}}>
 
       <Box  sx={{ display: 'flex' }}>
+        
       <CircularProgress />
     </Box>
     </div>
