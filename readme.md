@@ -9,7 +9,7 @@
 
 ---
 
-<p align="center"> An awesome Project to describe README 
+<p align="center">The Joy joy e-commerce project aims to create a digital platform that facilitates buying and selling activities over the internet, providing users with a seamless and efficient shopping experience. Sellers can list their products and services, while buyers can easily search for and purchase items. The platform will focus on delivering an excellent user experience, ensuring transaction security, and supporting a wide range of products and services. 
     <br> 
 <a href=''>Demo</a>
     <br> 
@@ -98,4 +98,4 @@ Your trello board link
 
 ## ⚠️ Guided By <a name = "guided_by"></a>
 
-This project is guided by ©️ **[MERAKI Academy](https://www.meraki-academy.org)**
+This project is guided by ©️ **[Jamal Barhoum]()**
