@@ -1,6 +1,6 @@
 <p align="center">
 
- <img width="400px" height="100px" src="—Pngtree—joy svg design_5692202.png" alt="Project logo">
+ <img width="400px" height="100px" src="https://www.otakustore.gr/files/products/31270-1b.jpg" alt="Project logo">
  </a>
 </p>
 
