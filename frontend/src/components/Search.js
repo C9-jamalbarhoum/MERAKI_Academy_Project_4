@@ -3,6 +3,7 @@ import React, { useEffect, useContext, useState } from "react";
 import { USEContext } from "../App";
 import { useNavigate } from "react-router-dom";
 import MultiActionAreaCard from "./MultiActionAreaCard";
+import NotExist from "./NotExist/NotExist";
 function Search() {
   const Navigate = useNavigate();
   const { SearchVal, setSearchVal } = useContext(USEContext);
@@ -21,7 +22,7 @@ function Search() {
   }, [SearchVal]);
   return (
     <>
-      <div style={{ paddingTop: "150px" }} className="container">
+      <div style={{ paddingTop: "150px",minHeight:"100vh" }} className="container">
         <div
           style={{
             gap: "20px",
@@ -30,6 +31,7 @@ function Search() {
           }}
           class="row"
         >
+          {SearchData.length < 1 && <NotExist/>}
           {SearchData.map((products, index) => {
             return (
               <>
@@ -67,7 +69,7 @@ function Search() {
           })}
         </div>
         <section dclass="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
-          <div>
+          {/* <div>
             <a class="me-4 text-reset">
               <img
                 onClick={() => {
@@ -84,7 +86,7 @@ function Search() {
                 src="arrow-right.svg"
               ></img>
             </a>
-          </div>
+          </div> */}
         </section>
       </div>
     </>
